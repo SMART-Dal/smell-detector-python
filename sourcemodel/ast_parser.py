@@ -1,0 +1,86 @@
+import ast
+
+from sourcemodel.sm_class import PyClass
+from sourcemodel.sm_function import PyFunction
+from sourcemodel.sm_import import PyImport
+from sourcemodel.sm_method import PyMethod
+from sourcemodel.sm_module import PyModule
+from sourcemodel.sm_parameter import PyParameter
+
+
+class ASTParser:
+    def __init__(self):
+        self.current_module = None
+
+    def parse_file(self, file_path):
+        with open(file_path, 'r') as file:
+            source_code = file.read()
+        self.current_module = PyModule(file_path)
+        tree = ast.parse(source_code)
+        self.visit(tree)
+        return self.current_module
+
+    def visit(self, node):
+        method = 'visit_' + node.__class__.__name__
+        visitor = getattr(self, method, self.generic_visit)
+        return visitor(node)
+
+    def visit_ClassDef(self, node):
+        py_class = PyClass(node.name)
+        self.current_module.add_class(py_class)
+        for item in node.body:
+            if isinstance(item, ast.FunctionDef):
+                py_method = self.visit_FunctionDef(item, py_class)
+                py_class.add_method(py_method)
+            # Add more logic here for other class contents
+        return py_class
+
+    def visit_FunctionDef(self, node, parent_class=None):
+        if parent_class:
+            py_method = PyMethod(node.name)
+            for arg in node.args.args:
+                param = self.visit_arg(arg)
+                py_method.add_parameter(param)
+            parent_class.add_method(py_method)
+            return py_method
+        else:
+            py_function = PyFunction(node.name)
+            for arg in node.args.args:
+                param = self.visit_arg(arg)
+                py_function.add_parameter(param)
+            self.current_module.add_function(py_function)
+            return py_function
+
+    def visit_Import(self, node):
+        for alias in node.names:
+            py_import = PyImport(alias.name, alias.asname)
+            self.current_module.add_import(py_import)
+
+    def visit_ImportFrom(self, node):
+        for alias in node.names:
+            module_name = f"{node.module}.{alias.name}"
+            py_import = PyImport(module_name, alias.asname, is_from_import=True)
+            self.current_module.add_import(py_import)
+
+    def visit_arg(self, node):
+        # Handle default values and type annotations if present
+        default_value = None
+        param_type = None
+        if node.annotation:
+            param_type = self.get_annotation(node.annotation)
+        return PyParameter(node.arg, param_type, default_value)
+
+    def get_annotation(self, node):
+        # This method should be expanded to handle complex type annotations
+        if isinstance(node, ast.Name):
+            return node.id
+        return "complex_type"  # Placeholder for complex types
+
+    def generic_visit(self, node):
+        for field, value in ast.iter_fields(node):
+            if isinstance(value, list):
+                for item in value:
+                    if isinstance(item, ast.AST):
+                        self.visit(item)
+            elif isinstance(value, ast.AST):
+                self.visit(value)
