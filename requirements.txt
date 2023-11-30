@@ -1,1 +1,2 @@
 pytest~=7.4.3
+networkx~=3.2.1
