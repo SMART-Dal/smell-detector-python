@@ -5,11 +5,10 @@ from sourcemodel.sm_function import PyFunction
 from sourcemodel.sm_import import PyImport
 from sourcemodel.sm_method import PyMethod
 from sourcemodel.sm_module import PyModule
-from sourcemodel.sm_parameter import PyParameter
-
 
 class ASTParser:
     def __init__(self):
+        self.current_project = None
         self.current_module = None
 
     def parse_file(self, file_path):
@@ -28,6 +27,10 @@ class ASTParser:
     def visit_ClassDef(self, node):
         py_class = PyClass(node.name)
         self.current_module.add_class(py_class)
+        self.current_project.hierarchy_graph.add_class(node.name)
+        for base in node.bases:
+            if isinstance(base, ast.Name):
+                self.current_project.hierarchy_graph.add_inheritance(node.name, base.id)
         for item in node.body:
             if isinstance(item, ast.FunctionDef):
                 py_method = self.visit_FunctionDef(item, py_class)
