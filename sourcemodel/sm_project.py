@@ -6,7 +6,7 @@ class PyProject:
         self.name = name
         self.modules = []
         self.hierarchy_graph = HierarchyGraph()
-        # self.dependency_graph = DependencyGraph()
+        self.dependency_graph = DependencyGraph()
 
     def add_module(self, module):
         self.modules.append(module)

@@ -5,6 +5,8 @@ from sourcemodel.sm_function import PyFunction
 from sourcemodel.sm_import import PyImport
 from sourcemodel.sm_method import PyMethod
 from sourcemodel.sm_module import PyModule
+from sourcemodel.sm_parameter import PyParameter
+
 
 class ASTParser:
     def __init__(self):
@@ -58,12 +60,14 @@ class ASTParser:
         for alias in node.names:
             py_import = PyImport(alias.name, alias.asname)
             self.current_module.add_import(py_import)
+            self.current_project.dependency_graph.add_dependency(self.current_module.name, alias.name)
 
     def visit_ImportFrom(self, node):
         for alias in node.names:
             module_name = f"{node.module}.{alias.name}"
             py_import = PyImport(module_name, alias.asname, is_from_import=True)
             self.current_module.add_import(py_import)
+            self.current_project.dependency_graph.add_dependency(self.current_module.name, module_name)
 
     def visit_arg(self, node):
         # Handle default values and type annotations if present
