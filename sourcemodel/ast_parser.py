@@ -28,7 +28,9 @@ class ASTParser:
         return visitor(node)
 
     def visit_ClassDef(self, node):
-        py_class = PyClass(node.name)
+        start_line = node.lineno
+        end_line = max(child.lineno for child in ast.walk(node) if hasattr(child, 'lineno'))
+        py_class = PyClass(node.name, start_line, end_line)
         self.current_module.add_class(py_class)
         self.current_project.hierarchy_graph.add_class(node.name)
         for base in node.bases:
@@ -42,15 +44,17 @@ class ASTParser:
         return py_class
 
     def visit_FunctionDef(self, node, parent_class=None):
+        start_line = node.lineno
+        end_line = node.end_lineno if hasattr(node, 'end_lineno') else start_line
         if parent_class:
-            py_method = PyMethod(node.name)
+            py_method = PyMethod(node.name, start_line, end_line)
             for arg in node.args.args:
                 param = self.visit_arg(arg)
                 py_method.add_parameter(param)
             parent_class.add_method(py_method)
             return py_method
         else:
-            py_function = PyFunction(node.name)
+            py_function = PyFunction(node.name, start_line, end_line)
             for arg in node.args.args:
                 param = self.visit_arg(arg)
                 py_function.add_parameter(param)
