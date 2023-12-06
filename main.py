@@ -5,28 +5,40 @@ import os
 from analyzer import analyze_code
 from export.exporter import export_to_json, export_to_csv
 from log_config import setup_logging
+from sourcemodel.ast_parser import ASTParser
 
 setup_logging()
 
 
-def process_file(file_path):
+def get_project_name(input_path):
+    return os.path.basename(input_path) \
+        if os.path.isdir(input_path) \
+        else os.path.splitext(os.path.basename(input_path))[0]
+
+
+def process_file(file_path, project):
+    module_metrics, module_smells = None, None
     try:
-        return analyze_code(file_path)
+        parser = ASTParser(project)
+        module = parser.parse_file(file_path)
+        module_metrics, module_smells = module.analyze()
     except Exception as e:
         logging.error(f"Error in processing file {file_path}: {e}", exc_info=True)
+    return module_metrics, module_smells
 
 
-def process_directory(directory_path):
-    metrics_data = []
+def process_directory(directory_path, project):
+    # metrics_data = []
     for root, _, files in os.walk(directory_path):
         for file in files:
             if file.endswith('.py'):
                 file_path = os.path.join(root, file)
                 logging.info(f"Analyzing file: {file_path}")
-                file_metrics = process_file(file_path)
-                if file_metrics:
-                    metrics_data.extend(file_metrics)
-    return metrics_data
+                process_file(file_path, project)
+                # file_metrics = process_file(file_path)
+    #             if file_metrics:
+    #                 metrics_data.extend(file_metrics)
+    # return metrics_data
 
 
 def main():
@@ -48,16 +60,16 @@ def main():
         os.makedirs(args.output_dir, exist_ok=True)
 
     output_path = os.path.join(args.output_dir, os.path.basename(args.input) + f"_metrics.{args.format}")
-
+    project = get_project_name(args.input)
     if os.path.isdir(args.input):
-        metrics_data = process_directory(args.input)
+        process_directory(args.input, project)
     else:
-        metrics_data = process_file(args.input)
+        process_file(args.input, project)
 
-    if args.format == 'json':
-        export_to_json(metrics_data, output_path)
-    elif args.format == 'csv':
-        export_to_csv(metrics_data, output_path)
+    # if args.format == 'json':
+    #     export_to_json(metrics_data, output_path)
+    # elif args.format == 'csv':
+    #     export_to_csv(metrics_data, output_path)
 
 
 if __name__ == "__main__":

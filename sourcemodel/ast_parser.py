@@ -9,14 +9,15 @@ from sourcemodel.sm_parameter import PyParameter
 
 
 class ASTParser:
-    def __init__(self):
-        self.current_project = None
+    def __init__(self, project):
+        self.current_project = project
         self.current_module = None
 
     def parse_file(self, file_path):
         with open(file_path, 'r') as file:
             source_code = file.read()
         self.current_module = PyModule(file_path)
+        self.current_project.add_module(self.current_module)
         tree = ast.parse(source_code)
         self.visit(tree)
         return self.current_module
