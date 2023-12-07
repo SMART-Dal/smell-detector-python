@@ -2,10 +2,10 @@ import argparse
 import logging
 import os
 
-from analyzer import analyze_code
-from export.exporter import export_to_json, export_to_csv
+from export.exporter import export_class_metrics, export_module_metrics, export_method_metrics, export_to_json
 from log_config import setup_logging
 from sourcemodel.ast_parser import ASTParser
+from sourcemodel.sm_project import PyProject
 
 setup_logging()
 
@@ -17,28 +17,28 @@ def get_project_name(input_path):
 
 
 def process_file(file_path, project):
-    module_metrics, module_smells = None, None
     try:
         parser = ASTParser(project)
         module = parser.parse_file(file_path)
-        module_metrics, module_smells = module.analyze()
+        return module.analyze()
     except Exception as e:
         logging.error(f"Error in processing file {file_path}: {e}", exc_info=True)
-    return module_metrics, module_smells
+    return None
 
 
 def process_directory(directory_path, project):
-    # metrics_data = []
+    aggregated_metrics = {'class': [], 'method': [], 'module': []}
     for root, _, files in os.walk(directory_path):
         for file in files:
             if file.endswith('.py'):
                 file_path = os.path.join(root, file)
                 logging.info(f"Analyzing file: {file_path}")
-                process_file(file_path, project)
-                # file_metrics = process_file(file_path)
-    #             if file_metrics:
-    #                 metrics_data.extend(file_metrics)
-    # return metrics_data
+                file_metrics = process_file(file_path, project)
+                if file_metrics:
+                    aggregated_metrics['class'].extend(file_metrics.get('class_metrics', []))
+                    aggregated_metrics['method'].extend(file_metrics.get('method_metrics', []))
+                    aggregated_metrics['module'].append(file_metrics.get('module_metrics', {}))
+    return aggregated_metrics
 
 
 def main():
@@ -59,17 +59,21 @@ def main():
     if not os.path.exists(args.output_dir):
         os.makedirs(args.output_dir, exist_ok=True)
 
-    output_path = os.path.join(args.output_dir, os.path.basename(args.input) + f"_metrics.{args.format}")
-    project = get_project_name(args.input)
-    if os.path.isdir(args.input):
-        process_directory(args.input, project)
-    else:
-        process_file(args.input, project)
+    project_name = get_project_name(args.input)
+    project = PyProject(project_name)
 
-    # if args.format == 'json':
-    #     export_to_json(metrics_data, output_path)
-    # elif args.format == 'csv':
-    #     export_to_csv(metrics_data, output_path)
+    if os.path.isdir(args.input):
+        all_metrics = process_directory(args.input, project)
+    else:
+        all_metrics = process_file(args.input, project)
+
+        # Exporting results
+    if args.format == 'csv':
+        export_class_metrics(all_metrics['class'], args.output_dir, project_name)
+        export_method_metrics(all_metrics['method'], args.output_dir, project_name)
+        export_module_metrics(all_metrics['module'], args.output_dir, project_name)
+    elif args.format == 'json':
+        export_to_json(all_metrics, args.output_dir, project_name)
 
 
 if __name__ == "__main__":

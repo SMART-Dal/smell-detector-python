@@ -1,42 +1,32 @@
-import json
 import csv
-import logging
-from log_config import setup_logging
-
-setup_logging()
+import json
 
 
-def export_to_json(metrics_data, output_file):
-    """Export metrics data to a JSON file."""
-    try:
-        with open(output_file, 'w') as f:
-            json.dump(metrics_data, f, indent=4)
-        logging.info(f"Data successfully exported to JSON file: {output_file}")
-    except Exception as e:
-        logging.error(f"Error exporting data to JSON: {e}", exc_info=True)
+def export_class_metrics(data, output_dir, file_name):
+    headers = ['Name', 'LOC', 'WMC', 'LCOM', 'Fan-in', 'Fan-out', 'NOM', 'NOF']
+    export_to_csv(data, headers, output_dir, f"{file_name}_class_metrics")
 
 
-def standardize_data_for_csv(metrics_data, headers_order):
-    """Standardize metrics data for CSV export."""
-    standardized_data = []
-    for data in metrics_data:
-        standardized_entry = {header: data.get(header, '') for header in headers_order}
-        standardized_data.append(standardized_entry)
-    return standardized_data
+def export_method_metrics(data, output_dir, file_name):
+    headers = ['Name', 'LOC', 'CC', 'PC']
+    export_to_csv(data, headers, output_dir, f"{file_name}_method_metrics")
 
 
-def export_to_csv(metrics_data, output_file):
-    """Export metrics data to a CSV file."""
-    headers_order = ["type", "name", "loc", "number_of_fields", "number_of_methods",
-                     "wmc", "cyclomatic_complexity", "parameter_count", "lcom3"]
+def export_module_metrics(data, output_dir, file_name):
+    headers = ['Name', 'LOC', 'WMC', 'LCOM', 'Fan-in', 'Fan-out', 'NOM', 'NOF']
+    export_to_csv(data, headers, output_dir, f"{file_name}_module_metrics")
 
-    standardized_data = standardize_data_for_csv(metrics_data, headers_order)
 
-    try:
-        with open(output_file, 'w', newline='') as f:
-            writer = csv.DictWriter(f, fieldnames=headers_order)
-            writer.writeheader()
-            writer.writerows(standardized_data)
-        logging.info(f"Data successfully exported to CSV file: {output_file}")
-    except Exception as e:
-        logging.error(f"Error exporting data to CSV: {e}", exc_info=True)
+def export_to_csv(data, headers, output_dir, file_name):
+    output_path = f"{output_dir}/{file_name}.csv"
+    with open(output_path, 'w', newline='') as csv_file:
+        writer = csv.DictWriter(csv_file, fieldnames=headers)
+        writer.writeheader()
+        for row in data:
+            writer.writerow(row)
+
+
+def export_to_json(data, output_dir, file_name):
+    output_path = f"{output_dir}/{file_name}.json"
+    with open(output_path, 'w') as json_file:
+        json.dump(data, json_file, indent=4)

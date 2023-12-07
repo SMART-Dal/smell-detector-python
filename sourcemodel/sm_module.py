@@ -1,3 +1,6 @@
+from metrics.loc_calculator import calculate_module_loc
+
+
 class PyModule:
     def __init__(self, name):
         self.name = name
@@ -31,8 +34,9 @@ class PyModule:
             method_metrics.append(function_analysis)
 
         # Calculate module-level metrics
-        # module_metrics['loc'] = self.calculate_module_loc()
-        # Other module-level metrics can be added here
+        module_metrics['loc'] = calculate_module_loc(self)
+
+        # Add other module-level metrics add here
 
         return {
             'module_metrics': module_metrics,
