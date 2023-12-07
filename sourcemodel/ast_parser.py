@@ -1,11 +1,21 @@
 import ast
 
+from sourcemodel.ast_utils import get_return_type, get_function_body_and_variables, determine_access_modifier, \
+    get_decorators, get_annotation
 from sourcemodel.sm_class import PyClass
 from sourcemodel.sm_function import PyFunction
 from sourcemodel.sm_import import PyImport
 from sourcemodel.sm_method import PyMethod
 from sourcemodel.sm_module import PyModule
 from sourcemodel.sm_parameter import PyParameter
+
+
+def populate_function_details(py_function, return_type, function_body, local_variables):
+    py_function.set_return_type(return_type)
+    for statement in function_body:
+        py_function.add_body_statement(statement)
+    for variable in local_variables:
+        py_function.add_local_variable(variable)
 
 
 class ASTParser:
@@ -48,16 +58,16 @@ class ASTParser:
         end_line = node.end_lineno if hasattr(node, 'end_lineno') else start_line
 
         # Handle return type
-        return_type = self.get_return_type(node)
+        return_type = get_return_type(node)
 
         # Handle function body and local variables
-        function_body, local_variables = self.get_function_body_and_variables(node)
+        function_body, local_variables = get_function_body_and_variables(node)
 
         if parent_class:  # It's a method in a class
-            access_modifier = self.determine_access_modifier(node)
-            decorators = self.get_decorators(node)
+            access_modifier = determine_access_modifier(node)
+            decorators = get_decorators(node)
             py_method = PyMethod(node.name, start_line, end_line, access_modifier, decorators)
-            self.populate_function_details(py_method, return_type, function_body, local_variables)
+            populate_function_details(py_method, return_type, function_body, local_variables)
             for arg in node.args.args:
                 param = self.visit_arg(arg)
                 py_method.add_parameter(param)
@@ -65,7 +75,7 @@ class ASTParser:
             return py_method
         else:  # It's a standalone function
             py_function = PyFunction(node.name, start_line, end_line)
-            self.populate_function_details(py_function, return_type, function_body, local_variables)
+            populate_function_details(py_function, return_type, function_body, local_variables)
             for arg in node.args.args:
                 param = self.visit_arg(arg)
                 py_function.add_parameter(param)
@@ -90,14 +100,8 @@ class ASTParser:
         default_value = None
         param_type = None
         if node.annotation:
-            param_type = self.get_annotation(node.annotation)
+            param_type = get_annotation(node.annotation)
         return PyParameter(node.arg, param_type, default_value)
-
-    def get_annotation(self, node):
-        # This method should be expanded to handle complex type annotations
-        if isinstance(node, ast.Name):
-            return node.id
-        return "complex_type"  # Placeholder for complex types
 
     def generic_visit(self, node):
         for field, value in ast.iter_fields(node):
@@ -107,34 +111,3 @@ class ASTParser:
                         self.visit(item)
             elif isinstance(value, ast.AST):
                 self.visit(value)
-
-    def get_return_type(self, node):
-        if node.returns:
-            return self.get_annotation(node.returns)
-        return None
-
-    def get_function_body_and_variables(self, node):
-        function_body = []
-        local_variables = []
-        for stmt in node.body:
-            function_body.append(stmt)
-            if isinstance(stmt, ast.Assign):
-                for target in stmt.targets:
-                    if isinstance(target, ast.Name):
-                        local_variables.append(target.id)
-        return function_body, local_variables
-
-    def determine_access_modifier(self, node):
-        if node.name.startswith('_'):
-            return 'private'
-        return 'public'
-
-    def get_decorators(self, node):
-        return [decorator.id for decorator in node.decorator_list if isinstance(decorator, ast.Name)]
-
-    def populate_function_details(self, py_function, return_type, function_body, local_variables):
-        py_function.set_return_type(return_type)
-        for statement in function_body:
-            py_function.add_body_statement(statement)
-        for variable in local_variables:
-            py_function.add_local_variable(variable)
