@@ -19,7 +19,3 @@ class PyProject:
     def analyze_project(self):
         for module in self.modules:
             module.analyze()
-
-
-
-
