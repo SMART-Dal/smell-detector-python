@@ -1,7 +1,8 @@
 import ast
+import os
 
 from sourcemodel.ast_utils import get_return_type, get_function_body_and_variables, determine_access_modifier, \
-    get_decorators, get_annotation
+    get_decorators, get_annotation, extract_package_name
 from sourcemodel.sm_class import PyClass
 from sourcemodel.sm_function import PyFunction
 from sourcemodel.sm_import import PyImport
@@ -23,10 +24,11 @@ class ASTParser:
         self.current_project = project
         self.current_module = None
 
-    def parse_file(self, file_path):
+    def parse_file(self, file_path, project_root):
         with open(file_path, 'r') as file:
             source_code = file.read()
-        self.current_module = PyModule(file_path)
+        package_name = extract_package_name(file_path, project_root)
+        self.current_module = PyModule(os.path.basename(file_path), package_name)
         self.current_project.add_module(self.current_module)
         tree = ast.parse(source_code)
         self.visit(tree)

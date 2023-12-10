@@ -10,11 +10,9 @@ def calculate_module_loc(py_module):
 
 # Calculate the LOC for a class.
 def calculate_class_loc(py_class):
-    # Assuming PyClass has start_line and end_line attributes
     return py_class.end_line - py_class.start_line + 1
 
 
 # Calculate the LOC for a function or method.
 def calculate_function_loc(py_function):
-    # Assuming PyFunction has start_line and end_line attributes
     return py_function.end_line - py_function.start_line + 1

@@ -1,4 +1,5 @@
 import ast
+import os
 
 
 def get_return_type(node):
@@ -41,3 +42,17 @@ def get_annotation(annotation):
     # Add more cases as needed for complex annotations
     return "complex_type"
 
+
+def extract_package_name(file_path, project_root):
+    directory = os.path.dirname(file_path)
+    package_parts = []
+
+    # Traverse up until the project root or filesystem root
+    while directory and (project_root is None or directory.startswith(project_root)):
+        directory, package_part = os.path.split(directory)
+        if package_part:  # Ignore empty parts
+            package_parts.append(package_part)
+
+    package_name = '.'.join(reversed(package_parts))
+    print(package_name)
+    return package_name
