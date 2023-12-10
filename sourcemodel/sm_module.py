@@ -61,8 +61,9 @@ class PyModule:
         method_metrics = []
         function_metrics = []
         for py_class in self.classes:
-
+            # print(f"Analyzing class: {py_class.name}")
             for method in py_class.methods:
+                # print(f"Analyzing method: {method.name}")
                 analyzed_method = self.analyze_methods(method, py_class.name)
                 method_metrics.append(analyzed_method)
 
