@@ -1,5 +1,5 @@
-from metrics.cyclomatic_complexity import calculate_cyclomatic_complexity
-from metrics.loc_calculator import calculate_module_loc, calculate_class_loc, calculate_function_loc
+from metrics.method_metrics import calculate_class_loc, calculate_cyclomatic_complexity, calculate_function_loc, \
+    calculate_parameter_count, calculate_module_loc
 
 
 class PyModule:
@@ -29,23 +29,29 @@ class PyModule:
 
     def analyze_methods(self, py_method, class_name):
         complexity = calculate_cyclomatic_complexity(py_method.ast_node)
+        param_count = calculate_parameter_count(py_method)
+
         return {
             'package': self.package_name,
             'module_name': self.name,
             'class_name': class_name,
             'method_name': py_method.name,
             'loc': calculate_function_loc(py_method),
-            'cc': complexity
+            'cc': complexity,
+            'pc': param_count
         }
 
     def analyze_function(self, py_function):
         complexity = calculate_cyclomatic_complexity(py_function.ast_node)
+        param_count = calculate_parameter_count(py_function)
+
         return {
             'package': self.package_name,
             'module_name': self.name,
             'function_name': py_function.name,
             'loc': calculate_function_loc(py_function),
-            'cc': complexity
+            'cc': complexity,
+            'pc': param_count
         }
 
     def analyze(self):

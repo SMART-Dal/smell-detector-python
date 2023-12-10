@@ -72,8 +72,12 @@ class ASTParser:
         parameters = [self.visit_arg(arg) for arg in node.args.args]
 
         def is_same_method(method, name, params):
-            # Comparing method name and number of parameters
-            return method.name == name and len(method.parameters) == len(params)
+            if method.name != name or len(method.parameters) != len(params):
+                return False
+            for i in range(len(method.parameters)):
+                if method.parameters[i].param_type != params[i].param_type:
+                    return False
+            return True
 
         if parent_class:  # It's a method in a class
             # Check if the method with same signature has already been added to avoid duplication
