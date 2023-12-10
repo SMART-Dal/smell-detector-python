@@ -34,7 +34,7 @@ def process_file(file_path, project, project_root):
 
 
 def process_directory(directory_path, project, project_root):
-    aggregated_metrics = {'class': [], 'method': [], 'module': []}
+    aggregated_metrics = {'module': [], 'class': [], 'method': [], 'function': []}
     for root, _, files in os.walk(directory_path):
         for file in files:
             if file.endswith('.py'):
@@ -42,9 +42,10 @@ def process_directory(directory_path, project, project_root):
                 logging.info(f"Analyzing file: {file_path}")
                 file_metrics = process_file(file_path, project, project_root)
                 if file_metrics:
+                    aggregated_metrics['module'].append(file_metrics.get('module_metrics', {}))
                     aggregated_metrics['class'].extend(file_metrics.get('class_metrics', []))
                     aggregated_metrics['method'].extend(file_metrics.get('method_metrics', []))
-                    aggregated_metrics['module'].append(file_metrics.get('module_metrics', {}))
+                    aggregated_metrics['function'].extend(file_metrics.get('function_metrics', []))
     return aggregated_metrics
 
 
@@ -79,15 +80,17 @@ def main():
     # if all_metrics and any(all_metrics.values()):
     if all_metrics:
         class_headers = ['Class Name', 'LOC', 'WMC', 'LCOM', 'Fan-in', 'Fan-out', 'NOM', 'NOF']
-        method_headers = ['Method Name', 'LOC', 'CC', 'PC']
+        function_headers = ['Method Name', 'LOC', 'CC', 'PC']
         module_headers = ['Module Name', 'LOC', 'WMC', 'LCOM', 'Fan-in', 'Fan-out', 'NOM', 'NOF']
 
+        export_metrics(all_metrics['module'], args.output_dir, f"{project_name}_module_metrics", args.format,
+                       module_headers)
         export_metrics(all_metrics['class'], args.output_dir, f"{project_name}_class_metrics", args.format,
                        class_headers)
         export_metrics(all_metrics['method'], args.output_dir, f"{project_name}_method_metrics", args.format,
-                       method_headers)
-        export_metrics(all_metrics['module'], args.output_dir, f"{project_name}_module_metrics", args.format,
-                       module_headers)
+                       function_headers)
+        export_metrics(all_metrics['function'], args.output_dir, f"{project_name}_function_metrics", args.format,
+                       function_headers)
     else:
         logging.info("No data available for export.")
 

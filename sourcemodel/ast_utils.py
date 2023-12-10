@@ -54,5 +54,4 @@ def extract_package_name(file_path, project_root):
             package_parts.append(package_part)
 
     package_name = '.'.join(reversed(package_parts))
-    print(package_name)
     return package_name
