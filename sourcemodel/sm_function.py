@@ -1,8 +1,9 @@
 class PyFunction:
-    def __init__(self, name, start_line, end_line):
+    def __init__(self, name, start_line, end_line, ast_node):
         self.name = name
         self.start_line = start_line
         self.end_line = end_line
+        self.ast_node = ast_node
         self.parameters = []
         self.return_type = None
         self.function_body = []

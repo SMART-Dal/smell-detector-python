@@ -68,7 +68,7 @@ class ASTParser:
         if parent_class:  # It's a method in a class
             access_modifier = determine_access_modifier(node)
             decorators = get_decorators(node)
-            py_method = PyMethod(node.name, start_line, end_line, access_modifier, decorators)
+            py_method = PyMethod(node.name, start_line, end_line, access_modifier, decorators, node)
             populate_function_details(py_method, return_type, function_body, local_variables)
             for arg in node.args.args:
                 param = self.visit_arg(arg)
@@ -76,7 +76,7 @@ class ASTParser:
             parent_class.add_method(py_method)
             return py_method
         else:  # It's a standalone function
-            py_function = PyFunction(node.name, start_line, end_line)
+            py_function = PyFunction(node.name, start_line, end_line, node)
             populate_function_details(py_function, return_type, function_body, local_variables)
             for arg in node.args.args:
                 param = self.visit_arg(arg)
