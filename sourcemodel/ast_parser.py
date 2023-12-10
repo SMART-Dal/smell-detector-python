@@ -1,6 +1,8 @@
 import ast
+import logging
 import os
 
+from log_config import setup_logging
 from sourcemodel.ast_utils import get_return_type, get_function_body_and_variables, determine_access_modifier, \
     get_decorators, get_annotation, extract_package_name
 from sourcemodel.sm_class import PyClass
@@ -9,6 +11,8 @@ from sourcemodel.sm_import import PyImport
 from sourcemodel.sm_method import PyMethod
 from sourcemodel.sm_module import PyModule
 from sourcemodel.sm_parameter import PyParameter
+
+setup_logging()
 
 
 def populate_function_details(py_function, return_type, function_body, local_variables):
@@ -50,8 +54,7 @@ class ASTParser:
                 self.current_project.hierarchy_graph.add_inheritance(node.name, base.id)
         for item in node.body:
             if isinstance(item, ast.FunctionDef):
-                py_method = self.visit_FunctionDef(item, py_class)
-                py_class.add_method(py_method)
+                self.visit_FunctionDef(item, py_class)
             # Add more logic here for other class contents
         return py_class
 
@@ -65,23 +68,32 @@ class ASTParser:
         # Handle function body and local variables
         function_body, local_variables = get_function_body_and_variables(node)
 
+        # Collect parameters
+        parameters = [self.visit_arg(arg) for arg in node.args.args]
+
+        def is_same_method(method, name, params):
+            # Comparing method name and number of parameters
+            return method.name == name and len(method.parameters) == len(params)
+
         if parent_class:  # It's a method in a class
-            access_modifier = determine_access_modifier(node)
-            decorators = get_decorators(node)
-            py_method = PyMethod(node.name, start_line, end_line, access_modifier, decorators, node)
-            populate_function_details(py_method, return_type, function_body, local_variables)
-            for arg in node.args.args:
-                param = self.visit_arg(arg)
-                py_method.add_parameter(param)
-            parent_class.add_method(py_method)
-            return py_method
+            # Check if the method with same signature has already been added to avoid duplication
+            if not any(is_same_method(method, node.name, parameters) for method in parent_class.methods):
+                access_modifier = determine_access_modifier(node)
+                decorators = get_decorators(node)
+                py_method = PyMethod(node.name, start_line, end_line, access_modifier, decorators, node)
+                populate_function_details(py_method, return_type, function_body, local_variables)
+                py_method.parameters = parameters
+                parent_class.add_method(py_method)
+                logging.info(f"Added method {node.name} to class {parent_class.name}")
+                # print(f"Added method {node.name} to class {parent_class.name}")
+                return py_method
         else:  # It's a standalone function
             py_function = PyFunction(node.name, start_line, end_line, node)
             populate_function_details(py_function, return_type, function_body, local_variables)
-            for arg in node.args.args:
-                param = self.visit_arg(arg)
-                py_function.add_parameter(param)
+            py_function.parameters = parameters
             self.current_module.add_function(py_function)
+            logging.info(f"Added standalone function {node.name}")
+            # print(f"Added standalone function {node.name}")
             return py_function
 
     def visit_Import(self, node):
