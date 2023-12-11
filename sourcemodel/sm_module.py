@@ -1,5 +1,7 @@
-from metrics.method_metrics import calculate_class_loc, calculate_cyclomatic_complexity, calculate_function_loc, \
-    calculate_parameter_count, calculate_module_loc
+from metrics.cyclomatic_complexity import calculate_cyclomatic_complexity
+from metrics.loc_calculator import calculate_class_loc, calculate_function_loc, calculate_module_loc
+from metrics.parameter_count import calculate_parameter_count
+from metrics.wmc_calculator import calculate_wmc_for_class, calculate_wmc_for_module
 
 
 class PyModule:
@@ -20,11 +22,13 @@ class PyModule:
         self.imports.append(py_import)
 
     def analyze_class(self, py_class):
+        wmc = calculate_wmc_for_class(py_class)
         return {
             'package': self.package_name,
             'module_name': self.name,
             'class_name': py_class.name,
-            'loc': calculate_class_loc(py_class)
+            'loc': calculate_class_loc(py_class),
+            'wmc': wmc
         }
 
     def analyze_methods(self, py_method, class_name):
@@ -55,10 +59,13 @@ class PyModule:
         }
 
     def analyze(self):
+        wmc = calculate_wmc_for_module(self)
+
         module_metrics = {
             'package': self.package_name,
             'module_name': self.name,
-            'loc': calculate_module_loc(self)
+            'loc': calculate_module_loc(self),
+            'wmc' : wmc
         }
 
         # Aggregate metrics for each class in the module
