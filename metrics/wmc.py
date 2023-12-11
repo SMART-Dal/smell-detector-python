@@ -1,5 +1,4 @@
-# In your metrics module (e.g., metrics.py or a specific file for WMC)
-from metrics.cyclomatic_complexity import calculate_cyclomatic_complexity
+from metrics.cc import calculate_cyclomatic_complexity
 
 
 def calculate_wmc_for_class(py_class):

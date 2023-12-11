@@ -1,4 +1,3 @@
-# Calculate the total LOC for a module.
 import ast
 
 
