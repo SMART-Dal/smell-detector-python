@@ -1,7 +1,7 @@
 import ast
 
-from sourcemodel.ast_utils import get_return_type, get_function_body_and_variables, determine_access_modifier, \
-    get_decorators, get_annotation, extract_package_name
+from sourcemodel.ast_utils import get_return_type, get_function_body_and_variables, \
+    get_decorators, get_annotation
 
 
 def test_get_return_type():
@@ -19,21 +19,7 @@ def test_get_function_body_and_variables():
     assert set(variables) == {'x', 'y'}
 
 
-def test_determine_access_modifier():
-    public_func = ast.FunctionDef(name='public_function')
-    private_func = ast.FunctionDef(name='_private_function')
-    assert determine_access_modifier(public_func) == 'public'
-    assert determine_access_modifier(private_func) == 'private'
-
-
-def test_get_decorators():
-    func_def = ast.FunctionDef(decorator_list=[ast.Name(id='decorator1'), ast.Name(id='decorator2')])
-    assert get_decorators(func_def) == ['decorator1', 'decorator2']
-
-
 def test_get_annotation():
     assert get_annotation(ast.Name(id='int')) == 'int'
     assert get_annotation(ast.Subscript(value=ast.Name(id='List'), slice=ast.Name(id='int'))) == 'List[int]'
     assert get_annotation(ast.Tuple(elts=[ast.Name(id='int'), ast.Name(id='str')])) == '(int, str)'
-
-

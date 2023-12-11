@@ -20,12 +20,6 @@ def get_function_body_and_variables(node):
     return function_body, local_variables
 
 
-def determine_access_modifier(node):
-    if node.name.startswith('_'):
-        return 'private'
-    return 'public'
-
-
 def get_decorators(node):
     return [decorator.id for decorator in node.decorator_list if isinstance(decorator, ast.Name)]
 

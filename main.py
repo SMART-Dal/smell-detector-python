@@ -26,7 +26,7 @@ def get_project_name(input_path):
 def process_file(file_path, project, project_root):
     try:
         parser = ASTParser(project)
-        module = parser.parse_file(file_path, project_root)
+        module = parser.parse(file_path, project_root)
         return module.analyze()
     except Exception as e:
         logging.error(f"Error in processing file {file_path}: {e}", exc_info=True)

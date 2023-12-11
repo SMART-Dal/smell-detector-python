@@ -1,5 +1,6 @@
 from metrics.cc import calculate_cyclomatic_complexity
 from metrics.loc import calculate_class_loc, calculate_function_loc, calculate_module_loc
+from metrics.nof import calculate_nof, calculate_nopf, calculate_module_nof, calculate_module_nopf
 from metrics.nom import calculate_nom, calculate_nopm
 from metrics.pc import calculate_parameter_count
 from metrics.wmc import calculate_wmc_for_class, calculate_wmc_for_module
@@ -12,6 +13,7 @@ class PyModule:
         self.classes = []
         self.functions = []
         self.imports = []
+        self.global_variables = []
 
     def add_class(self, py_class):
         self.classes.append(py_class)
@@ -22,7 +24,12 @@ class PyModule:
     def add_import(self, py_import):
         self.imports.append(py_import)
 
+    def add_global_variable(self, variable_name):
+        if variable_name not in self.global_variables:
+            self.global_variables.append(variable_name)
+
     def analyze(self):
+
         module_metrics = self.calculate_module_metrics()
         class_metrics = [self.analyze_class(py_class) for py_class in self.classes]
         method_metrics = [self.analyze_method_or_function(method, py_class.name)
@@ -37,18 +44,23 @@ class PyModule:
         }
 
     def calculate_module_metrics(self):
+
         module_nom = sum(calculate_nom(py_class) for py_class in self.classes)
         module_nopm = sum(calculate_nopm(py_class) for py_class in self.classes) + len(self.functions)
+
         return {
             'package': self.package_name,
             'module_name': self.name,
             'loc': calculate_module_loc(self),
             'wmc': calculate_wmc_for_module(self),
             'nom': module_nom,
-            'nopm': module_nopm
+            'nopm': module_nopm,
+            'nof': calculate_module_nof(self),
+            'nopf': calculate_module_nopf(self)
         }
 
     def analyze_class(self, py_class):
+        # print(f"analyzing {self.name} : {py_class.name}")
         return {
             'package': self.package_name,
             'module_name': self.name,
@@ -56,7 +68,9 @@ class PyModule:
             'loc': calculate_class_loc(py_class),
             'wmc': calculate_wmc_for_class(py_class),
             'nom': calculate_nom(py_class),
-            'nopm': calculate_nopm(py_class)
+            'nopm': calculate_nopm(py_class),
+            'nof': calculate_nof(py_class),
+            'nopf': calculate_nopf(py_class)
         }
 
     def analyze_method_or_function(self, item, class_name=None):
