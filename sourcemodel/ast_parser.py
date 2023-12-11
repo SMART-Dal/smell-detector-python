@@ -64,12 +64,19 @@ class ASTParser:
         for target in node.targets:
             if isinstance(target, ast.Name):
                 access_modifier = 'public' if not target.id.startswith('_') else 'private'
-                py_class.add_field(target.id, access_modifier)
+                py_class.add_class_field(target.id, access_modifier)
 
     def visit_FunctionDef(self, node, parent_class=None):
         py_function = self._create_py_function_or_method(node, parent_class)
         if parent_class:
             parent_class.add_method(py_function)
+            for stmt in ast.walk(node):
+                if isinstance(stmt, ast.Assign):
+                    for target in stmt.targets:
+                        if isinstance(target, ast.Attribute) and isinstance(target.value,
+                                                                            ast.Name) and target.value.id == 'self':
+                            parent_class.add_instance_field(target.attr)
+            self._analyze_function_body(node, py_function, parent_class)
         else:
             self.current_module.add_function(py_function)
         return py_function
@@ -89,6 +96,15 @@ class ASTParser:
             py_function = PyFunction(node.name, start_line, end_line, node)
             self._populate_function_details(py_function, return_type, function_body, local_variables, parameters)
             return py_function
+
+    @staticmethod
+    def _analyze_function_body(node, py_function, parent_class):
+        if parent_class:
+            for stmt in ast.walk(node):
+                if isinstance(stmt, ast.Attribute) and isinstance(stmt.value, ast.Name) and stmt.value.id == 'self':
+                    field_name = stmt.attr
+                    if field_name in parent_class.class_fields or field_name in parent_class.instance_fields:
+                        parent_class.add_method_interaction(py_function.name, field_name)
 
     @staticmethod
     def _get_decorators(node):

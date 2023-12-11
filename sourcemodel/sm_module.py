@@ -1,4 +1,5 @@
 from metrics.cc import calculate_cyclomatic_complexity
+from metrics.lcom import calculate_lcom4
 from metrics.loc import calculate_class_loc, calculate_function_loc, calculate_module_loc
 from metrics.nof import calculate_nof, calculate_nopf, calculate_module_nof, calculate_module_nopf
 from metrics.nom import calculate_nom, calculate_nopm
@@ -70,7 +71,8 @@ class PyModule:
             'nom': calculate_nom(py_class),
             'nopm': calculate_nopm(py_class),
             'nof': calculate_nof(py_class),
-            'nopf': calculate_nopf(py_class)
+            'nopf': calculate_nopf(py_class),
+            'lcom': calculate_lcom4(py_class)
         }
 
     def analyze_method_or_function(self, item, class_name=None):

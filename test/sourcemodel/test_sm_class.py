@@ -14,7 +14,7 @@ def test_pyclass_initialization(sample_pyclass):
     assert sample_pyclass.start_line == 1
     assert sample_pyclass.end_line == 10
     assert isinstance(sample_pyclass.methods, list)
-    assert isinstance(sample_pyclass.fields, list)
+    assert isinstance(sample_pyclass.class_fields, list)
     assert isinstance(sample_pyclass.base_classes, list)
     assert isinstance(sample_pyclass.nested_classes, list)
 
@@ -27,8 +27,8 @@ def test_add_method(sample_pyclass):
 
 def test_add_variable(sample_pyclass):
     mock_variable = Mock()
-    sample_pyclass.add_field(mock_variable, "public")
-    assert mock_variable in sample_pyclass.fields
+    sample_pyclass.add_class_field(mock_variable, "public")
+    assert mock_variable in sample_pyclass.class_fields
 
 
 def test_add_nested_class(sample_pyclass):
@@ -48,9 +48,9 @@ def test_method_list_integrity(sample_pyclass):
 def test_variable_list_integrity(sample_pyclass):
     mock_variable1 = Mock()
     mock_variable2 = Mock()
-    sample_pyclass.add_field(mock_variable1, "public")
-    sample_pyclass.add_field(mock_variable2, "public")
-    assert sample_pyclass.fields == [(mock_variable1, "public"), (mock_variable2, "public")]
+    sample_pyclass.add_class_field(mock_variable1, "public")
+    sample_pyclass.add_class_field(mock_variable2, "public")
+    assert sample_pyclass.class_fields == [(mock_variable1, "public"), (mock_variable2, "public")]
 
 
 def test_nested_class_list_integrity(sample_pyclass):
