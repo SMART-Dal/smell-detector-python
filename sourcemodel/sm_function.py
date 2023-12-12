@@ -10,6 +10,7 @@ class PyFunction:
         self.local_variables = []
         self.called_methods = set()
         self.used_modules = set()
+        self.external_calls = set()
 
     def add_parameter(self, parameter):
         self.parameters.append(parameter)
@@ -30,3 +31,5 @@ class PyFunction:
             module_name = method_name.split('.')[0]
             self.used_modules.add(module_name)  # Add this line
 
+    def add_external_call(self, called_name):
+        self.external_calls.add(called_name)

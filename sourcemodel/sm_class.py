@@ -7,8 +7,7 @@ class PyClass:
         self.class_fields = {}  # Static fields
         self.instance_fields = {}  # Instance fields
         self.method_interactions = {}
-        self.base_classes = []
-        self.nested_classes = []
+        self.external_dependencies = set()
 
     def add_method(self, method_obj):
         self.methods.append(method_obj)
@@ -30,5 +29,6 @@ class PyClass:
         # print(f"Adding instance field {field_name}")
         self.instance_fields[field_name] = 'public'  # Default to public for instance fields
 
-    def add_nested_class(self, nested_class_obj):
-        self.nested_classes.append(nested_class_obj)
+    def add_external_dependency(self, dependency):
+        self.external_dependencies.add(dependency)
+

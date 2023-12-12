@@ -108,10 +108,27 @@ class ASTParser:
     def _analyze_function_body(node, py_function, parent_class):
         if parent_class:
             for stmt in ast.walk(node):
+                # Check for method interactions within the class (for fan-in)
                 if isinstance(stmt, ast.Attribute) and isinstance(stmt.value, ast.Name) and stmt.value.id == 'self':
                     field_name = stmt.attr
                     if field_name in parent_class.class_fields or field_name in parent_class.instance_fields:
                         parent_class.add_method_interaction(py_function.name, field_name)
+
+                if isinstance(stmt, ast.Call):
+                    called_name = None
+                    # Direct function calls (e.g., some_function())
+                    if isinstance(stmt.func, ast.Name):
+                        called_name = stmt.func.id
+                    # Method calls or attribute access on an object (e.g., some_object.some_method())
+                    elif isinstance(stmt.func, ast.Attribute) and isinstance(stmt.func.value, ast.Name):
+                        called_name = f"{stmt.func.value.id}.{stmt.func.attr}"
+
+                    # If a called name was identified, add it as an external call
+                    if called_name:
+                        py_function.add_external_call(called_name)
+                        # If this is a method within a class, also note the external dependency at the class level
+                        if parent_class:
+                            parent_class.add_external_dependency(called_name.split('.')[0])
 
     @staticmethod
     def _get_decorators(node):
