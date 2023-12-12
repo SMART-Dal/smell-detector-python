@@ -24,6 +24,7 @@ class ASTParser:
             package_name = extract_package_name(file_path, project_root)
             self.current_module = PyModule(os.path.basename(file_path), package_name)
             self.current_project.add_module(self.current_module)
+            self.current_project.dependency_graph.add_module(self.current_module.name)
             tree = ast.parse(source_code)
             self._visit(tree)
         except Exception as e:
@@ -45,6 +46,12 @@ class ASTParser:
         py_class = self._create_py_class(node)
         self.current_module.add_class(py_class)
         self.current_project.hierarchy_graph.add_class(node.name)
+
+        for base in node.bases:
+            if isinstance(base, ast.Name):
+                base_class_name = base.id
+                self.current_project.hierarchy_graph.add_inheritance(node.name, base_class_name)
+
         self._process_class_body(py_class, node.body)
         return py_class
 
@@ -101,6 +108,17 @@ class ASTParser:
     def _analyze_function_body(node, py_function, parent_class):
         if parent_class:
             for stmt in ast.walk(node):
+                if isinstance(stmt, ast.Call):
+                    if isinstance(stmt.func, ast.Attribute):
+                        if isinstance(stmt.func.value, ast.Name):
+                            class_name = stmt.func.value.id
+                            method_name = stmt.func.attr
+                            parent_class.add_used_class(class_name)
+                            py_function.add_called_method(f"{class_name}.{method_name}")
+                    elif isinstance(stmt.func, ast.Name):
+                        method_name = stmt.func.id
+                        py_function.add_called_method(method_name)
+
                 if isinstance(stmt, ast.Attribute) and isinstance(stmt.value, ast.Name) and stmt.value.id == 'self':
                     field_name = stmt.attr
                     if field_name in parent_class.class_fields or field_name in parent_class.instance_fields:

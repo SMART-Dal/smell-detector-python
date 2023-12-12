@@ -9,6 +9,7 @@ class PyClass:
         self.method_interactions = {}
         self.base_classes = []
         self.nested_classes = []
+        self.used_classes = set()
 
     def add_method(self, method_obj):
         self.methods.append(method_obj)
@@ -29,6 +30,9 @@ class PyClass:
     def add_instance_field(self, field_name):
         # print(f"Adding instance field {field_name}")
         self.instance_fields[field_name] = 'public'  # Default to public for instance fields
+
+    def add_used_class(self, class_name):
+        self.used_classes.add(class_name)
 
     def add_nested_class(self, nested_class_obj):
         self.nested_classes.append(nested_class_obj)

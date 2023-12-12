@@ -1,5 +1,5 @@
 from sourcemodel.dependency_graph import DependencyGraph
-from sourcemodel.herrarchy_graph import HierarchyGraph
+from sourcemodel.hierarchy_graph import HierarchyGraph
 
 
 class PyProject:
@@ -11,6 +11,7 @@ class PyProject:
         self.dependency_graph = DependencyGraph()
 
     def add_module(self, module):
+        module.dependency_graph = self.dependency_graph
         self.modules.append(module)
 
     def add_package(self, package):

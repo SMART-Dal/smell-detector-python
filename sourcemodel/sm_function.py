@@ -8,6 +8,7 @@ class PyFunction:
         self.return_type = None
         self.function_body = []
         self.local_variables = []
+        self.called_methods = set()
 
     def add_parameter(self, parameter):
         self.parameters.append(parameter)
@@ -20,3 +21,7 @@ class PyFunction:
 
     def add_local_variable(self, variable):
         self.local_variables.append(variable)
+
+    def add_called_method(self, method_name):
+        self.called_methods.add(method_name)
+
