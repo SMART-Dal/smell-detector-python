@@ -19,13 +19,14 @@ class PyModule:
         self.functions = []
         self.imports = []
         self.global_variables = []
-        self.used_modules = set()
 
     def add_class(self, py_class):
         self.classes.append(py_class)
 
     def add_function(self, py_function):
         self.functions.append(py_function)
+        for module_name in py_function.used_modules:
+            self.dependency_graph.add_dependency(self.name, module_name)
 
     def add_import(self, py_import):
         self.imports.append(py_import)
@@ -33,9 +34,6 @@ class PyModule:
     def add_global_variable(self, variable_name):
         if variable_name not in self.global_variables:
             self.global_variables.append(variable_name)
-
-    def add_used_module(self, module_name):
-        self.used_modules.add(module_name)
 
     def analyze(self):
 

@@ -11,6 +11,7 @@ class PyProject:
         self.dependency_graph = DependencyGraph()
 
     def add_module(self, module):
+        # print(f"Adding module: {module.name}")
         module.dependency_graph = self.dependency_graph
         self.modules.append(module)
 
@@ -20,3 +21,12 @@ class PyProject:
     def analyze_project(self):
         for module in self.modules:
             module.analyze()
+
+    def find_class(self, class_name):
+        print(f"Finding class {class_name}")
+        for module in self.modules:
+            for py_class in module.classes:
+                if py_class.name == class_name:
+                    print(f"Found class {class_name} in module {module}")
+                    return py_class
+        return None

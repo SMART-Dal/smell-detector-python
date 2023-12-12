@@ -108,17 +108,6 @@ class ASTParser:
     def _analyze_function_body(node, py_function, parent_class):
         if parent_class:
             for stmt in ast.walk(node):
-                if isinstance(stmt, ast.Call):
-                    if isinstance(stmt.func, ast.Attribute):
-                        if isinstance(stmt.func.value, ast.Name):
-                            class_name = stmt.func.value.id
-                            method_name = stmt.func.attr
-                            parent_class.add_used_class(class_name)
-                            py_function.add_called_method(f"{class_name}.{method_name}")
-                    elif isinstance(stmt.func, ast.Name):
-                        method_name = stmt.func.id
-                        py_function.add_called_method(method_name)
-
                 if isinstance(stmt, ast.Attribute) and isinstance(stmt.value, ast.Name) and stmt.value.id == 'self':
                     field_name = stmt.attr
                     if field_name in parent_class.class_fields or field_name in parent_class.instance_fields:

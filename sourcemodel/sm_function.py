@@ -9,6 +9,7 @@ class PyFunction:
         self.function_body = []
         self.local_variables = []
         self.called_methods = set()
+        self.used_modules = set()
 
     def add_parameter(self, parameter):
         self.parameters.append(parameter)
@@ -23,5 +24,9 @@ class PyFunction:
         self.local_variables.append(variable)
 
     def add_called_method(self, method_name):
+        print(f"Adding {method_name}")
         self.called_methods.add(method_name)
+        if '.' in method_name:
+            module_name = method_name.split('.')[0]
+            self.used_modules.add(module_name)  # Add this line
 
