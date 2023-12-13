@@ -4,13 +4,12 @@ import os
 import logging
 
 
-def export_metrics(data, output_dir, file_name, format, headers):
+def export_data(data, output_dir, file_name, exp_format, headers=None):
+    """Generic data export function."""
     try:
-        if format == 'json':
+        if exp_format == 'json':
             export_to_json(data, output_dir, file_name)
-        elif format == 'csv':
-            export_to_csv(data, headers, output_dir, file_name)
-        logging.info(f"Exported {format.upper()} data to {file_name}.{format}")
+        logging.info(f"Exported {exp_format.upper()} data to {file_name}.{exp_format}")
     except Exception as e:
         logging.error(f"Failed to export data: {e}")
 
@@ -21,11 +20,11 @@ def export_to_json(data, output_dir, file_name):
         json.dump(data, json_file, indent=4)
 
 
-def export_to_csv(data, headers, output_dir, file_name):
-    output_path = os.path.join(output_dir, f"{file_name}.csv")
-    with open(output_path, 'w', newline='') as csv_file:
-        writer = csv.DictWriter(csv_file, fieldnames=headers)
-        writer.writeheader()
-        for row in data:
-            if row is not None and isinstance(row, dict):
-                writer.writerow(row)
+def export_implementation_smells(implementation_smells, output_dir, file_name, exp_format):
+    headers = ['Type', 'Entity Name', 'Location', 'Details']
+    export_data(implementation_smells, output_dir, f"{file_name}_implementation_smells", exp_format, headers)
+
+
+def export_design_smells(design_smells, output_dir, file_name, exp_format):
+    headers = ['Type', 'Entity Name', 'Location', 'Details']
+    export_data(design_smells, output_dir, f"{file_name}_design_smells", exp_format, headers)

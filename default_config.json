@@ -1,0 +1,8 @@
+{
+  "Smells": {
+    "LongParameterList": {
+      "enable": true,
+      "threshold": 4
+    }
+  }
+}

@@ -2,8 +2,11 @@ import argparse
 import logging
 import os
 
-from export.exporter import export_metrics
+from config_loader import load_config
+from export.exporter import export_data, export_implementation_smells, export_design_smells
 from log_config import setup_logging
+from smells import get_detector
+from smells.smell_detector import ImplementationSmellDetector, DesignSmellDetector
 from sourcemodel.ast_parser import ASTParser
 from sourcemodel.sm_project import PyProject
 
@@ -58,11 +61,26 @@ def analyze_modules(modules):
     return aggregated_metrics
 
 
+def detect_smells(module, config):
+    detected_smells = {'implementation': [], 'design': []}
+    for smell_name, settings in config['Smells'].items():
+        if settings.get('enable', False):
+            detector = get_detector(smell_name)
+            if detector:
+                smells = detector.detect(module, settings)
+                if isinstance(detector, ImplementationSmellDetector):
+                    detected_smells['implementation'].extend(smells)
+                elif isinstance(detector, DesignSmellDetector):
+                    detected_smells['design'].extend(smells)
+    return detected_smells
+
+
 def main():
     parser = argparse.ArgumentParser(description="PyCodeSmells Analysis Tool")
     parser.add_argument('-i', '--input', required=True, help="Input Python file or directory for analysis")
     parser.add_argument('-o', '--output_dir', required=True, help="Output directory for the results")
     parser.add_argument('-f', '--format', choices=['json', 'csv'], required=True, help="Output format")
+    parser.add_argument('-c', '--config', help="Path to custom configuration file", default=None)
     args = parser.parse_args()
 
     if not os.path.exists(args.input):
@@ -86,19 +104,27 @@ def main():
 
     all_metrics = analyze_modules(modules)
 
-    if all_metrics:
-        class_headers = ['Class Name', 'LOC', 'WMC', 'LCOM', 'Fan-in', 'Fan-out', 'NOM', 'NOF']
-        function_headers = ['Method Name', 'LOC', 'CC', 'PC']
-        module_headers = ['Module Name', 'LOC', 'WMC', 'LCOM', 'Fan-in', 'Fan-out', 'NOM', 'NOF']
+    config = load_config(user_path=args.config)
 
-        export_metrics(all_metrics['module'], args.output_dir, f"{project_name}_module_metrics", args.format,
-                       module_headers)
-        export_metrics(all_metrics['class'], args.output_dir, f"{project_name}_class_metrics", args.format,
-                       class_headers)
-        export_metrics(all_metrics['method'], args.output_dir, f"{project_name}_method_metrics", args.format,
-                       function_headers)
-        export_metrics(all_metrics['function'], args.output_dir, f"{project_name}_function_metrics", args.format,
-                       function_headers)
+    all_smells = {'implementation': [], 'design': []}
+
+    for module in modules:
+        smells = detect_smells(module, config)
+        for smell_type in all_smells:
+            all_smells[smell_type].extend(smells[smell_type])
+
+    if all_metrics:
+        export_data(all_metrics['module'], args.output_dir, f"{project_name}_module_metrics", args.format)
+        export_data(all_metrics['class'], args.output_dir, f"{project_name}_class_metrics", args.format)
+        export_data(all_metrics['method'], args.output_dir, f"{project_name}_method_metrics", args.format)
+        export_data(all_metrics['function'], args.output_dir, f"{project_name}_function_metrics", args.format)
+
+    if all_smells['implementation']:
+        export_implementation_smells(all_smells['implementation'], args.output_dir, project_name, args.format)
+
+    if all_smells['design']:
+        export_design_smells(all_smells['design'], args.output_dir, project_name, args.format)
+
     else:
         logging.info("No data available for export.")
 

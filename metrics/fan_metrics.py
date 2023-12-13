@@ -1,10 +1,8 @@
 def calculate_fan_in_class(py_class):
-    print(f"Fan in: Method interactions {py_class.name} : {py_class.method_interactions}")
     return len(py_class.method_interactions)
 
 
 def calculate_fan_out_class(py_class):
-    print(f"Fab out: External dep {py_class.name} : {py_class.external_dependencies}")
     return len(py_class.external_dependencies)
 
 
