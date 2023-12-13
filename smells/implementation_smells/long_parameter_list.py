@@ -1,7 +1,7 @@
 from ..smell_detector import ImplementationSmellDetector
 
 
-def create_smell_detail(module_name, entity, param_count, max_params):
+def _create_smell_detail(module_name, entity, param_count, max_params):
     return {
         'module': module_name,
         'type': 'LongParameterList',
@@ -20,10 +20,10 @@ class LongParameterListDetector(ImplementationSmellDetector):
         for py_class in module.classes:
             for method in py_class.methods:
                 if len(method.parameters) > max_params:
-                    smells.append(create_smell_detail(module_name, method, len(method.parameters), max_params))
+                    smells.append(_create_smell_detail(module_name, method, len(method.parameters), max_params))
 
         for function in module.functions:
             if len(function.parameters) > max_params:
-                smells.append(create_smell_detail(module_name, function, len(function.parameters), max_params))
+                smells.append(_create_smell_detail(module_name, function, len(function.parameters), max_params))
 
         return smells

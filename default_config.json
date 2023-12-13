@@ -3,6 +3,10 @@
     "LongParameterList": {
       "enable": true,
       "threshold": 4
+    },
+    "LongIdentifier": {
+      "enable": true,
+      "threshold": 20
     }
   }
 }
