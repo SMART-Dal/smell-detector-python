@@ -7,6 +7,10 @@
     "LongIdentifier": {
       "enable": true,
       "threshold": 20
+    },
+    "LongMethod": {
+      "enable": true,
+      "threshold": 20
     }
   }
 }
