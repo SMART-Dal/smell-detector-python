@@ -1,13 +1,13 @@
 from ..smell_detector import ImplementationSmellDetector
 
 
-def _create_smell(module_name, name, line, entity_type):
+def _create_smell(module_name, entity, line, entity_type):
     return {
         'module': module_name,
         'type': 'LongIdentifier',
-        'entity_name': name,
+        'entity_name': entity.name,
         'location': f"Line {line}",
-        'details': f"{entity_type} name '{name}' is too long."
+        'details': f"{entity_type} name '{entity.name}' is too long."
     }
 
 
@@ -20,11 +20,11 @@ class LongIdentifierDetector(ImplementationSmellDetector):
         for py_class in module.classes:
             if len(py_class.name) > max_length:
 
-                smells.append(_create_smell(module.name, py_class.name, py_class.start_line, 'Class'))
+                smells.append(_create_smell(module.name, py_class, py_class.start_line, 'Class'))
 
         # Check for long function/method names
         for py_function in module.functions + [method for cls in module.classes for method in cls.methods]:
             if len(py_function.name) > max_length:
-                smells.append(_create_smell(module.name, py_function.name, py_function.start_line, 'Function/Method'))
+                smells.append(_create_smell(module.name, py_function, py_function.start_line, 'Function/Method'))
 
         return smells

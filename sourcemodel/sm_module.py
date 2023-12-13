@@ -87,12 +87,16 @@ class PyModule:
         }
 
     def analyze_method_or_function(self, item, class_name=None):
+        lines = calculate_function_loc(item)
         complexity = calculate_cyclomatic_complexity(item.ast_node)
         param_count = calculate_parameter_count(item)
+
+        item.set_metrics(lines, complexity, param_count)
+
         metrics = {
             'package': self.package_name,
             'module_name': self.name,
-            'loc': calculate_function_loc(item),
+            'loc': lines,
             'cc': complexity,
             'pc': param_count
         }

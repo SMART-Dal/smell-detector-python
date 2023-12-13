@@ -19,14 +19,12 @@ class LongMethodDetector(ImplementationSmellDetector):
         # Check for long methods in classes
         for py_class in module.classes:
             for method in py_class.methods:
-                line_count = method.end_line - method.start_line + 1
-                if line_count > max_lines:
-                    smells.append(_create_smell(module.name, method, line_count))
+                if method.loc > max_lines:
+                    smells.append(_create_smell(module.name, method, method.loc))
 
         # Check for long standalone functions
         for function in module.functions:
-            line_count = function.end_line - function.start_line + 1
-            if line_count > max_lines:
-                smells.append(_create_smell(module.name, function, line_count))
+            if function.loc > max_lines:
+                smells.append(_create_smell(module.name, function, function.loc))
 
         return smells

@@ -11,6 +11,9 @@ class PyFunction:
         self.called_methods = set()
         self.used_modules = set()
         self.external_calls = set()
+        self.loc = None
+        self.complexity = None
+        self.parameter_count = None
 
     def add_parameter(self, parameter):
         self.parameters.append(parameter)
@@ -33,3 +36,8 @@ class PyFunction:
 
     def add_external_call(self, called_name):
         self.external_calls.add(called_name)
+
+    def set_metrics(self, loc, complexity, parameter_count):
+        self.loc = loc
+        self.complexity = complexity
+        self.parameter_count = parameter_count
