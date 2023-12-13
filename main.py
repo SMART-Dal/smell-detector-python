@@ -114,6 +114,7 @@ def main():
             all_smells[smell_type].extend(smells[smell_type])
 
     if all_metrics:
+
         export_data(all_metrics['module'], args.output_dir, f"{project_name}_module_metrics", args.format)
         export_data(all_metrics['class'], args.output_dir, f"{project_name}_class_metrics", args.format)
         export_data(all_metrics['method'], args.output_dir, f"{project_name}_method_metrics", args.format)
