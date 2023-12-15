@@ -15,6 +15,10 @@
     "ComplexMethod": {
       "enable": true,
       "threshold": 10
+    },
+    "LongStatement": {
+      "enable": true,
+      "threshold": 100
     }
   }
 }
