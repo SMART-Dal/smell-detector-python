@@ -6,6 +6,7 @@ from .long_method import LongMethodDetector
 from .long_parameter_list import LongParameterListDetector
 from .long_statement import LongStatementDetector
 from .magic_number import MagicNumberDetector
+from .missing_default import MissingDefaultDetector
 
 DETECTORS = {
     'LongMethod': LongMethodDetector(),
@@ -16,4 +17,5 @@ DETECTORS = {
     'ComplexConditional': ComplexConditionalDetector(),
     'EmptyCatchBlock': EmptyCatchBlockDetector(),
     'MagicNumber': MagicNumberDetector(),
+    'MissingDefault': MissingDefaultDetector(),
 }

@@ -29,6 +29,9 @@
     },
     "MagicNumber": {
       "enable": true
+    },
+    "MissingDefault": {
+      "enable": true
     }
   }
 }
