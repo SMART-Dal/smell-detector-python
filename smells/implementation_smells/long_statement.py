@@ -22,9 +22,7 @@ class LongStatementDetector(ImplementationSmellDetector):
         smells = []
         max_length = config.get("threshold")
 
-        # Iterate through all functions and methods in the module
         for py_function in module.functions + [method for cls in module.classes for method in cls.methods]:
-            # Check each statement in the function or method
             for statement in py_function.function_body:
                 statement_str = _ast_to_string(statement)
                 if len(statement_str) > max_length:

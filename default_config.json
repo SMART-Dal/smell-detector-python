@@ -19,6 +19,10 @@
     "LongStatement": {
       "enable": true,
       "threshold": 100
+    },
+    "ComplexConditional": {
+      "enable": true,
+      "threshold": 3
     }
   }
 }
