@@ -1,5 +1,6 @@
 from .complex_conditional import ComplexConditionalDetector
 from .complex_method import ComplexMethodDetector
+from .empty_catch_block import EmptyCatchBlockDetector
 from .long_identifier import LongIdentifierDetector
 from .long_method import LongMethodDetector
 from .long_parameter_list import LongParameterListDetector
@@ -12,4 +13,5 @@ DETECTORS = {
     'ComplexMethod': ComplexMethodDetector(),
     'LongStatement': LongStatementDetector(),
     'ComplexConditional': ComplexConditionalDetector(),
+    'EmptyCatchBlock': EmptyCatchBlockDetector(),
 }

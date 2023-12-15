@@ -23,6 +23,9 @@
     "ComplexConditional": {
       "enable": true,
       "threshold": 3
+    },
+    "EmptyCatchBlock": {
+      "enable": true
     }
   }
 }
