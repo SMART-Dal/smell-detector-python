@@ -26,6 +26,9 @@
     },
     "EmptyCatchBlock": {
       "enable": true
+    },
+    "MagicNumber": {
+      "enable": true
     }
   }
 }

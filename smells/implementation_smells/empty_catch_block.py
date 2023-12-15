@@ -28,7 +28,6 @@ def _check_for_empty_catch(module,entity):
 class EmptyCatchBlockDetector(ImplementationSmellDetector):
     def detect(self, module, config):
         smells = []
-        print("Empty Catch Block Detector")
         for py_function in module.functions + [method for cls in module.classes for method in cls.methods]:
             smells.extend(_check_for_empty_catch(module, py_function))
         return smells
