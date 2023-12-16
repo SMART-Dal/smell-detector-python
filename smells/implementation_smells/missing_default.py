@@ -25,21 +25,12 @@ def _has_missing_default(node):
     return False
 
 
-def _create_smell(module_name, entity):
-    return {
-        'module': module_name,
-        'type': 'MissingDefault',
-        'entity_name': entity.name,
-        'location': f"Line {entity.start_line}",
-        'details': f"Missing default case in {entity.name}."
-    }
-
-
 class MissingDefaultDetector(ImplementationSmellDetector):
     def detect(self, module, config):
         smells = []
         # Check standalone functions and class methods
-        for entity in module.functions + [m for c in module.classes for m in c.methods]:
+        for entity in self._iterate_functions_and_methods(module):
             if _has_missing_default(entity.ast_node):
-                smells.append(_create_smell(module.name, entity))
+                detail = f"Missing default case in {entity.name}."
+                smells.append(self._create_smell(module.name, entity, detail, entity.start_line))
         return smells
