@@ -3,7 +3,7 @@ import pytest
 import networkx as nx
 from unittest.mock import Mock, patch
 
-from sourcemodel.hierarchy_graph import HierarchyGraph
+from src.sourcemodel.hierarchy_graph import HierarchyGraph
 
 
 @pytest.fixture

@@ -2,7 +2,7 @@ import ast
 import logging
 import os
 
-from log_config import setup_logging
+from src.log_config import setup_logging
 from sourcemodel import (
     PyClass, PyFunction, PyImport, PyMethod, PyModule, PyParameter
 )

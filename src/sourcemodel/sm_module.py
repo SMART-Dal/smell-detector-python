@@ -1,12 +1,6 @@
-from metrics.cc import calculate_cyclomatic_complexity
-from metrics.fan_metrics import calculate_fan_in_class, calculate_fan_out_class, calculate_fan_in_module, \
-    calculate_fan_out_module
-from metrics.lcom import calculate_lcom4
-from metrics.loc import calculate_class_loc, calculate_function_loc, calculate_module_loc
-from metrics.nof import calculate_nof, calculate_nopf, calculate_module_nof, calculate_module_nopf
-from metrics.nom import calculate_nom, calculate_nopm
-from metrics.pc import calculate_parameter_count
-from metrics.wmc import calculate_wmc_for_class, calculate_wmc_for_module
+import metrics
+
+from metrics import calculate_function_loc, calculate_cyclomatic_complexity, calculate_parameter_count
 from sourcemodel.dependency_graph import DependencyGraph
 
 
@@ -53,20 +47,20 @@ class PyModule:
     def calculate_module_metrics(self):
         dependency_graph = self.dependency_graph.graph
 
-        module_nom = sum(calculate_nom(py_class) for py_class in self.classes)
-        module_nopm = sum(calculate_nopm(py_class) for py_class in self.classes) + len(self.functions)
+        module_nom = sum(metrics.calculate_nom(py_class) for py_class in self.classes)
+        module_nopm = sum(metrics.calculate_nopm(py_class) for py_class in self.classes) + len(self.functions)
 
         return {
             'package': self.package_name,
             'module_name': self.name,
-            'loc': calculate_module_loc(self),
-            'wmc': calculate_wmc_for_module(self),
+            'loc': metrics.calculate_module_loc(self),
+            'wmc': metrics.calculate_wmc_for_module(self),
             'nom': module_nom,
             'nopm': module_nopm,
-            'nof': calculate_module_nof(self),
-            'nopf': calculate_module_nopf(self),
-            'fan_in': calculate_fan_in_module(self, dependency_graph),
-            'fan_out': calculate_fan_out_module(self, dependency_graph)
+            'nof': metrics.calculate_module_nof(self),
+            'nopf': metrics.calculate_module_nopf(self),
+            'fan_in': metrics.calculate_fan_in_module(self, dependency_graph),
+            'fan_out': metrics.calculate_fan_out_module(self, dependency_graph)
         }
 
     def analyze_class(self, py_class):
@@ -75,15 +69,15 @@ class PyModule:
             'package': self.package_name,
             'module_name': self.name,
             'class_name': py_class.name,
-            'loc': calculate_class_loc(py_class),
-            'wmc': calculate_wmc_for_class(py_class),
-            'nom': calculate_nom(py_class),
-            'nopm': calculate_nopm(py_class),
-            'nof': calculate_nof(py_class),
-            'nopf': calculate_nopf(py_class),
-            'lcom': calculate_lcom4(py_class),
-            'fan_in': calculate_fan_in_class(py_class),
-            'fan_out': calculate_fan_out_class(py_class)
+            'loc': metrics.calculate_class_loc(py_class),
+            'wmc': metrics.calculate_wmc_for_class(py_class),
+            'nom': metrics.calculate_nom(py_class),
+            'nopm': metrics.calculate_nopm(py_class),
+            'nof': metrics.calculate_nof(py_class),
+            'nopf': metrics.calculate_nopf(py_class),
+            'lcom': metrics.calculate_lcom4(py_class),
+            'fan_in': metrics.calculate_fan_in_class(py_class),
+            'fan_out': metrics.calculate_fan_out_class(py_class)
         }
 
     def analyze_method_or_function(self, item, class_name=None):
