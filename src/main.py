@@ -10,8 +10,6 @@ from smells.smell_detector import ImplementationSmellDetector, DesignSmellDetect
 from sourcemodel.ast_parser import ASTParser
 from sourcemodel.sm_project import PyProject
 
-setup_logging()
-
 
 def get_root_path(input_path):
     if os.path.isdir(input_path):
@@ -81,53 +79,64 @@ def main():
     parser.add_argument('-o', '--output_dir', required=True, help="Output directory for the results")
     parser.add_argument('-f', '--format', choices=['json', 'csv'], required=True, help="Output format")
     parser.add_argument('-c', '--config', help="Path to custom configuration file", default=None)
+    parser.add_argument('-l', '--log_dir', default=None,
+                        help="Directory to store log files. Defaults to the output directory if not specified.")
+
     args = parser.parse_args()
+
+    log_directory = args.log_dir if args.log_dir else args.output_dir
+    setup_logging(log_directory)
 
     if not os.path.exists(args.input):
         logging.error(f"Input path does not exist: {args.input}")
+        print(f"Error: Input path does not exist: {args.input}")
         return
 
-    if not os.path.exists(args.output_dir):
-        os.makedirs(args.output_dir, exist_ok=True)
+    try:
+        if not os.path.exists(args.output_dir):
+            os.makedirs(args.output_dir, exist_ok=True)
 
-    project_root = get_root_path(args.input)
-    project_name = get_project_name(args.input)
-    project = PyProject(project_name)
+        project_root = get_root_path(args.input)
+        project_name = get_project_name(args.input)
+        project = PyProject(project_name)
 
-    modules = []
-    if os.path.isdir(args.input):
-        modules = process_directory(args.input, project, project_root)
-    else:
-        module = process_file(args.input, project, project_root)
-        if module:
-            modules.append(module)
+        modules = []
+        if os.path.isdir(args.input):
+            modules = process_directory(args.input, project, project_root)
+        else:
+            module = process_file(args.input, project, project_root)
+            if module:
+                modules.append(module)
 
-    all_metrics = analyze_modules(modules)
+        all_metrics = analyze_modules(modules)
 
-    config = load_config(user_path=args.config)
+        config = load_config(user_path=args.config)
 
-    all_smells = {'implementation': [], 'design': []}
+        all_smells = {'implementation': [], 'design': []}
 
-    for module in modules:
-        smells = detect_smells(module, config)
-        for smell_type in all_smells:
-            all_smells[smell_type].extend(smells[smell_type])
+        for module in modules:
+            smells = detect_smells(module, config)
+            for smell_type in all_smells:
+                all_smells[smell_type].extend(smells[smell_type])
 
-    if all_metrics:
+        if all_metrics:
+            export_data(all_metrics['module'], args.output_dir, f"{project_name}_module_metrics", args.format)
+            export_data(all_metrics['class'], args.output_dir, f"{project_name}_class_metrics", args.format)
+            export_data(all_metrics['method'], args.output_dir, f"{project_name}_method_metrics", args.format)
+            export_data(all_metrics['function'], args.output_dir, f"{project_name}_function_metrics", args.format)
 
-        export_data(all_metrics['module'], args.output_dir, f"{project_name}_module_metrics", args.format)
-        export_data(all_metrics['class'], args.output_dir, f"{project_name}_class_metrics", args.format)
-        export_data(all_metrics['method'], args.output_dir, f"{project_name}_method_metrics", args.format)
-        export_data(all_metrics['function'], args.output_dir, f"{project_name}_function_metrics", args.format)
+        if all_smells['implementation']:
+            export_implementation_smells(all_smells['implementation'], args.output_dir, project_name, args.format)
 
-    if all_smells['implementation']:
-        export_implementation_smells(all_smells['implementation'], args.output_dir, project_name, args.format)
+        if all_smells['design']:
+            export_design_smells(all_smells['design'], args.output_dir, project_name, args.format)
 
-    if all_smells['design']:
-        export_design_smells(all_smells['design'], args.output_dir, project_name, args.format)
+        else:
+            logging.info("No data available for export.")
 
-    else:
-        logging.info("No data available for export.")
+    except Exception as e:
+        logging.error(f"An unexpected error occurred: {e}", exc_info=True)
+        print(f"An unexpected error occurred: {e}")
 
 
 if __name__ == "__main__":

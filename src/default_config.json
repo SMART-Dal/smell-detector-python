@@ -6,7 +6,7 @@
     },
     "LongIdentifier": {
       "enable": true,
-      "threshold": 20
+      "threshold": 30
     },
     "LongMethod": {
       "enable": true,

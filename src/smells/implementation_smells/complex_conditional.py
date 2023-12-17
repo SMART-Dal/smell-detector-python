@@ -1,4 +1,6 @@
 import ast
+import logging
+
 from ..smell_detector import ImplementationSmellDetector
 
 
@@ -12,18 +14,23 @@ def _count_logical_operators(node):
 
 
 class ComplexConditionalDetector(ImplementationSmellDetector):
-    def detect(self, module, config):
+    def _detect_smells(self, module, config):
         smells = []
-        max_operators = config.get("threshold")
+        max_operators = config.get("threshold", 3)  # Default to 3 if not specified
 
         for entity in self._iterate_functions_and_methods(module):
-            # Visit each node in the function or method body
-            for node in ast.walk(entity.ast_node):
-                if isinstance(node, (ast.If, ast.While, ast.BoolOp)):
-                    complexity = _count_logical_operators(node)
-                    if complexity > max_operators:
-                        detail = f"A conditional in {entity.name} has a complexity of {complexity}, exceeding the max of {max_operators}."
-                        smell_detail = self._create_smell(module.name, entity, detail, node.lineno)
-                        smells.append(smell_detail)
+            try:
+                # Visit each node in the function or method body
+                for node in ast.walk(entity.ast_node):
+                    if isinstance(node, (ast.If, ast.While, ast.BoolOp)):
+                        complexity = _count_logical_operators(node)
+                        if complexity > max_operators:
+                            detail = f"A conditional in {entity.name} has a complexity of {complexity}, exceeding the max of {max_operators}."
+                            smell_detail = self._create_smell(module.name, entity, detail, node.lineno)
+                            smells.append(smell_detail)
+            except Exception as e:
+                logging.error(f"Error analyzing {entity.name} in {module.name}: {e}", exc_info=True)
 
+        logging.info(
+            f"Completed complex conditional detection in module: {module.name}. Total smells detected: {len(smells)}")
         return smells
