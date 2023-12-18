@@ -1,4 +1,4 @@
-from sourcemodel.dependency_graph import DependencyGraph
+from src.sourcemodel.dependency_graph import DependencyGraph
 from src.sourcemodel.hierarchy_graph import HierarchyGraph
 
 
@@ -23,10 +23,8 @@ class PyProject:
             module.analyze()
 
     def find_class(self, class_name):
-        print(f"Finding class {class_name}")
         for module in self.modules:
             for py_class in module.classes:
                 if py_class.name == class_name:
-                    print(f"Found class {class_name} in module {module}")
                     return py_class
         return None

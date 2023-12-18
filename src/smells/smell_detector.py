@@ -40,13 +40,15 @@ class ImplementationSmellDetector(SmellDetector):
 
     @staticmethod
     def _iterate_functions_and_methods(module):
-        """Yield all functions and methods from the given module."""
         try:
-            for function in module.functions:
-                yield function
-            for py_class in module.classes:
-                for method in py_class.methods:
-                    yield method
+            if module.functions is not None:
+                for function in module.functions:
+                    yield function
+            if module.classes is not None:
+                for py_class in module.classes:
+                    if py_class.methods is not None:
+                        for method in py_class.methods:
+                            yield method
         except AttributeError as e:
             logging.error(f"Error iterating functions and methods in module {module.name}: {e}")
 

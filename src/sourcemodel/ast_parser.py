@@ -2,15 +2,14 @@ import ast
 import logging
 import os
 
-from src.log_config import setup_logging
-from sourcemodel import (
-    PyClass, PyFunction, PyImport, PyMethod, PyModule, PyParameter
-)
-from sourcemodel.ast_utils import (
-    get_return_type, get_function_body_and_variables, get_annotation, extract_package_name
-)
-
-setup_logging()
+from src.sourcemodel.ast_utils import extract_package_name, get_return_type, get_function_body_and_variables, \
+    get_annotation
+from src.sourcemodel.sm_class import PyClass
+from src.sourcemodel.sm_function import PyFunction
+from src.sourcemodel.sm_import import PyImport
+from src.sourcemodel.sm_method import PyMethod
+from src.sourcemodel.sm_module import PyModule
+from src.sourcemodel.sm_parameter import PyParameter
 
 
 class ASTParser:
