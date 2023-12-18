@@ -4,7 +4,7 @@ from metrics import calculate_function_loc, calculate_cyclomatic_complexity, cal
 from sourcemodel.dependency_graph import DependencyGraph
 
 
-class PyModule:
+class SMModule:
     def __init__(self, name, package_name=None, input_dependency_graph=None):
         self.name = name
         self.package_name = package_name

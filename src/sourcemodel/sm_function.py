@@ -1,4 +1,4 @@
-class PyFunction:
+class SMFunction:
     def __init__(self, name, start_line, end_line, ast_node):
         self.name = name
         self.start_line = start_line

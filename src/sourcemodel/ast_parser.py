@@ -4,12 +4,12 @@ import os
 
 from src.sourcemodel.ast_utils import extract_package_name, get_return_type, get_function_body_and_variables, \
     get_annotation
-from src.sourcemodel.sm_class import PyClass
-from src.sourcemodel.sm_function import PyFunction
-from src.sourcemodel.sm_import import PyImport
-from src.sourcemodel.sm_method import PyMethod
-from src.sourcemodel.sm_module import PyModule
-from src.sourcemodel.sm_parameter import PyParameter
+from src.sourcemodel.sm_class import SMClass
+from src.sourcemodel.sm_function import SMFunction
+from src.sourcemodel.sm_import import SMImport
+from src.sourcemodel.sm_method import SMMethod
+from src.sourcemodel.sm_module import SMModule
+from src.sourcemodel.sm_parameter import SMParameter
 
 
 class ASTParser:
@@ -21,7 +21,7 @@ class ASTParser:
         try:
             source_code = self._read_file(file_path)
             package_name = extract_package_name(file_path, project_root)
-            self.current_module = PyModule(os.path.basename(file_path), package_name)
+            self.current_module = SMModule(os.path.basename(file_path), package_name)
             self.current_project.add_module(self.current_module)
             self.current_project.dependency_graph.add_module(self.current_module.name)
             tree = ast.parse(source_code)
@@ -56,7 +56,7 @@ class ASTParser:
 
     def _create_py_class(self, node):
         start_line, end_line = node.lineno, self._get_end_line(node)
-        return PyClass(node.name, start_line, end_line)
+        return SMClass(node.name, start_line, end_line)
 
     def _process_class_body(self, py_class, body):
         for item in body:
@@ -95,11 +95,11 @@ class ASTParser:
         if parent_class:
             access_modifier = 'public' if not node.name.startswith('_') else 'private'
             decorators = self._get_decorators(node)
-            py_method = PyMethod(node.name, start_line, end_line, access_modifier, decorators, node)
+            py_method = SMMethod(node.name, start_line, end_line, access_modifier, decorators, node)
             self._populate_function_details(py_method, return_type, function_body, local_variables, parameters)
             return py_method
         else:
-            py_function = PyFunction(node.name, start_line, end_line, node)
+            py_function = SMFunction(node.name, start_line, end_line, node)
             self._populate_function_details(py_function, return_type, function_body, local_variables, parameters)
             return py_function
 
@@ -150,14 +150,14 @@ class ASTParser:
 
     def visit_Import(self, node):
         for alias in node.names:
-            py_import = PyImport(alias.name, alias.asname)
+            py_import = SMImport(alias.name, alias.asname)
             self.current_module.add_import(py_import)
             self.current_project.dependency_graph.add_dependency(self.current_module.name, alias.name)
 
     def visit_ImportFrom(self, node):
         for alias in node.names:
             module_name = f"{node.module}.{alias.name}"
-            py_import = PyImport(module_name, alias.asname, is_from_import=True)
+            py_import = SMImport(module_name, alias.asname, is_from_import=True)
             self.current_module.add_import(py_import)
             self.current_project.dependency_graph.add_dependency(self.current_module.name, module_name)
 
@@ -170,7 +170,7 @@ class ASTParser:
     def visit_arg(node):
         default_value = None
         param_type = get_annotation(node.annotation) if node.annotation else None
-        return PyParameter(node.arg, param_type, default_value)
+        return SMParameter(node.arg, param_type, default_value)
 
     def _generic_visit(self, node):
         for field, value in ast.iter_fields(node):

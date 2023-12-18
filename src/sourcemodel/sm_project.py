@@ -2,7 +2,7 @@ from src.sourcemodel.dependency_graph import DependencyGraph
 from src.sourcemodel.hierarchy_graph import HierarchyGraph
 
 
-class PyProject:
+class SMProject:
     def __init__(self, name):
         self.name = name
         self.modules = []

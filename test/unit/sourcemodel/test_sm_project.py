@@ -1,6 +1,6 @@
 import pytest
 
-from src.sourcemodel.sm_project import PyProject
+from src.sourcemodel.sm_project import SMProject
 
 
 # Fixtures to provide mocked modules and packages
@@ -23,7 +23,7 @@ def mock_package(mocker):
 
 @pytest.fixture
 def py_project():
-    return PyProject(name='TestProject')
+    return SMProject(name='TestProject')
 
 
 # Tests start here

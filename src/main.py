@@ -8,7 +8,7 @@ from log_config import setup_logging
 from smells import get_detector
 from smells.smell_detector import ImplementationSmellDetector, DesignSmellDetector
 from sourcemodel.ast_parser import ASTParser
-from sourcemodel.sm_project import PyProject
+from sourcemodel.sm_project import SMProject
 
 
 def get_root_path(input_path):
@@ -95,7 +95,7 @@ def perform_analysis(args):
     try:
         project_root = get_root_path(args.input)
         project_name = get_project_name(args.input)
-        project = PyProject(project_name)
+        project = SMProject(project_name)
 
         modules = process_directory(args.input, project, project_root) if os.path.isdir(args.input) else [
             process_file(args.input, project, project_root)]
