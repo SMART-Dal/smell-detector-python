@@ -1,0 +1,37 @@
+{
+  "Smells": {
+    "LongParameterList": {
+      "enable": true,
+      "threshold": 4
+    },
+    "LongIdentifier": {
+      "enable": true,
+      "threshold": 30
+    },
+    "LongMethod": {
+      "enable": true,
+      "threshold": 20
+    },
+    "ComplexMethod": {
+      "enable": true,
+      "threshold": 10
+    },
+    "LongStatement": {
+      "enable": true,
+      "threshold": 100
+    },
+    "ComplexConditional": {
+      "enable": true,
+      "threshold": 3
+    },
+    "EmptyCatchBlock": {
+      "enable": true
+    },
+    "MagicNumber": {
+      "enable": true
+    },
+    "MissingDefault": {
+      "enable": true
+    }
+  }
+}
