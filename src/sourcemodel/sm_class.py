@@ -1,4 +1,4 @@
-class PyClass:
+class SMClass:
     def __init__(self, name, start_line, end_line):
         self.name = name
         self.start_line = start_line

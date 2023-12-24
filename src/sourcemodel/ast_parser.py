@@ -2,15 +2,14 @@ import ast
 import logging
 import os
 
-from src.log_config import setup_logging
-from sourcemodel import (
-    PyClass, PyFunction, PyImport, PyMethod, PyModule, PyParameter
-)
-from sourcemodel.ast_utils import (
-    get_return_type, get_function_body_and_variables, get_annotation, extract_package_name
-)
-
-setup_logging()
+from src.sourcemodel.ast_utils import extract_package_name, get_return_type, get_function_body_and_variables, \
+    get_annotation
+from src.sourcemodel.sm_class import SMClass
+from src.sourcemodel.sm_function import SMFunction
+from src.sourcemodel.sm_import import SMImport
+from src.sourcemodel.sm_method import SMMethod
+from src.sourcemodel.sm_module import SMModule
+from src.sourcemodel.sm_parameter import SMParameter
 
 
 class ASTParser:
@@ -22,7 +21,7 @@ class ASTParser:
         try:
             source_code = self._read_file(file_path)
             package_name = extract_package_name(file_path, project_root)
-            self.current_module = PyModule(os.path.basename(file_path), package_name)
+            self.current_module = SMModule(os.path.basename(file_path), package_name)
             self.current_project.add_module(self.current_module)
             self.current_project.dependency_graph.add_module(self.current_module.name)
             tree = ast.parse(source_code)
@@ -43,8 +42,8 @@ class ASTParser:
         return visitor(node)
 
     def visit_ClassDef(self, node):
-        py_class = self._create_py_class(node)
-        self.current_module.add_class(py_class)
+        sm_class = self._create_sm_class(node)
+        self.current_module.add_class(sm_class)
         self.current_project.hierarchy_graph.add_class(node.name)
 
         for base in node.bases:
@@ -52,43 +51,43 @@ class ASTParser:
                 base_class_name = base.id
                 self.current_project.hierarchy_graph.add_inheritance(node.name, base_class_name)
 
-        self._process_class_body(py_class, node.body)
-        return py_class
+        self._process_class_body(sm_class, node.body)
+        return sm_class
 
-    def _create_py_class(self, node):
+    def _create_sm_class(self, node):
         start_line, end_line = node.lineno, self._get_end_line(node)
-        return PyClass(node.name, start_line, end_line)
+        return SMClass(node.name, start_line, end_line)
 
-    def _process_class_body(self, py_class, body):
+    def _process_class_body(self, sm_class, body):
         for item in body:
             if isinstance(item, ast.FunctionDef):
-                self.visit_FunctionDef(item, py_class)
+                self.visit_FunctionDef(item, sm_class)
             elif isinstance(item, ast.Assign):
-                self._process_class_variables(py_class, item)
+                self._process_class_variables(sm_class, item)
 
     @staticmethod
-    def _process_class_variables(py_class, node):
+    def _process_class_variables(sm_class, node):
         for target in node.targets:
             if isinstance(target, ast.Name):
                 access_modifier = 'public' if not target.id.startswith('_') else 'private'
-                py_class.add_class_field(target.id, access_modifier)
+                sm_class.add_class_field(target.id, access_modifier)
 
     def visit_FunctionDef(self, node, parent_class=None):
-        py_function = self._create_py_function_or_method(node, parent_class)
+        sm_function = self._create_sm_function_or_method(node, parent_class)
         if parent_class:
-            parent_class.add_method(py_function)
+            parent_class.add_method(sm_function)
             for stmt in ast.walk(node):
                 if isinstance(stmt, ast.Assign):
                     for target in stmt.targets:
                         if isinstance(target, ast.Attribute) and isinstance(target.value,
                                                                             ast.Name) and target.value.id == 'self':
                             parent_class.add_instance_field(target.attr)
-            self._analyze_function_body(node, py_function, parent_class)
+            self._analyze_function_body(node, sm_function, parent_class)
         else:
-            self.current_module.add_function(py_function)
-        return py_function
+            self.current_module.add_function(sm_function)
+        return sm_function
 
-    def _create_py_function_or_method(self, node, parent_class):
+    def _create_sm_function_or_method(self, node, parent_class):
         start_line, end_line = node.lineno, self._get_end_line(node)
         return_type, function_body, local_variables = self._process_function_details(node)
         parameters = [self.visit_arg(arg) for arg in node.args.args]
@@ -96,23 +95,23 @@ class ASTParser:
         if parent_class:
             access_modifier = 'public' if not node.name.startswith('_') else 'private'
             decorators = self._get_decorators(node)
-            py_method = PyMethod(node.name, start_line, end_line, access_modifier, decorators, node)
-            self._populate_function_details(py_method, return_type, function_body, local_variables, parameters)
-            return py_method
+            sm_method = SMMethod(node.name, start_line, end_line, access_modifier, decorators, node)
+            self._populate_function_details(sm_method, return_type, function_body, local_variables, parameters)
+            return sm_method
         else:
-            py_function = PyFunction(node.name, start_line, end_line, node)
-            self._populate_function_details(py_function, return_type, function_body, local_variables, parameters)
-            return py_function
+            sm_function = SMFunction(node.name, start_line, end_line, node)
+            self._populate_function_details(sm_function, return_type, function_body, local_variables, parameters)
+            return sm_function
 
     @staticmethod
-    def _analyze_function_body(node, py_function, parent_class):
+    def _analyze_function_body(node, sm_function, parent_class):
         if parent_class:
             for stmt in ast.walk(node):
                 # Check for method interactions within the class (for fan-in)
                 if isinstance(stmt, ast.Attribute) and isinstance(stmt.value, ast.Name) and stmt.value.id == 'self':
                     field_name = stmt.attr
                     if field_name in parent_class.class_fields or field_name in parent_class.instance_fields:
-                        parent_class.add_method_interaction(py_function.name, field_name)
+                        parent_class.add_method_interaction(sm_function.name, field_name)
 
                 if isinstance(stmt, ast.Call):
                     called_name = None
@@ -125,7 +124,7 @@ class ASTParser:
 
                     # If a called name was identified, add it as an external call
                     if called_name:
-                        py_function.add_external_call(called_name)
+                        sm_function.add_external_call(called_name)
                         # If this is a method within a class, also note the external dependency at the class level
                         if parent_class:
                             parent_class.add_external_dependency(called_name.split('.')[0])
@@ -135,13 +134,13 @@ class ASTParser:
         return [decorator.id for decorator in node.decorator_list if isinstance(decorator, ast.Name)]
 
     @staticmethod
-    def _populate_function_details(py_function, return_type, function_body, local_variables, parameters):
-        py_function.set_return_type(return_type)
-        py_function.parameters = parameters
+    def _populate_function_details(sm_function, return_type, function_body, local_variables, parameters):
+        sm_function.set_return_type(return_type)
+        sm_function.parameters = parameters
         for statement in function_body:
-            py_function.add_body_statement(statement)
+            sm_function.add_body_statement(statement)
         for variable in local_variables:
-            py_function.add_local_variable(variable)
+            sm_function.add_local_variable(variable)
 
     @staticmethod
     def _process_function_details(node):
@@ -151,15 +150,15 @@ class ASTParser:
 
     def visit_Import(self, node):
         for alias in node.names:
-            py_import = PyImport(alias.name, alias.asname)
-            self.current_module.add_import(py_import)
+            sm_import = SMImport(alias.name, alias.asname)
+            self.current_module.add_import(sm_import)
             self.current_project.dependency_graph.add_dependency(self.current_module.name, alias.name)
 
     def visit_ImportFrom(self, node):
         for alias in node.names:
             module_name = f"{node.module}.{alias.name}"
-            py_import = PyImport(module_name, alias.asname, is_from_import=True)
-            self.current_module.add_import(py_import)
+            sm_import = SMImport(module_name, alias.asname, is_from_import=True)
+            self.current_module.add_import(sm_import)
             self.current_project.dependency_graph.add_dependency(self.current_module.name, module_name)
 
     def visit_Assign(self, node):
@@ -171,7 +170,7 @@ class ASTParser:
     def visit_arg(node):
         default_value = None
         param_type = get_annotation(node.annotation) if node.annotation else None
-        return PyParameter(node.arg, param_type, default_value)
+        return SMParameter(node.arg, param_type, default_value)
 
     def _generic_visit(self, node):
         for field, value in ast.iter_fields(node):

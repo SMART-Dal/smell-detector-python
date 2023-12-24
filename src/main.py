@@ -8,32 +8,32 @@ from log_config import setup_logging
 from smells import get_detector
 from smells.smell_detector import ImplementationSmellDetector, DesignSmellDetector
 from sourcemodel.ast_parser import ASTParser
-from sourcemodel.sm_project import PyProject
+from sourcemodel.sm_project import SMProject
 
 
 def get_root_path(input_path):
-    if os.path.isdir(input_path):
-        return input_path
-    else:
-        return os.path.dirname(input_path)
+    """Get the root path of the input file or directory."""
+    return input_path if os.path.isdir(input_path) else os.path.dirname(input_path)
 
 
 def get_project_name(input_path):
-    return os.path.basename(input_path) \
-        if os.path.isdir(input_path) \
-        else os.path.splitext(os.path.basename(input_path))[0]
+    """Extract the project name from the input path."""
+    return os.path.basename(input_path) if os.path.isdir(input_path) else \
+    os.path.splitext(os.path.basename(input_path))[0]
 
 
-def process_file(file_path, project, project_root):
+def process_file(file_path, project, project_root, parser=None):
+    """Process an individual Python file."""
+    parser = parser or ASTParser(project)
     try:
-        parser = ASTParser(project)
-        return parser.parse(file_path, project_root)  # Just parse and return the PyModule object
+        return parser.parse(file_path, project_root)
     except Exception as e:
         logging.error(f"Error in processing file {file_path}: {e}", exc_info=True)
     return None
 
 
 def process_directory(directory_path, project, project_root):
+    """Process all Python files within a directory."""
     modules = []
     for root, _, files in os.walk(directory_path):
         for file in files:
@@ -47,6 +47,7 @@ def process_directory(directory_path, project, project_root):
 
 
 def analyze_modules(modules):
+    """Analyze parsed modules to gather metrics and identify smells."""
     aggregated_metrics = {'module': [], 'class': [], 'method': [], 'function': []}
     for module in modules:
         logging.info(f"Analyzing module: {module.name}")
@@ -60,6 +61,7 @@ def analyze_modules(modules):
 
 
 def detect_smells(module, config):
+    """Detect code smells within a module based on the provided configuration."""
     detected_smells = {'implementation': [], 'design': []}
     for smell_name, settings in config['Smells'].items():
         if settings.get('enable', False):
@@ -73,52 +75,48 @@ def detect_smells(module, config):
     return detected_smells
 
 
-def main():
-    parser = argparse.ArgumentParser(description="PyCodeSmells Analysis Tool")
-    parser.add_argument('-i', '--input', required=True, help="Input Python file or directory for analysis")
-    parser.add_argument('-o', '--output_dir', required=True, help="Output directory for the results")
-    parser.add_argument('-f', '--format', choices=['json', 'csv'], required=True, help="Output format")
-    parser.add_argument('-c', '--config', help="Path to custom configuration file", default=None)
-    parser.add_argument('-l', '--log_dir', default=None,
-                        help="Directory to store log files. Defaults to the output directory if not specified.")
-
-    args = parser.parse_args()
-
+def configure_environment(args):
+    """Set up the environment before analysis starts, including logging and path checks."""
     log_directory = args.log_dir if args.log_dir else args.output_dir
     setup_logging(log_directory)
 
     if not os.path.exists(args.input):
         logging.error(f"Input path does not exist: {args.input}")
-        print(f"Error: Input path does not exist: {args.input}")
-        return
+        return False  # Indicates that the environment setup was not successful
 
+    if not os.path.exists(args.output_dir):
+        os.makedirs(args.output_dir, exist_ok=True)
+
+    return True  # Indicates successful environment setup
+
+
+def perform_analysis(args):
+    """Conduct the main analysis workflow."""
     try:
-        if not os.path.exists(args.output_dir):
-            os.makedirs(args.output_dir, exist_ok=True)
-
         project_root = get_root_path(args.input)
         project_name = get_project_name(args.input)
-        project = PyProject(project_name)
+        project = SMProject(project_name)
 
-        modules = []
-        if os.path.isdir(args.input):
-            modules = process_directory(args.input, project, project_root)
-        else:
-            module = process_file(args.input, project, project_root)
-            if module:
-                modules.append(module)
-
+        modules = process_directory(args.input, project, project_root) if os.path.isdir(args.input) else [
+            process_file(args.input, project, project_root)]
         all_metrics = analyze_modules(modules)
-
         config = load_config(user_path=args.config)
 
         all_smells = {'implementation': [], 'design': []}
-
         for module in modules:
             smells = detect_smells(module, config)
             for smell_type in all_smells:
                 all_smells[smell_type].extend(smells[smell_type])
 
+        return all_metrics, all_smells, project_name
+    except Exception as e:
+        logging.error(f"An error occurred during analysis: {e}")
+        raise  # Re-raising the exception after logging
+
+
+def export_results(all_metrics, all_smells, project_name, args):
+    """Export the analysis results based on user-specified formats."""
+    try:
         if all_metrics:
             export_data(all_metrics['module'], args.output_dir, f"{project_name}_module_metrics", args.format)
             export_data(all_metrics['class'], args.output_dir, f"{project_name}_class_metrics", args.format)
@@ -133,10 +131,29 @@ def main():
 
         else:
             logging.info("No data available for export.")
-
     except Exception as e:
-        logging.error(f"An unexpected error occurred: {e}", exc_info=True)
-        print(f"An unexpected error occurred: {e}")
+        logging.error(f"Failed to export results: {e}")
+        raise  # Re-raising the exception after logging
+
+
+def main():
+    """Entry point of the application."""
+    parser = argparse.ArgumentParser(description="PyCodeSmells Analysis Tool")
+    parser.add_argument('-i', '--input', required=True, help="Input Python file or directory for analysis")
+    parser.add_argument('-o', '--output_dir', required=True, help="Output directory for the results")
+    parser.add_argument('-f', '--format', choices=['json', 'csv'], required=True, help="Output format")
+    parser.add_argument('-c', '--config', help="Path to custom configuration file", default=None)
+    parser.add_argument('-l', '--log_dir', default=None,
+                        help="Directory to store log files. Defaults to the output directory if not specified.")
+    args = parser.parse_args()
+
+    if configure_environment(args):
+        try:
+            all_metrics, all_smells, project_name = perform_analysis(args)
+            export_results(all_metrics, all_smells, project_name, args)
+        except Exception as e:
+            logging.error(f"Analysis failed: {e}")
+            print(f"Analysis failed. Check logs for details.")
 
 
 if __name__ == "__main__":

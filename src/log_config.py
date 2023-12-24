@@ -49,12 +49,9 @@ def setup_logging(log_directory=None):
     rotate_handler.setFormatter(logging.Formatter(LOG_FORMAT, DATE_FORMAT))
     logger.addHandler(rotate_handler)
 
-    # # Console handler for development
-    # if ENVIRONMENT == 'development':
-    #     console_handler = logging.StreamHandler()
-    #     console_handler.setFormatter(logging.Formatter(LOG_FORMAT, DATE_FORMAT))
-    #     logger.addHandler(console_handler)
+    # Console handler for development
+    if ENVIRONMENT == 'development':
+        console_handler = logging.StreamHandler()
+        console_handler.setFormatter(logging.Formatter(LOG_FORMAT, DATE_FORMAT))
+        logger.addHandler(console_handler)
 
-
-# Initialize logging
-setup_logging()

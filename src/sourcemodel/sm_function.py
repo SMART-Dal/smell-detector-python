@@ -1,4 +1,4 @@
-class PyFunction:
+class SMFunction:
     def __init__(self, name, start_line, end_line, ast_node):
         self.name = name
         self.start_line = start_line
@@ -28,7 +28,6 @@ class PyFunction:
         self.local_variables.append(variable)
 
     def add_called_method(self, method_name):
-        print(f"Adding {method_name}")
         self.called_methods.add(method_name)
         if '.' in method_name:
             module_name = method_name.split('.')[0]
