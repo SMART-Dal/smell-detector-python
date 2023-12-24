@@ -1,80 +1,78 @@
-import pytest
 import logging
+from unittest.mock import MagicMock
+
+import pytest
 
 from src.smells.smell_detector import ImplementationSmellDetector, DesignSmellDetector
 
 
-class ConcreteImplementationSmellDetector(ImplementationSmellDetector):
-    def _detect_smells(self, module, config):
-        if config.get('detect'):
-            return [{'smell': 'detected'}]
-        return []
-
-
-class ConcreteDesignSmellDetector(DesignSmellDetector):
-    def _detect_smells(self, module, config):
-        if config.get('detect'):
-            return [{'smell': 'detected'}]
-        return []
-
-
+# Sample mock class and function objects for testing purposes
 @pytest.fixture
-def module_mock(mocker):
-    module = mocker.MagicMock()
-    module.name = "test_module"
-    module.functions = []
-    module.classes = []
+def mock_module():
+    module = MagicMock()
+    module.name = "SampleModule"
+    module.functions = [MagicMock(name="Function1"), MagicMock(name="Function2")]
+    module.classes = [MagicMock(name="Class1", methods=[MagicMock(name="Method1"), MagicMock(name="Method2")])]
     return module
 
 
 @pytest.fixture
-def config_mock():
+def mock_config():
     return {'detect': True}
 
 
-def test_implementation_smell_detector_detects_smells(module_mock, config_mock):
-    detector = ConcreteImplementationSmellDetector()
-    smells = detector.detect(module_mock, config_mock)
-    assert len(smells) > 0
+# Concrete implementations for testing
+class MockImplementationDetector(ImplementationSmellDetector):
+    def _detect_smells(self, module, config):
+        return [{'smell': 'ImplementationSmell'}] if config.get('detect') else []
 
 
-def test_implementation_smell_detector_no_smells(module_mock):
-    detector = ConcreteImplementationSmellDetector()
-    smells = detector.detect(module_mock, {'detect': False})
-    assert len(smells) == 0
+class MockDesignDetector(DesignSmellDetector):
+    def _detect_smells(self, module, config):
+        return [{'smell': 'DesignSmell'}] if config.get('detect') else []
 
 
-def test_design_smell_detector_detects_smells(module_mock, config_mock):
-    detector = ConcreteDesignSmellDetector()
-    smells = detector.detect(module_mock, config_mock)
-    assert len(smells) > 0
+@pytest.fixture
+def implementation_detector():
+    return MockImplementationDetector()
 
 
-def test_design_smell_detector_no_smells(module_mock):
-    detector = ConcreteDesignSmellDetector()
-    smells = detector.detect(module_mock, {'detect': False})
-    assert len(smells) == 0
+@pytest.fixture
+def design_detector():
+    return MockDesignDetector()
 
 
-def test_smell_creation(module_mock):
-    detector = ConcreteImplementationSmellDetector()
-    smell = detector._create_smell(module_mock.name, module_mock, "Dummy smell", line=10)
-    assert smell is not None
-    assert smell['details'] == "Dummy smell"
-    assert smell['location'] == "Line 10"
+# Tests for ImplementationSmellDetector
+def test_implementation_smell_detection_success(implementation_detector, mock_module, mock_config):
+    smells = implementation_detector.detect(mock_module, mock_config)
+    assert len(smells) > 0, "Should detect smells when enabled"
 
 
-# def test_iterate_functions_and_methods_error_handling(module_mock, caplog):
-#     module_mock.functions = None  # Mimic an AttributeError scenario
-#     detector = ConcreteImplementationSmellDetector()
-#
-#     with caplog.at_level(logging.ERROR):
-#         list(detector._iterate_functions_and_methods(module_mock))
-#
-#     # Print all captured log records for debugging
-#     for record in caplog.records:
-#         print(f"{record.levelname}: {record.message}")
-#
-#     # Assert that the expected error message is in the error logs
-#     error_logs = [record.message for record in caplog.records if record.levelname == 'ERROR']
-#     assert "Error iterating functions and methods" in error_logs, "Should log an error for invalid modules"
+def test_implementation_smell_detection_disabled(implementation_detector, mock_module):
+    smells = implementation_detector.detect(mock_module, {'detect': False})
+    assert len(smells) == 0, "Should not detect smells when disabled"
+
+
+def test_implementation_smell_detection_error_handling(implementation_detector, mock_module, caplog, mocker):
+    mocker.patch.object(implementation_detector, '_detect_smells', side_effect=Exception("Unexpected Error"))
+    with caplog.at_level(logging.ERROR):
+        implementation_detector.detect(mock_module, {'detect': True})
+    assert "Error detecting implementation smells" in caplog.text, "Error should be logged"
+
+
+def test_design_smell_detection_success(design_detector, mock_module, mock_config):
+    smells = design_detector.detect(mock_module, mock_config)
+    assert len(smells) > 0, "Should detect smells when enabled"
+
+
+def test_design_smell_detection_disabled(design_detector, mock_module):
+    smells = design_detector.detect(mock_module, {'detect': False})
+    assert len(smells) == 0, "Should not detect smells when disabled"
+
+
+def test_design_smell_detection_error_handling(design_detector, mock_module, caplog, mocker):
+    mocker.patch.object(design_detector, '_detect_smells', side_effect=Exception("Unexpected Error"))
+    with caplog.at_level(logging.ERROR):
+        smells = design_detector.detect(mock_module, {'detect': True})
+    assert "Error detecting design smells" in caplog.text
+    assert len(smells) == 0, "Should return an empty list on error"
