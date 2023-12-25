@@ -2,7 +2,7 @@ import json
 import logging
 
 
-def load_config(default_path='src/default_config.json', user_path=None):
+def load_config(default_path='./default_config.json', user_path=None):
     config = {}
     try:
         with open(default_path, 'r') as file:
