@@ -9,7 +9,6 @@ class ComplexMethodDetector(ImplementationSmellDetector):
         max_complexity = config.get("threshold", 10)  # Default to 10 if not specified
 
         for entity in self._iterate_functions_and_methods(module):
-            print(entity)
             try:
                 # Check the complexity of each entity (function or method)
                 if hasattr(entity, 'complexity') and entity.complexity > max_complexity:

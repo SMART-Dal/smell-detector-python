@@ -1,10 +1,12 @@
 import logging
 
 from .implementation_smells import DETECTORS as IMPL_SMELL_DETECTORS
+from .design_smells import DETECTORS as DESIGN_SMELL_DETECTORS
 
 # Initialize all detectors, including implementation and potentially design detectors in the future
 ALL_DETECTORS = {}
 ALL_DETECTORS.update(IMPL_SMELL_DETECTORS)
+ALL_DETECTORS.update(DESIGN_SMELL_DETECTORS)
 
 
 def get_detector(smell_name):

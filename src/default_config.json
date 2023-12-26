@@ -32,6 +32,11 @@
     },
     "MissingDefault": {
       "enable": true
+    },
+    "ImperativeAbstraction": {
+      "enable": true,
+      "threshold": 3,
+      "max_line": 0
     }
   }
 }

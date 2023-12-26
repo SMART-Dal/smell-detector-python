@@ -6,18 +6,7 @@ class SmellDetector(ABC):
     @abstractmethod
     def detect(self, module, config):
         """Detects smells within the given module based on the provided configuration."""
-        pass  # Implemented in child classes
-
-
-class ImplementationSmellDetector(SmellDetector):
-    """Base class for all implementation smell detectors."""
-
-    def detect(self, module, config):
-        try:
-            return self._detect_smells(module, config)
-        except Exception as e:
-            logging.error(f"Error detecting implementation smells in module {module.name}: {e}", exc_info=True)
-            return []
+        pass
 
     @abstractmethod
     def _detect_smells(self, module, config):
@@ -51,6 +40,22 @@ class ImplementationSmellDetector(SmellDetector):
                             yield method
         except AttributeError as e:
             logging.error(f"Error iterating functions and methods in module {module.name}: {e}")
+
+
+class ImplementationSmellDetector(SmellDetector):
+    """Base class for all implementation smell detectors."""
+
+    def detect(self, module, config):
+        try:
+            return self._detect_smells(module, config)
+        except Exception as e:
+            logging.error(f"Error detecting implementation smells in module {module.name}: {e}", exc_info=True)
+            return []
+
+    @abstractmethod
+    def _detect_smells(self, module, config):
+        """Actual smell detection logic to be implemented by child classes."""
+        pass
 
 
 class DesignSmellDetector(SmellDetector):

@@ -19,7 +19,7 @@ def get_root_path(input_path):
 def get_project_name(input_path):
     """Extract the project name from the input path."""
     return os.path.basename(input_path) if os.path.isdir(input_path) else \
-    os.path.splitext(os.path.basename(input_path))[0]
+        os.path.splitext(os.path.basename(input_path))[0]
 
 
 def process_file(file_path, project, project_root, parser=None):
@@ -62,16 +62,38 @@ def analyze_modules(modules):
 
 def detect_smells(module, config):
     """Detect code smells within a module based on the provided configuration."""
-    detected_smells = {'implementation': [], 'design': []}
+    implementation_smells = []
+    design_smells = []
+
     for smell_name, settings in config['Smells'].items():
-        if settings.get('enable', False):
-            detector = get_detector(smell_name)
-            if detector:
-                smells = detector.detect(module, settings)
-                if isinstance(detector, ImplementationSmellDetector):
-                    detected_smells['implementation'].extend(smells)
-                elif isinstance(detector, DesignSmellDetector):
-                    detected_smells['design'].extend(smells)
+        if not settings.get('enable', False):
+            continue  # Skip if the smell is not enabled
+
+        detector = get_detector(smell_name)
+        if detector is None:
+            logging.warning(f"Detector not found for smell: {smell_name}")
+            continue
+
+        try:
+            smells = detector.detect(module, settings)
+            if not isinstance(smells, list):
+                logging.error(f"Expected list from detector but got {type(smells)} for {smell_name}")
+                continue
+
+            if isinstance(detector, ImplementationSmellDetector):
+                implementation_smells.extend(smells)
+            elif isinstance(detector, DesignSmellDetector):
+                design_smells.extend(smells)
+
+        except Exception as e:
+            logging.error(f"Exception during detection of {smell_name}: {e}", exc_info=True)
+
+    # Combine the collected smells into a single dictionary before returning
+    detected_smells = {
+        'implementation': implementation_smells,
+        'design': design_smells
+    }
+
     return detected_smells
 
 
