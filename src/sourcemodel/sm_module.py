@@ -4,8 +4,9 @@ from src.sourcemodel.dependency_graph import DependencyGraph
 
 
 class SMModule:
-    def __init__(self, name, package_name=None, input_dependency_graph=None):
+    def __init__(self, name, project=None, package_name=None, input_dependency_graph=None):
         self.name = name
+        self.project = project
         self.package_name = package_name
         self.dependency_graph: DependencyGraph = input_dependency_graph
         self.classes = []

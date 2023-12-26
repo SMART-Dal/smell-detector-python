@@ -51,6 +51,10 @@
     },
     "UnutilizedAbstraction": {
       "enable": true
+    },
+    "DeepHierarchy": {
+      "enable": true,
+      "max_depth": 4
     }
   }
 }

@@ -21,7 +21,7 @@ class ASTParser:
         try:
             source_code = self._read_file(file_path)
             package_name = extract_package_name(file_path, project_root)
-            self.current_module = SMModule(os.path.basename(file_path), package_name)
+            self.current_module = SMModule(os.path.basename(file_path), self.current_project, package_name)
             self.current_project.add_module(self.current_module)
             self.current_project.dependency_graph.add_module(self.current_module.name)
             tree = ast.parse(source_code)

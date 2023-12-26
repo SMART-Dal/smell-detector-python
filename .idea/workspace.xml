@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10a34c66-8b2d-49cb-a9eb-b7884f060b78" name="Changes" comment="Implemented Design Smell: Multifaceted Abstraction with Test Cases">
-      <change afterPath="$PROJECT_DIR$/src/smells/design_smells/unutilized_abstraction.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/src/smells/design_smells/test_unutilized_abstraction.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/smells/design_smells/deep_hierarchy.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/smells/design_smells/test_deep_hierarchy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/main_csv_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/main_csv_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/default_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/default_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/smells/design_smells/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/smells/design_smells/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sourcemodel/ast_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sourcemodel/ast_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sourcemodel/sm_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sourcemodel/sm_class.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sourcemodel/hierarchy_graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sourcemodel/hierarchy_graph.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sourcemodel/sm_module.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sourcemodel/sm_module.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +69,8 @@
     "Python tests.pytest for test_complex_conditional_detector.test_error_handling.executor": "Run",
     "Python tests.pytest for test_complex_method.test_configuration_respect.executor": "Run",
     "Python tests.pytest for test_complex_method.test_error_handling.executor": "Run",
+    "Python tests.pytest for test_deep_hierarchy.test_detect_deep_hierarchy.executor": "Run",
+    "Python tests.pytest for test_deep_hierarchy.test_no_deep_hierarchy.executor": "Run",
     "Python tests.pytest for test_lcom.test_calculate_lcom4_invalid_class.executor": "Run",
     "Python tests.pytest for test_long_identifier.test_error_handling.executor": "Run",
     "Python tests.pytest for test_long_identifier.test_long_class_names.executor": "Run",
@@ -89,6 +93,7 @@
     "Python tests.pytest in test_complex_conditional.py.executor": "Run",
     "Python tests.pytest in test_complex_conditional_detector.py.executor": "Run",
     "Python tests.pytest in test_complex_method.py.executor": "Run",
+    "Python tests.pytest in test_deep_hierarchy.py.executor": "Run",
     "Python tests.pytest in test_empty_catch_block.py.executor": "Run",
     "Python tests.pytest in test_exporter.py.executor": "Run",
     "Python tests.pytest in test_fan_metrics.py.executor": "Run",
@@ -130,7 +135,7 @@
       <recent name="E:\DAL\Project\smell-detector-python\test\src\metrics" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main-csv-1">
+  <component name="RunManager" selected="Python tests.pytest for test_deep_hierarchy.test_error_handling_module_iteration">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="smell-detector-python" />
       <option name="ENV_FILES" value="" />
@@ -272,7 +277,7 @@
       <option name="USE_PATTERN" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test_multifaceted_abstraction.test_error_handling_in_class_check" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for test_deep_hierarchy.test_detect_deep_hierarchy" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="smell-detector-python" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -286,11 +291,11 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_multifaceted_abstraction.test_error_handling_in_class_check&quot;" />
+      <option name="_new_target" value="&quot;test_deep_hierarchy.test_detect_deep_hierarchy&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test_multifaceted_abstraction.test_error_handling_in_module_check" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for test_deep_hierarchy.test_detect_deep_hierarchy_with_logging" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="smell-detector-python" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -304,11 +309,11 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_multifaceted_abstraction.test_error_handling_in_module_check&quot;" />
+      <option name="_new_target" value="&quot;test_deep_hierarchy.test_detect_deep_hierarchy_with_logging&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test_unnecessary_abstraction.test_error_handling_in_classs_check" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for test_deep_hierarchy.test_error_handling_depth_calculation" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="smell-detector-python" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -322,11 +327,11 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_unnecessary_abstraction.test_error_handling_in_classs_check&quot;" />
+      <option name="_new_target" value="&quot;test_deep_hierarchy.test_error_handling_depth_calculation&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest in test_multifaceted_abstraction.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for test_deep_hierarchy.test_error_handling_module_iteration" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="smell-detector-python" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -340,11 +345,11 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/src/smells/design_smells/test_multifaceted_abstraction.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <option name="_new_target" value="&quot;test_deep_hierarchy.test_error_handling_module_iteration&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest in test_unnecessary_abstraction.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest in test_deep_hierarchy.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="smell-detector-python" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -358,26 +363,27 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/src/smells/design_smells/test_unnecessary_abstraction.py&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/src/smells/design_smells/test_deep_hierarchy.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.main-csv-2" />
       <item itemvalue="Python.main-json-1" />
       <item itemvalue="Python.main-csv-1" />
-      <item itemvalue="Python tests.pytest for test_multifaceted_abstraction.test_error_handling_in_class_check" />
-      <item itemvalue="Python tests.pytest for test_multifaceted_abstraction.test_error_handling_in_module_check" />
-      <item itemvalue="Python tests.pytest for test_unnecessary_abstraction.test_error_handling_in_classs_check" />
-      <item itemvalue="Python tests.pytest in test_multifaceted_abstraction.py" />
-      <item itemvalue="Python tests.pytest in test_unnecessary_abstraction.py" />
+      <item itemvalue="Python tests.pytest for test_deep_hierarchy.test_detect_deep_hierarchy" />
+      <item itemvalue="Python tests.pytest for test_deep_hierarchy.test_detect_deep_hierarchy_with_logging" />
+      <item itemvalue="Python tests.pytest for test_deep_hierarchy.test_error_handling_depth_calculation" />
+      <item itemvalue="Python tests.pytest for test_deep_hierarchy.test_error_handling_module_iteration" />
+      <item itemvalue="Python tests.pytest in test_deep_hierarchy.py" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.pytest in test_multifaceted_abstraction.py" />
-        <item itemvalue="Python tests.pytest for test_multifaceted_abstraction.test_error_handling_in_module_check" />
-        <item itemvalue="Python tests.pytest for test_multifaceted_abstraction.test_error_handling_in_class_check" />
-        <item itemvalue="Python tests.pytest in test_unnecessary_abstraction.py" />
-        <item itemvalue="Python tests.pytest for test_unnecessary_abstraction.test_error_handling_in_classs_check" />
+        <item itemvalue="Python tests.pytest for test_deep_hierarchy.test_error_handling_module_iteration" />
+        <item itemvalue="Python tests.pytest for test_deep_hierarchy.test_error_handling_depth_calculation" />
+        <item itemvalue="Python tests.pytest for test_deep_hierarchy.test_detect_deep_hierarchy_with_logging" />
+        <item itemvalue="Python tests.pytest in test_deep_hierarchy.py" />
+        <item itemvalue="Python tests.pytest for test_deep_hierarchy.test_detect_deep_hierarchy" />
       </list>
     </recent_temporary>
   </component>
@@ -467,6 +473,7 @@
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_imperative_abstraction_test_error_handling_in_class_check.coverage" NAME="pytest for test_imperative_abstraction.test_error_handling_in_class_check Coverage Results" MODIFIED="1703565074062" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_long_parameter_list_py.coverage" NAME="pytest in test_long_parameter_list.py Coverage Results" MODIFIED="1703467550077" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_unnecessary_abstraction_test_error_handling_in_classs_check.coverage" NAME="pytest for test_unnecessary_abstraction.test_error_handling_in_classs_check Coverage Results" MODIFIED="1703571572784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
+    <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_deep_hierarchy_py.coverage" NAME="pytest in test_deep_hierarchy.py Coverage Results" MODIFIED="1703622846838" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_long_identifier_py.coverage" NAME="pytest in test_long_identifier.py Coverage Results" MODIFIED="1703467456129" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_complex_conditional_test_complex_conditionals.coverage" NAME="pytest for test_complex_conditional.test_complex_conditionals Coverage Results" MODIFIED="1703520702012" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_long_identifier_test_no_long_identifiers.coverage" NAME="pytest for test_long_identifier.test_no_long_identifiers Coverage Results" MODIFIED="1703523175819" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
@@ -477,6 +484,7 @@
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_long_identifier_test_long_identifier_names.coverage" NAME="pytest for test_long_identifier.test_long_identifier_names Coverage Results" MODIFIED="1703522729005" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_long_statement_py.coverage" NAME="pytest in test_long_statement.py Coverage Results" MODIFIED="1703467620490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_empty_catch_block_py.coverage" NAME="pytest in test_empty_catch_block.py Coverage Results" MODIFIED="1703477880718" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
+    <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_deep_hierarchy_test_detect_deep_hierarchy.coverage" NAME="pytest for test_deep_hierarchy.test_detect_deep_hierarchy Coverage Results" MODIFIED="1703622811911" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_complex_conditional_detector_test_configuration_respect.coverage" NAME="pytest for test_complex_conditional_detector.test_configuration_respect Coverage Results" MODIFIED="1703396131335" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_magic_number_test_error_handling.coverage" NAME="pytest for test_magic_number.test_error_handling Coverage Results" MODIFIED="1703524978466" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_pc_py.coverage" NAME="pytest in test_pc.py Coverage Results" MODIFIED="1703527274227" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/metrics" />
@@ -487,7 +495,8 @@
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_multifaceted_abstraction_test_error_handling_in_module_check.coverage" NAME="pytest for test_multifaceted_abstraction.test_error_handling_in_module_check Coverage Results" MODIFIED="1703573712954" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$main_json_1.coverage" NAME="main-json-1 Coverage Results" MODIFIED="1703572380499" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_loc_py.coverage" NAME="pytest in test_loc.py Coverage Results" MODIFIED="1703526906456" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/metrics" />
-    <SUITE FILE_PATH="coverage/smell_detector_python$main_csv_1.coverage" NAME="main-csv-1 Coverage Results" MODIFIED="1703576276372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/smell_detector_python$main_csv_1.coverage" NAME="main-csv-1 Coverage Results" MODIFIED="1703622079273" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_unutilized_abstraction_py.coverage" NAME="pytest in test_unutilized_abstraction.py Coverage Results" MODIFIED="1703580794027" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_imperative_abstraction_test_error_handling_in_module_check.coverage" NAME="pytest for test_imperative_abstraction.test_error_handling_in_module_check Coverage Results" MODIFIED="1703562335625" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_complex_conditional_detector_test_error_handling.coverage" NAME="pytest for test_complex_conditional_detector.test_error_handling Coverage Results" MODIFIED="1703396135695" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_exporter_py.coverage" NAME="pytest in test_exporter.py Coverage Results" MODIFIED="1703567022223" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/export" />
@@ -497,12 +506,15 @@
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_smell_detector_test_design_smell_detection_error_handling.coverage" NAME="pytest for test_smell_detector.test_design_smell_detection_error_handling Coverage Results" MODIFIED="1703398960591" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_unnecessary_abstraction_py.coverage" NAME="pytest in test_unnecessary_abstraction.py Coverage Results" MODIFIED="1703571615966" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_wmc_py.coverage" NAME="pytest in test_wmc.py Coverage Results" MODIFIED="1703529073914" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/metrics" />
+    <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_deep_hierarchy_test_no_deep_hierarchy.coverage" NAME="pytest for test_deep_hierarchy.test_no_deep_hierarchy Coverage Results" MODIFIED="1703622803326" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_imperative_abstraction_test_no_imperative_abstraction.coverage" NAME="pytest for test_imperative_abstraction.test_no_imperative_abstraction Coverage Results" MODIFIED="1703562044413" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
+    <SUITE FILE_PATH="coverage/smell_detector_python$main_csv_2.coverage" NAME="main-csv-2 Coverage Results" MODIFIED="1703582691523" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_long_method_py.coverage" NAME="pytest in test_long_method.py Coverage Results" MODIFIED="1703465483372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_lcom_py.coverage" NAME="pytest in test_lcom.py Coverage Results" MODIFIED="1703532595429" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/metrics" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_complex_conditional_test_error_handling.coverage" NAME="pytest for test_complex_conditional.test_error_handling Coverage Results" MODIFIED="1703521058183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_unnecessary_abstraction_test_error_handling_in_class_check.coverage" NAME="pytest for test_unnecessary_abstraction.test_error_handling_in_class_check Coverage Results" MODIFIED="1703571483312" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_long_identifier_test_error_handling.coverage" NAME="pytest for test_long_identifier.test_error_handling Coverage Results" MODIFIED="1703524102648" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
+    <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_unutilized_abstraction_test_error_handling.coverage" NAME="pytest for test_unutilized_abstraction.test_error_handling Coverage Results" MODIFIED="1703576652815" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_magic_number_py.coverage" NAME="pytest in test_magic_number.py Coverage Results" MODIFIED="1703524986727" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_complex_method_test_configuration_respect.coverage" NAME="pytest for test_complex_method.test_configuration_respect Coverage Results" MODIFIED="1703470250704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_multifaceted_abstraction_test_error_handling_in_class_check.coverage" NAME="pytest for test_multifaceted_abstraction.test_error_handling_in_class_check Coverage Results" MODIFIED="1703573620824" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />

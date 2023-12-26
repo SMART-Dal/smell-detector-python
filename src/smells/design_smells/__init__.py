@@ -1,3 +1,4 @@
+from .deep_hierarchy import DeepHierarchyDetector
 from .imperative_abstraction import ImperativeAbstractionDetector
 from .multifaceted_abstraction import MultifacetedAbstractionDetector
 from .unnecessary_abstraction import UnnecessaryAbstractionDetector
@@ -8,4 +9,5 @@ DETECTORS = {
     'UnnecessaryAbstraction': UnnecessaryAbstractionDetector(),
     'MultifacetedAbstraction': MultifacetedAbstractionDetector(),
     'UnutilizedAbstraction': UnutilizedAbstractionDetector(),
+    'DeepHierarchy': DeepHierarchyDetector()
 }
