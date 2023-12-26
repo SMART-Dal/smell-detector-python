@@ -64,6 +64,8 @@ class SMModule:
 
     def analyze_class(self, sm_class):
         # print(f"analyzing {self.name} : {sm_class.name}")
+        lcom4 = metrics.calculate_lcom4(sm_class)
+        sm_class.set_metrics(lcom4)
         return {
             'package': self.package_name,
             'module_name': self.name,

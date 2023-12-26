@@ -43,6 +43,11 @@
       "max_methods": 1,
       "max_fields": 1,
       "min_method_loc": 5
+    },
+    "MultifacetedAbstraction": {
+      "enable": true,
+      "max_lcom4": 1.5,
+      "min_methods": 3
     }
   }
 }
