@@ -37,6 +37,12 @@
       "enable": true,
       "threshold": 3,
       "max_line": 0
+    },
+    "UnnecessaryAbstraction": {
+      "enable": true,
+      "max_methods": 1,
+      "max_fields": 1,
+      "min_method_loc": 5
     }
   }
 }

@@ -73,7 +73,6 @@ def detect_smells(module, config):
         if detector is None:
             logging.warning(f"Detector not found for smell: {smell_name}")
             continue
-
         try:
             smells = detector.detect(module, settings)
             if not isinstance(smells, list):
