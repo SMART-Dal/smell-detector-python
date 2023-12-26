@@ -55,6 +55,9 @@
     "DeepHierarchy": {
       "enable": true,
       "max_depth": 4
+    },
+    "MultipathHierarchy": {
+      "enable": true
     }
   }
 }
