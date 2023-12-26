@@ -49,10 +49,33 @@ class ASTParser:
         for base in node.bases:
             if isinstance(base, ast.Name):
                 base_class_name = base.id
+                sm_class.add_super_class(base_class_name)
                 self.current_project.hierarchy_graph.add_inheritance(node.name, base_class_name)
+                base_class = self.current_project.find_class(base_class_name)
+                if base_class:
+                    base_class.mark_as_used()
 
         self._process_class_body(sm_class, node.body)
         return sm_class
+
+    def visit_Call(self, node):
+        # When visiting calls, check if it's a class instantiation or method call
+        if isinstance(node.func, ast.Name):
+            called_name = node.func.id
+            self._mark_class_used(called_name)
+        elif isinstance(node.func, ast.Attribute):
+            # This could be a method call; mark the class of the method as used
+            if isinstance(node.func.value, ast.Name):
+                class_name = node.func.value.id
+                self._mark_class_used(class_name)
+
+    def _mark_class_used(self, class_name):
+        # Logic to mark a class as used
+        for module in self.current_project.modules:
+            for sm_class in module.classes:
+                if sm_class.name == class_name:
+                    sm_class.mark_used()
+                    break
 
     def _create_sm_class(self, node):
         start_line, end_line = node.lineno, self._get_end_line(node)
@@ -103,8 +126,7 @@ class ASTParser:
             self._populate_function_details(sm_function, return_type, function_body, local_variables, parameters)
             return sm_function
 
-    @staticmethod
-    def _analyze_function_body(node, sm_function, parent_class):
+    def _analyze_function_body(self, node, sm_function, parent_class):
         if parent_class:
             for stmt in ast.walk(node):
                 # Check for method interactions within the class (for fan-in)
@@ -118,6 +140,7 @@ class ASTParser:
                     # Direct function calls (e.g., some_function())
                     if isinstance(stmt.func, ast.Name):
                         called_name = stmt.func.id
+                        self._mark_class_as_used(called_name)
                     # Method calls or attribute access on an object (e.g., some_object.some_method())
                     elif isinstance(stmt.func, ast.Attribute) and isinstance(stmt.func.value, ast.Name):
                         called_name = f"{stmt.func.value.id}.{stmt.func.attr}"
@@ -147,6 +170,11 @@ class ASTParser:
         return_type = get_return_type(node)
         function_body, local_variables = get_function_body_and_variables(node)
         return return_type, function_body, local_variables
+
+    def _mark_class_as_used(self, class_name):
+        sm_class = self.current_project.find_class(class_name)
+        if sm_class:
+            sm_class.mark_as_used()
 
     def visit_Import(self, node):
         for alias in node.names:

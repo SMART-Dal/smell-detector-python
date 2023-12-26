@@ -9,6 +9,8 @@ class SMClass:
         self.method_interactions = {}
         self.external_dependencies = set()
         self.lcom4 = None
+        self.super_classes = []
+        self.is_used = False
 
     def add_method(self, method_obj):
         self.methods.append(method_obj)
@@ -32,3 +34,9 @@ class SMClass:
 
     def set_metrics(self, lcom4):
         self.lcom4 = lcom4
+
+    def mark_as_used(self):
+        self.is_used = True
+
+    def add_super_class(self, super_class_name):
+        self.super_classes.append(super_class_name)

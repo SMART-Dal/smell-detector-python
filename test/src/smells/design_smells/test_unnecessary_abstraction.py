@@ -36,27 +36,27 @@ def substantial_method():
 # Fixture for an unnecessary class (minimal methods and fields)
 @pytest.fixture
 def unnecessary_class(minimal_method):
-    py_class = create_autospec(SMClass, instance=True)
-    py_class.name = "UnnecessaryClass"
-    py_class.start_line = 1
-    py_class.end_line = 50
-    py_class.class_fields = {}
-    py_class.instance_fields = {}
-    py_class.methods = [minimal_method]
-    return py_class
+    sm_class = create_autospec(SMClass, instance=True)
+    sm_class.name = "UnnecessaryClass"
+    sm_class.start_line = 1
+    sm_class.end_line = 50
+    sm_class.class_fields = {}
+    sm_class.instance_fields = {}
+    sm_class.methods = [minimal_method]
+    return sm_class
 
 
 # Fixture for a substantial class (more methods or fields)
 @pytest.fixture
 def substantial_class(substantial_method):
-    py_class = create_autospec(SMClass, instance=True)
-    py_class.name = "SubstantialClass"
-    py_class.start_line = 1
-    py_class.end_line = 100
-    py_class.class_fields = {'field1': 'public'}
-    py_class.instance_fields = {}
-    py_class.methods = [substantial_method]
-    return py_class
+    sm_class = create_autospec(SMClass, instance=True)
+    sm_class.name = "SubstantialClass"
+    sm_class.start_line = 1
+    sm_class.end_line = 100
+    sm_class.class_fields = {'field1': 'public'}
+    sm_class.instance_fields = {}
+    sm_class.methods = [substantial_method]
+    return sm_class
 
 
 # Fixture for a mock module with an unnecessary class only

@@ -48,6 +48,9 @@
       "enable": true,
       "max_lcom4": 1.5,
       "min_methods": 3
+    },
+    "UnutilizedAbstraction": {
+      "enable": true
     }
   }
 }
