@@ -61,6 +61,10 @@
     },
     "RebelliousHierarchy": {
       "enable": true
+    },
+    "MissingHierarchy": {
+      "enable": true,
+      "max_branches": 3
     }
   }
 }
