@@ -67,8 +67,11 @@
       "max_branches": 3
     },
     "BrokenHierarchy": {
+      "enable": true
+    },
+    "WideHierarchy": {
       "enable": true,
-      "max_branches": 3
+      "threshold": 5
     }
   }
 }

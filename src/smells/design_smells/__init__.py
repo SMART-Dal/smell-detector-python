@@ -7,6 +7,7 @@ from .multipath_hierarchy import MultipathHierarchyDetector
 from .rebellious_hierarchy import RebelliousHierarchyDetector
 from .unnecessary_abstraction import UnnecessaryAbstractionDetector
 from .unutilized_abstraction import UnutilizedAbstractionDetector
+from .wide_hierarchy import WideHierarchyDetector
 
 DETECTORS = {
     'ImperativeAbstraction': ImperativeAbstractionDetector(),
@@ -17,5 +18,6 @@ DETECTORS = {
     'MultipathHierarchy': MultipathHierarchyDetector(),
     'RebelliousHierarchy': RebelliousHierarchyDetector(),
     'MissingHierarchy': MissingHierarchyDetector(),
-    'BrokenHierarchy': BrokenHierarchyDetector()
+    'BrokenHierarchy': BrokenHierarchyDetector(),
+    'WideHierarchy': WideHierarchyDetector()
 }

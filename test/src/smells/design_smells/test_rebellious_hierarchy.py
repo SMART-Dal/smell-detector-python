@@ -1,6 +1,8 @@
 import logging
-import pytest
 from unittest.mock import create_autospec, MagicMock
+
+import pytest
+
 from src.smells.design_smells import RebelliousHierarchyDetector
 from src.sourcemodel.sm_class import SMClass
 from src.sourcemodel.sm_method import SMMethod
