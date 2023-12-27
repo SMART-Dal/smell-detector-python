@@ -65,6 +65,10 @@
     "MissingHierarchy": {
       "enable": true,
       "max_branches": 3
+    },
+    "BrokenHierarchy": {
+      "enable": true,
+      "max_branches": 3
     }
   }
 }

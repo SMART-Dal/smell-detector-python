@@ -1,3 +1,4 @@
+from .broken_hierarchy import BrokenHierarchyDetector
 from .deep_hierarchy import DeepHierarchyDetector
 from .imperative_abstraction import ImperativeAbstractionDetector
 from .missing_hierarchy import MissingHierarchyDetector
@@ -15,5 +16,6 @@ DETECTORS = {
     'DeepHierarchy': DeepHierarchyDetector(),
     'MultipathHierarchy': MultipathHierarchyDetector(),
     'RebelliousHierarchy': RebelliousHierarchyDetector(),
-    'MissingHierarchy': MissingHierarchyDetector()
+    'MissingHierarchy': MissingHierarchyDetector(),
+    'BrokenHierarchy': BrokenHierarchyDetector()
 }
