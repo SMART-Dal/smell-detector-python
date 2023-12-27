@@ -58,6 +58,9 @@
     },
     "MultipathHierarchy": {
       "enable": true
+    },
+    "RebelliousHierarchy": {
+      "enable": true
     }
   }
 }
