@@ -6,6 +6,7 @@ from .missing_hierarchy import MissingHierarchyDetector
 from .multifaceted_abstraction import MultifacetedAbstractionDetector
 from .multipath_hierarchy import MultipathHierarchyDetector
 from .rebellious_hierarchy import RebelliousHierarchyDetector
+from .unexploited_encapsulation import UnexploitedEncapsulationDetector
 from .unnecessary_abstraction import UnnecessaryAbstractionDetector
 from .unutilized_abstraction import UnutilizedAbstractionDetector
 from .wide_hierarchy import WideHierarchyDetector
@@ -21,5 +22,6 @@ DETECTORS = {
     'MissingHierarchy': MissingHierarchyDetector(),
     'BrokenHierarchy': BrokenHierarchyDetector(),
     'WideHierarchy': WideHierarchyDetector(),
-    'DeficientEncapsulation': DeficientEncapsulationDetector()
+    'DeficientEncapsulation': DeficientEncapsulationDetector(),
+    'UnexploitedEncapsulation': UnexploitedEncapsulationDetector()
 }

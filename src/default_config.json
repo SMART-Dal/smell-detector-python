@@ -75,6 +75,9 @@
     },
     "DeficientEncapsulation": {
       "enable": true
+    },
+    "UnexploitedEncapsulation": {
+      "enable": true
     }
   }
 }
