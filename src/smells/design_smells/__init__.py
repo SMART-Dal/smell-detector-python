@@ -1,5 +1,6 @@
 from .broken_hierarchy import BrokenHierarchyDetector
 from .deep_hierarchy import DeepHierarchyDetector
+from .deficient_encapsulation import DeficientEncapsulationDetector
 from .imperative_abstraction import ImperativeAbstractionDetector
 from .missing_hierarchy import MissingHierarchyDetector
 from .multifaceted_abstraction import MultifacetedAbstractionDetector
@@ -19,5 +20,6 @@ DETECTORS = {
     'RebelliousHierarchy': RebelliousHierarchyDetector(),
     'MissingHierarchy': MissingHierarchyDetector(),
     'BrokenHierarchy': BrokenHierarchyDetector(),
-    'WideHierarchy': WideHierarchyDetector()
+    'WideHierarchy': WideHierarchyDetector(),
+    'DeficientEncapsulation': DeficientEncapsulationDetector()
 }

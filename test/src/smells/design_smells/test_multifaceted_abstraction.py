@@ -14,24 +14,24 @@ def detector():
 
 @pytest.fixture
 def simple_class():
-    py_class = create_autospec(SMClass, instance=True)
-    py_class.name = "SimpleClass"
-    py_class.start_line = 1
-    py_class.end_line = 50
-    py_class.lcom4 = 1.0
-    py_class.methods = ['method1', 'method2']
-    return py_class
+    sm_class = create_autospec(SMClass, instance=True)
+    sm_class.name = "SimpleClass"
+    sm_class.start_line = 1
+    sm_class.end_line = 50
+    sm_class.lcom4 = 1.0
+    sm_class.methods = ['method1', 'method2']
+    return sm_class
 
 
 @pytest.fixture
 def multifaceted_class():
-    py_class = create_autospec(SMClass, instance=True)
-    py_class.name = "MultifacetedClass"
-    py_class.start_line = 1
-    py_class.end_line = 110
-    py_class.lcom4 = 2.0  # Greater than the default max_lcom of 1.5
-    py_class.methods = ['method1', 'method2', 'method3', 'method4']  # More than the min_methods of 3
-    return py_class
+    sm_class = create_autospec(SMClass, instance=True)
+    sm_class.name = "MultifacetedClass"
+    sm_class.start_line = 1
+    sm_class.end_line = 110
+    sm_class.lcom4 = 2.0  # Greater than the default max_lcom of 1.5
+    sm_class.methods = ['method1', 'method2', 'method3', 'method4']  # More than the min_methods of 3
+    return sm_class
 
 
 @pytest.fixture

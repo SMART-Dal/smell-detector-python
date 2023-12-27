@@ -72,6 +72,9 @@
     "WideHierarchy": {
       "enable": true,
       "threshold": 5
+    },
+    "DeficientEncapsulation": {
+      "enable": true
     }
   }
 }

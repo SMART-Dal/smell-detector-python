@@ -35,27 +35,27 @@ def large_method():
 # Fixture for a simple class with one small public method
 @pytest.fixture
 def simple_class(simple_method):
-    py_class = create_autospec(SMClass)
-    py_class.name = "SimpleClass"
-    py_class.start_line = 1
-    py_class.end_line = 10
-    py_class.class_fields = {'field1': 'public'}
-    py_class.instance_fields = {}
-    py_class.methods = [simple_method]
-    return py_class
+    sm_class = create_autospec(SMClass)
+    sm_class.name = "SimpleClass"
+    sm_class.start_line = 1
+    sm_class.end_line = 10
+    sm_class.class_fields = {'field1': 'public'}
+    sm_class.instance_fields = {}
+    sm_class.methods = [simple_method]
+    return sm_class
 
 
 # Fixture for a class that would be considered an Imperative Abstraction
 @pytest.fixture
 def imperative_class(large_method):
-    py_class = create_autospec(SMClass)
-    py_class.name = "ImperativeClass"
-    py_class.start_line = 1
-    py_class.end_line = 100
-    py_class.class_fields = {}
-    py_class.instance_fields = {}
-    py_class.methods = [large_method]
-    return py_class
+    sm_class = create_autospec(SMClass)
+    sm_class.name = "ImperativeClass"
+    sm_class.start_line = 1
+    sm_class.end_line = 100
+    sm_class.class_fields = {}
+    sm_class.instance_fields = {}
+    sm_class.methods = [large_method]
+    return sm_class
 
 
 # Fixture for a mock module with a simple class only
