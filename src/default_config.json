@@ -1,8 +1,46 @@
 {
   "Smells": {
-    "LongParameterList": {
+    "BrokenHierarchy": {
+      "enable": true
+    },
+    "BrokenModularization": {
       "enable": true,
-      "threshold": 4
+      "x_references": 5
+    },
+    "ComplexConditional": {
+      "enable": true,
+      "threshold": 3
+    },
+    "ComplexMethod": {
+      "enable": true,
+      "threshold": 10
+    },
+    "DeepHierarchy": {
+      "enable": true,
+      "max_depth": 4
+    },
+    "DeficientEncapsulation": {
+      "enable": true
+    },
+    "EmptyCatchBlock": {
+      "enable": true
+    },
+    "HubLikeModularization": {
+      "enable": true,
+      "max_fan_in": 20,
+      "max_fan_out": 20
+    },
+    "ImperativeAbstraction": {
+      "enable": true,
+      "max_line": 0,
+      "threshold": 3
+    },
+    "InsufficientModularization": {
+      "enable": true,
+      "max_loc": 300,
+      "max_nom": 20,
+      "max_nopm": 10,
+      "max_wmc": 15
     },
     "LongIdentifier": {
       "enable": true,
@@ -12,20 +50,13 @@
       "enable": true,
       "threshold": 20
     },
-    "ComplexMethod": {
+    "LongParameterList": {
       "enable": true,
-      "threshold": 10
+      "threshold": 4
     },
     "LongStatement": {
       "enable": true,
       "threshold": 100
-    },
-    "ComplexConditional": {
-      "enable": true,
-      "threshold": 3
-    },
-    "EmptyCatchBlock": {
-      "enable": true
     },
     "MagicNumber": {
       "enable": true
@@ -33,28 +64,14 @@
     "MissingDefault": {
       "enable": true
     },
-    "ImperativeAbstraction": {
+    "MissingHierarchy": {
       "enable": true,
-      "threshold": 3,
-      "max_line": 0
-    },
-    "UnnecessaryAbstraction": {
-      "enable": true,
-      "max_methods": 1,
-      "max_fields": 1,
-      "min_method_loc": 5
+      "max_branches": 3
     },
     "MultifacetedAbstraction": {
       "enable": true,
       "max_lcom4": 1.5,
       "min_methods": 3
-    },
-    "UnutilizedAbstraction": {
-      "enable": true
-    },
-    "DeepHierarchy": {
-      "enable": true,
-      "max_depth": 4
     },
     "MultipathHierarchy": {
       "enable": true
@@ -62,38 +79,21 @@
     "RebelliousHierarchy": {
       "enable": true
     },
-    "MissingHierarchy": {
-      "enable": true,
-      "max_branches": 3
+    "UnexploitedEncapsulation": {
+      "enable": true
     },
-    "BrokenHierarchy": {
+    "UnnecessaryAbstraction": {
+      "enable": true,
+      "max_fields": 1,
+      "max_methods": 1,
+      "min_method_loc": 5
+    },
+    "UnutilizedAbstraction": {
       "enable": true
     },
     "WideHierarchy": {
       "enable": true,
       "threshold": 5
-    },
-    "DeficientEncapsulation": {
-      "enable": true
-    },
-    "UnexploitedEncapsulation": {
-      "enable": true
-    },
-    "BrokenModularization": {
-      "enable": true,
-      "x_references": 5
-    },
-    "InsufficientModularization": {
-      "enable": true,
-      "max_nopm": 10,
-      "max_wmc": 15,
-      "max_nom": 20,
-      "max_loc": 300
-    },
-    "HubLikeModularization": {
-      "enable": true,
-      "max_fan_in": 20,
-      "max_fan_out": 20
     }
   }
 }
