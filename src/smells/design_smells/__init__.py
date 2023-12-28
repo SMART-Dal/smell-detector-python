@@ -3,6 +3,7 @@ from .broken_modularization import BrokenModularizationDetector
 from .deep_hierarchy import DeepHierarchyDetector
 from .deficient_encapsulation import DeficientEncapsulationDetector
 from .imperative_abstraction import ImperativeAbstractionDetector
+from .insufficient_modularization import InsufficientModularizationDetector
 from .missing_hierarchy import MissingHierarchyDetector
 from .multifaceted_abstraction import MultifacetedAbstractionDetector
 from .multipath_hierarchy import MultipathHierarchyDetector
@@ -25,5 +26,6 @@ DETECTORS = {
     'WideHierarchy': WideHierarchyDetector(),
     'DeficientEncapsulation': DeficientEncapsulationDetector(),
     'UnexploitedEncapsulation': UnexploitedEncapsulationDetector(),
-    'BrokenModularization': BrokenModularizationDetector()
+    'BrokenModularization': BrokenModularizationDetector(),
+    'InsufficientModularization': InsufficientModularizationDetector()
 }

@@ -82,6 +82,13 @@
     "BrokenModularization": {
       "enable": true,
       "x_references": 5
+    },
+    "InsufficientModularization": {
+      "enable": true,
+      "max_nopm": 10,
+      "max_wmc": 15,
+      "max_nom": 20,
+      "max_loc": 300
     }
   }
 }

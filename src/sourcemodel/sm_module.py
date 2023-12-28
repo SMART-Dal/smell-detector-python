@@ -65,21 +65,30 @@ class SMModule:
 
     def analyze_class(self, sm_class):
         # print(f"analyzing {self.name} : {sm_class.name}")
-        lcom4 = metrics.calculate_lcom4(sm_class)
-        sm_class.set_metrics(lcom4)
+        loc = metrics.calculate_class_loc(sm_class),
+        wmc = metrics.calculate_wmc_for_class(sm_class),
+        nom = metrics.calculate_nom(sm_class),
+        nopm = metrics.calculate_nopm(sm_class),
+        nof = metrics.calculate_nof(sm_class),
+        nopf = metrics.calculate_nopf(sm_class),
+        lcom = metrics.calculate_lcom4(sm_class),
+        fan_in = metrics.calculate_fan_in_class(sm_class),
+        fan_out = metrics.calculate_fan_out_class(sm_class)
+
+        sm_class.set_metrics(loc, wmc, nom, nopm, nopf, lcom, fan_in, fan_out)
         return {
             'package': self.package_name,
             'module_name': self.name,
             'class_name': sm_class.name,
-            'loc': metrics.calculate_class_loc(sm_class),
-            'wmc': metrics.calculate_wmc_for_class(sm_class),
-            'nom': metrics.calculate_nom(sm_class),
-            'nopm': metrics.calculate_nopm(sm_class),
-            'nof': metrics.calculate_nof(sm_class),
-            'nopf': metrics.calculate_nopf(sm_class),
-            'lcom': metrics.calculate_lcom4(sm_class),
-            'fan_in': metrics.calculate_fan_in_class(sm_class),
-            'fan_out': metrics.calculate_fan_out_class(sm_class)
+            'loc': loc,
+            'wmc': wmc,
+            'nom': nom,
+            'nopm': nopm,
+            'nof': nof,
+            'nopf': nopf,
+            'lcom': lcom,
+            'fan_in': fan_in,
+            'fan_out': fan_out
         }
 
     def analyze_method_or_function(self, item, class_name=None):

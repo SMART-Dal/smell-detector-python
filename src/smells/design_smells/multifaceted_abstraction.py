@@ -12,9 +12,10 @@ class MultifacetedAbstractionDetector(DesignSmellDetector):
 
         for py_class in module.classes:
             try:
-
-                if py_class.lcom4 > max_lcom and len(py_class.methods) >= min_methods:
-                    detail = f"Class '{py_class.name}' has a high LCOM4 value of {py_class.lcom4}, indicating it may have multiple responsibilities."
+                lcom4 = py_class.metrics['lcom4']
+                print(lcom4)
+                if lcom4 > max_lcom and len(py_class.methods) >= min_methods:
+                    detail = f"Class '{py_class.name}' has a high LCOM4 value of {lcom4}, indicating it may have multiple responsibilities."
                     smell = self._create_smell(module.name, py_class, detail, py_class.start_line)
                     if smell:
                         smells.append(smell)

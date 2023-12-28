@@ -8,9 +8,9 @@ class SMClass:
         self.instance_fields = {}  # Instance fields
         self.method_interactions = {}
         self.external_dependencies = set()
-        self.lcom4 = None
         self.super_classes = []
         self.is_used = False
+        self.metrics = {}
 
     def add_method(self, method_obj):
         self.methods.append(method_obj)
@@ -32,8 +32,16 @@ class SMClass:
     def add_external_dependency(self, dependency):
         self.external_dependencies.add(dependency)
 
-    def set_metrics(self, lcom4):
-        self.lcom4 = lcom4
+    def set_metrics(self, loc, wmc, nom, nopm, nopf, lcom, fan_in, fan_out):
+        self.metrics['loc'] = loc
+        self.metrics['wmc'] = wmc
+        self.metrics['nom'] = nom
+        self.metrics['nopm'] = nopm
+        self.metrics['nopf'] = nopf
+        self.metrics['lcom4'] = lcom
+        self.metrics['fan_in'] = fan_in
+        self.metrics['fan_out'] = fan_out
+
 
     def mark_as_used(self):
         self.is_used = True
