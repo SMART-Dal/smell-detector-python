@@ -78,6 +78,10 @@
     },
     "UnexploitedEncapsulation": {
       "enable": true
+    },
+    "BrokenModularization": {
+      "enable": true,
+      "x_references": 5
     }
   }
 }

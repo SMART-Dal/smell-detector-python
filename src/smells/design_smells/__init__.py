@@ -1,4 +1,5 @@
 from .broken_hierarchy import BrokenHierarchyDetector
+from .broken_modularization import BrokenModularizationDetector
 from .deep_hierarchy import DeepHierarchyDetector
 from .deficient_encapsulation import DeficientEncapsulationDetector
 from .imperative_abstraction import ImperativeAbstractionDetector
@@ -23,5 +24,6 @@ DETECTORS = {
     'BrokenHierarchy': BrokenHierarchyDetector(),
     'WideHierarchy': WideHierarchyDetector(),
     'DeficientEncapsulation': DeficientEncapsulationDetector(),
-    'UnexploitedEncapsulation': UnexploitedEncapsulationDetector()
+    'UnexploitedEncapsulation': UnexploitedEncapsulationDetector(),
+    'BrokenModularization': BrokenModularizationDetector()
 }
