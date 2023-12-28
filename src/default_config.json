@@ -89,6 +89,11 @@
       "max_wmc": 15,
       "max_nom": 20,
       "max_loc": 300
+    },
+    "HubLikeModularization": {
+      "enable": true,
+      "max_fan_in": 20,
+      "max_fan_out": 20
     }
   }
 }

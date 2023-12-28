@@ -1,4 +1,3 @@
-# Fixture for the detector
 from unittest.mock import create_autospec, MagicMock
 
 import pytest

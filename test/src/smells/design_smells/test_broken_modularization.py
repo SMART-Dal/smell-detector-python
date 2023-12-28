@@ -1,4 +1,3 @@
-import ast
 import logging
 from unittest.mock import create_autospec
 

@@ -32,16 +32,15 @@ class SMClass:
     def add_external_dependency(self, dependency):
         self.external_dependencies.add(dependency)
 
-    def set_metrics(self, loc, wmc, nom, nopm, nopf, lcom, fan_in, fan_out):
-        self.metrics['loc'] = loc
-        self.metrics['wmc'] = wmc
-        self.metrics['nom'] = nom
-        self.metrics['nopm'] = nopm
-        self.metrics['nopf'] = nopf
-        self.metrics['lcom4'] = lcom
-        self.metrics['fan_in'] = fan_in
-        self.metrics['fan_out'] = fan_out
-
+    def set_metrics(self, metrics):
+        self.metrics['loc'] = metrics['loc']
+        self.metrics['wmc'] = metrics['wmc']
+        self.metrics['nom'] = metrics['nom']
+        self.metrics['nopm'] = metrics['nopm']
+        self.metrics['nopf'] = metrics['nopf']
+        self.metrics['lcom4'] = metrics['lcom']
+        self.metrics['fan_in'] = metrics['fan_in']
+        self.metrics['fan_out'] = metrics['fan_out']
 
     def mark_as_used(self):
         self.is_used = True
