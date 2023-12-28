@@ -114,7 +114,7 @@ The PyCodeSmells Analysis Tool can detect a wide range of code smells. Below is 
   - `enable`: Turn detection on or off.
   - `max_loc`: The maximum Lines Of Code in a module.
   - `max_nom`: The maximum number of methods.
-  - `max_nopm`: The maximum number of operations per module.
+  - `max_nopm`: The maximum number of public methods per module.
   - `max_wmc`: The maximum Weighted Methods per Class.
 
 #### Encapsulation Smells

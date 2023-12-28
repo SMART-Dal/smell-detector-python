@@ -191,7 +191,7 @@
       <recent name="E:\DAL\Project\smell-detector-python\test\src\metrics" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.pytest for test_hub_like_modularization.test_various_fan_in_out_combinations">
+  <component name="RunManager" selected="Python tests.pytest in test_exporter.py">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="smell-detector-python" />
       <option name="ENV_FILES" value="" />
@@ -267,6 +267,29 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/main.py" />
       <option name="PARAMETERS" value="-i E:\DAL\Project\input -o E:\DAL\Project\output-0-csv -f csv -l E:\DAL\Project\logs" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main-json-1" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="smell-detector-python" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/main.py" />
+      <option name="PARAMETERS" value="-i E:\DAL\Project\input_1 -o E:\DAL\Project\output -f json" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -357,13 +380,13 @@
       <option name="USE_PATTERN" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test_hub_like_modularization.test_custom_thresholds" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for test_lcom.test_calculate_lcom4_invalid_class" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="smell-detector-python" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/src/smells/design_smells" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/src/metrics" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -371,17 +394,17 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_hub_like_modularization.test_custom_thresholds&quot;" />
+      <option name="_new_target" value="&quot;test_lcom.test_calculate_lcom4_invalid_class&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test_hub_like_modularization.test_error_handling" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest in test_exporter.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="smell-detector-python" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/src/smells/design_smells" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/src/export" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -389,17 +412,17 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_hub_like_modularization.test_error_handling&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/src/export/test_exporter.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test_hub_like_modularization.test_ignores_non_hub_classes" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest in test_lcom.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="smell-detector-python" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/src/smells/design_smells" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/src/metrics" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -407,17 +430,17 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_hub_like_modularization.test_ignores_non_hub_classes&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/src/metrics/test_lcom.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test_hub_like_modularization.test_multiple_classes_in_module" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest in test_wmc.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="smell-detector-python" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/src/smells/design_smells" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/src/metrics" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -425,26 +448,8 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_hub_like_modularization.test_multiple_classes_in_module&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pytest for test_hub_like_modularization.test_various_fan_in_out_combinations" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="smell-detector-python" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/src/smells/design_smells" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_parameters" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_hub_like_modularization.test_various_fan_in_out_combinations&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/src/metrics/test_wmc.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <list>
@@ -452,19 +457,18 @@
       <item itemvalue="Python.main-json-1" />
       <item itemvalue="Python.main-csv-1" />
       <item itemvalue="Python.main-csv-0" />
-      <item itemvalue="Python tests.pytest for test_hub_like_modularization.test_custom_thresholds" />
-      <item itemvalue="Python tests.pytest for test_hub_like_modularization.test_error_handling" />
-      <item itemvalue="Python tests.pytest for test_hub_like_modularization.test_ignores_non_hub_classes" />
-      <item itemvalue="Python tests.pytest for test_hub_like_modularization.test_multiple_classes_in_module" />
-      <item itemvalue="Python tests.pytest for test_hub_like_modularization.test_various_fan_in_out_combinations" />
+      <item itemvalue="Python tests.pytest for test_lcom.test_calculate_lcom4_invalid_class" />
+      <item itemvalue="Python tests.pytest in test_exporter.py" />
+      <item itemvalue="Python tests.pytest in test_lcom.py" />
+      <item itemvalue="Python tests.pytest in test_wmc.py" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.pytest for test_hub_like_modularization.test_various_fan_in_out_combinations" />
-        <item itemvalue="Python tests.pytest for test_hub_like_modularization.test_multiple_classes_in_module" />
-        <item itemvalue="Python tests.pytest for test_hub_like_modularization.test_error_handling" />
-        <item itemvalue="Python tests.pytest for test_hub_like_modularization.test_custom_thresholds" />
-        <item itemvalue="Python tests.pytest for test_hub_like_modularization.test_ignores_non_hub_classes" />
+        <item itemvalue="Python tests.pytest in test_wmc.py" />
+        <item itemvalue="Python tests.pytest in test_lcom.py" />
+        <item itemvalue="Python tests.pytest for test_lcom.test_calculate_lcom4_invalid_class" />
+        <item itemvalue="Python tests.pytest in test_exporter.py" />
+        <item itemvalue="Python.main-json-1" />
       </list>
     </recent_temporary>
   </component>
