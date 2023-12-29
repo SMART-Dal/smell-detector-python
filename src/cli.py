@@ -53,6 +53,7 @@ def analyze(
         log_dir: str = typer.Option(None, "--log_dir", "-l",
                                     help="The directory to store log files. Defaults to the output directory if not specified.")
 ):
+    """ Analyzes the specified Python project directory for code smells and calculate software metrics. """
 
     args = SimpleNamespace(
         input=input_dir,
@@ -73,7 +74,7 @@ def analyze(
         raise typer.Exit(code=1)
 
 
-@app.command()
+@app.command(help="Displays the version of the Python Smell Detector.")
 def version():
     typer.echo(f"Python Smell Detector Version {__version__}")
 
