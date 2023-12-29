@@ -5,15 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10a34c66-8b2d-49cb-a9eb-b7884f060b78" name="Changes" comment="Design Smells Implemented; Updated README">
-      <change afterPath="$PROJECT_DIR$/cli.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MANIFEST.in" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SCR.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config_loader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/log_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/log_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/cli.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/default_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/smells/default_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/smells/design_smells/multifaceted_abstraction.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/smells/design_smells/multifaceted_abstraction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/src/test_log_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/test_log_config.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,6 +178,7 @@
     "Python tests.pytest in test_unnecessary_abstraction.py.executor": "Run",
     "Python tests.pytest in test_wide_hierarchy.py.executor": "Run",
     "Python tests.pytest in test_wmc.py.executor": "Run",
+    "Python.SCR.executor": "Run",
     "Python.cli.executor": "Run",
     "Python.main-csv-0.executor": "Run",
     "Python.main-csv-1 (1).executor": "Run",
@@ -192,8 +191,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "develop__cli",
-    "last_opened_file_path": "E:/DAL/Project/smell-detector-python/test/src/export",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "E:/DAL/Project/smell-detector-python/src/smells",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -209,10 +208,12 @@
       <recent name="E:\DAL\Project\smell-detector-python\test\src\metrics" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\DAL\Project\smell-detector-python\src\smells" />
+      <recent name="E:\DAL\Project\smell-detector-python\src" />
       <recent name="E:\DAL\Project\smell-detector-python" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.pytest for test_log_config.test_setup_logging_console_handler_development">
+  <component name="RunManager" selected="Python.SCR">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="smell-detector-python" />
       <option name="ENV_FILES" value="" />
@@ -248,6 +249,29 @@
       <option name="ADDITIONAL_ARGS" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="SCR" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="smell-detector-python" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SCR.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="smell-detector-python" />
       <option name="ENV_FILES" value="" />
@@ -263,29 +287,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="cli" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="smell-detector-python" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="E:\DAL\Project\smell-detector-python\cli.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -333,31 +334,8 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cli.py" />
+      <option name="SCRIPT_NAME" value="E:\DAL\Project\smell-detector-python\src\cli.py" />
       <option name="PARAMETERS" value="-i E:\DAL\Project\input_1 -o E:\DAL\Project\output-1-csv -f csv -c E:\DAL\Project\config.json" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main-json-1" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="smell-detector-python" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/main.py" />
-      <option name="PARAMETERS" value="-i E:\DAL\Project\input_1 -o E:\DAL\Project\output -f json" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -524,9 +502,8 @@
       <item itemvalue="Python.main-csv-1" />
       <item itemvalue="Python.main-csv-1 (1)" />
       <item itemvalue="Python.main-csv-2" />
-      <item itemvalue="Python.main-json-1" />
       <item itemvalue="Python.main-csv-0" />
-      <item itemvalue="Python.cli" />
+      <item itemvalue="Python.SCR" />
       <item itemvalue="Python tests.pytest for test_log_config.test_ensure_log_directory_exists_success" />
       <item itemvalue="Python tests.pytest for test_log_config.test_log_level_configuration" />
       <item itemvalue="Python tests.pytest for test_log_config.test_setup_logging_console_handler_development" />
@@ -534,11 +511,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.SCR" />
         <item itemvalue="Python tests.pytest for test_log_config.test_setup_logging_console_handler_development" />
         <item itemvalue="Python tests.pytest for test_log_config.test_log_level_configuration" />
         <item itemvalue="Python tests.pytest in test_log_config.py" />
         <item itemvalue="Python tests.pytest for test_log_config.test_ensure_log_directory_exists_success" />
-        <item itemvalue="Python.cli" />
       </list>
     </recent_temporary>
   </component>
@@ -779,6 +756,7 @@
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_wmc_py.coverage" NAME="pytest in test_wmc.py Coverage Results" MODIFIED="1703529073914" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/metrics" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_deep_hierarchy_test_no_deep_hierarchy.coverage" NAME="pytest for test_deep_hierarchy.test_no_deep_hierarchy Coverage Results" MODIFIED="1703622803326" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_imperative_abstraction_test_no_imperative_abstraction.coverage" NAME="pytest for test_imperative_abstraction.test_no_imperative_abstraction Coverage Results" MODIFIED="1703562044413" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
+    <SUITE FILE_PATH="coverage/smell_detector_python$SCR.coverage" NAME="SCR Coverage Results" MODIFIED="1703833724373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_lcom_py.coverage" NAME="pytest in test_lcom.py Coverage Results" MODIFIED="1703532595429" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/metrics" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_hub_like_modularization_test_ignores_non_hub_classes.coverage" NAME="pytest for test_hub_like_modularization.test_ignores_non_hub_classes Coverage Results" MODIFIED="1703748241765" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_unnecessary_abstraction_test_error_handling_in_class_check.coverage" NAME="pytest for test_unnecessary_abstraction.test_error_handling_in_class_check Coverage Results" MODIFIED="1703571483312" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />

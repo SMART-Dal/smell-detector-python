@@ -159,7 +159,7 @@ def export_results(all_metrics, all_smells, project_name, args):
         raise  # Re-raising the exception after logging
 
 
-def main(args=None):
+def main(args):
     """Entry point of the application."""
 
     if configure_environment(args):

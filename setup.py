@@ -15,9 +15,9 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'py-smell-detector=cli:app'
+            'py-smell-detector=src.cli:app'
         ]
     },
     include_package_data=True,
-    package_data={'': ['src/default_config.json']},
+    package_data={'smells': ['default_config.json']},
 )

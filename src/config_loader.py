@@ -3,7 +3,7 @@ import logging
 import os
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-DEFAULT_CONFIG_PATH = os.path.join(script_dir, 'default_config.json')
+DEFAULT_CONFIG_PATH = os.path.join(script_dir, 'smells', 'default_config.json')
 
 
 def load_config(user_path=None):
