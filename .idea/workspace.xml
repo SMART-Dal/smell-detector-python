@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a34c66-8b2d-49cb-a9eb-b7884f060b78" name="Changes" comment="Implemented Design Smell: Insufficient Modularization with Test Cases">
+    <list default="true" id="10a34c66-8b2d-49cb-a9eb-b7884f060b78" name="Changes" comment="Design Smells Implemented; Updated README">
+      <change afterPath="$PROJECT_DIR$/cli.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/default_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/default_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config_loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/log_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/log_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/smells/design_smells/multifaceted_abstraction.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/smells/design_smells/multifaceted_abstraction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/src/test_log_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/test_log_config.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +41,11 @@
         </map>
       </branch-storage>
     </favorite-branches>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -52,146 +63,156 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
-    &quot;Python tests.pytest for test_broken_hierarchy.test_detects_broken_hierarchy.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_broken_hierarchy.test_method_signature_mismatch.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_broken_hierarchy.test_multiple_superclasses.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_broken_hierarchy.test_subclass_without_superclass.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_broken_hierarchy.test_superclass_without_methods.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_broken_modularization.test_broken_modularization_detected.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_broken_modularization.test_external_calls_below_threshold.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_broken_modularization.test_invalid_configuration.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_broken_modularization.test_mixed_access_external_calls.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_broken_modularization.test_multiple_classes_in_module.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_broken_modularization.test_no_external_calls.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_complex_conditional.test_complex_conditionals.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_complex_conditional.test_detect_complex_conditionals.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_complex_conditional.test_error_handling.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_complex_conditional.test_no_complex_conditionals.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_complex_conditional_detector.test_configuration_respect.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_complex_conditional_detector.test_error_handling.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_complex_method.test_configuration_respect.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_complex_method.test_error_handling.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_deep_hierarchy.test_detect_deep_hierarchy.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_deep_hierarchy.test_detect_deep_hierarchy_with_logging.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_deep_hierarchy.test_error_handling_depth_calculation.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_deep_hierarchy.test_error_handling_module_iteration.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_deep_hierarchy.test_no_deep_hierarchy.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_deficient_encapsulation.test_error_handling.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_deficient_encapsulation.test_inherited_public_field.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_deficient_encapsulation.test_internal_class_usage.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_deficient_encapsulation.test_multiple_public_fields.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_deficient_encapsulation.test_no_fields_class.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_deficient_encapsulation.test_private_field_not_flagged.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_deficient_encapsulation.test_protected_field_not_flagged.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_deficient_encapsulation.test_public_field_not_accessed_by_other_classes.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_deficient_encapsulation.test_public_field_used_appropriately.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_hub_like_modularization.test_custom_thresholds.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_hub_like_modularization.test_detects_hub_like_modularization.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_hub_like_modularization.test_error_handling.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_hub_like_modularization.test_ignores_non_hub_classes.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_hub_like_modularization.test_multiple_classes_in_module.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_hub_like_modularization.test_various_fan_in_out_combinations.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_insufficient_modularization.test_error_handling_at_module_level.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_insufficient_modularization.test_error_handling_in_class_check.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_insufficient_modularization.test_metrics_on_threshold.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_insufficient_modularization.test_smell_detection_with_custom_config.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_lcom.test_calculate_lcom4_invalid_class.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_long_identifier.test_error_handling.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_long_identifier.test_long_class_names.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_long_identifier.test_long_identifier.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_long_identifier.test_long_identifier_names.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_long_identifier.test_no_long_identifiers.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_magic_number.test_error_handling.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_missing_default.test_detect_missing_default.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_missing_default.test_error_handling.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_missing_default.test_no_missing_default.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_missing_hierarchy.test_detects_missing_hierarchy.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_multifaceted_abstraction.test_error_handling_in_class_check.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_multifaceted_abstraction.test_error_handling_in_module_check.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_multipath_hierarchy.test_error_handling_in_class_level.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_multipath_hierarchy.test_error_handling_in_module_level.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_multipath_hierarchy.test_multipath_hierarchy_detection.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_rebellious_hierarchy.test_error_logging_on_failed_analysis.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_rebellious_hierarchy.test_no_rebellious_hierarchy.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_rebellious_hierarchy.test_rebellious_hierarchy_with_config.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_rebellious_hierarchy.test_rebellious_in_complex_hierarchy.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_rebellious_hierarchy.test_rebellious_with_multiple_methods.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_smell_detector.test_design_smell_detection_error_handling.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_unexploited_encapsulation.test_multiple_entities_with_type_checks.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_unexploited_encapsulation.test_no_explicit_type_checks.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_unnecessary_abstraction.test_error_handling_in_class_check.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_unnecessary_abstraction.test_error_handling_in_classs_check.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_unnecessary_abstraction.test_error_handling_in_module_check.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_wide_hierarchy.test_invalid_config_input.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_wide_hierarchy.test_multiple_wide_hierarchies.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_wide_hierarchy.test_no_classes_in_module.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_wide_hierarchy.test_nonexistent_superclasses.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_wide_hierarchy.test_single_child.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_wide_hierarchy.test_wide_hierarchy_detection.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_wide_hierarchy.test_wide_hierarchy_with_custom_threshold.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest for test_wmc.test_calculate_wmc_for_class.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in long_identifier.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_broken_hierarchy.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_broken_modularization.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_cc.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_complex_conditional.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_complex_conditional_detector.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_complex_method.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_deep_hierarchy.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_deficient_encapsulation.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_empty_catch_block.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_exporter.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_fan_metrics.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_insufficient_modularization.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_lcom.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_loc.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_long_identifier.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_long_method.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_long_parameter_list.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_long_statement.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_magic_number.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_missing_default.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_missing_hierarchy.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_multifaceted_abstraction.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_multipath_hierarchy.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_nof.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_nom.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_pc.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_rebellious_hierarchy.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_smell_detector.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_unnecessary_abstraction.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_wide_hierarchy.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.pytest in test_wmc.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main-csv-0.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main-csv-1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main-json-1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.multifaceted_abstraction.executor&quot;: &quot;Run&quot;,
-    &quot;Python.smell_detector.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop__design__smells&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/DAL/Project/smell-detector-python/test/src/export&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "Python tests.pytest for test_broken_hierarchy.test_detects_broken_hierarchy.executor": "Run",
+    "Python tests.pytest for test_broken_hierarchy.test_method_signature_mismatch.executor": "Run",
+    "Python tests.pytest for test_broken_hierarchy.test_multiple_superclasses.executor": "Run",
+    "Python tests.pytest for test_broken_hierarchy.test_subclass_without_superclass.executor": "Run",
+    "Python tests.pytest for test_broken_hierarchy.test_superclass_without_methods.executor": "Run",
+    "Python tests.pytest for test_broken_modularization.test_broken_modularization_detected.executor": "Run",
+    "Python tests.pytest for test_broken_modularization.test_external_calls_below_threshold.executor": "Run",
+    "Python tests.pytest for test_broken_modularization.test_invalid_configuration.executor": "Run",
+    "Python tests.pytest for test_broken_modularization.test_mixed_access_external_calls.executor": "Run",
+    "Python tests.pytest for test_broken_modularization.test_multiple_classes_in_module.executor": "Run",
+    "Python tests.pytest for test_broken_modularization.test_no_external_calls.executor": "Run",
+    "Python tests.pytest for test_complex_conditional.test_complex_conditionals.executor": "Run",
+    "Python tests.pytest for test_complex_conditional.test_detect_complex_conditionals.executor": "Run",
+    "Python tests.pytest for test_complex_conditional.test_error_handling.executor": "Run",
+    "Python tests.pytest for test_complex_conditional.test_no_complex_conditionals.executor": "Run",
+    "Python tests.pytest for test_complex_conditional_detector.test_configuration_respect.executor": "Run",
+    "Python tests.pytest for test_complex_conditional_detector.test_error_handling.executor": "Run",
+    "Python tests.pytest for test_complex_method.test_configuration_respect.executor": "Run",
+    "Python tests.pytest for test_complex_method.test_error_handling.executor": "Run",
+    "Python tests.pytest for test_deep_hierarchy.test_detect_deep_hierarchy.executor": "Run",
+    "Python tests.pytest for test_deep_hierarchy.test_detect_deep_hierarchy_with_logging.executor": "Run",
+    "Python tests.pytest for test_deep_hierarchy.test_error_handling_depth_calculation.executor": "Run",
+    "Python tests.pytest for test_deep_hierarchy.test_error_handling_module_iteration.executor": "Run",
+    "Python tests.pytest for test_deep_hierarchy.test_no_deep_hierarchy.executor": "Run",
+    "Python tests.pytest for test_deficient_encapsulation.test_error_handling.executor": "Run",
+    "Python tests.pytest for test_deficient_encapsulation.test_inherited_public_field.executor": "Run",
+    "Python tests.pytest for test_deficient_encapsulation.test_internal_class_usage.executor": "Run",
+    "Python tests.pytest for test_deficient_encapsulation.test_multiple_public_fields.executor": "Run",
+    "Python tests.pytest for test_deficient_encapsulation.test_no_fields_class.executor": "Run",
+    "Python tests.pytest for test_deficient_encapsulation.test_private_field_not_flagged.executor": "Run",
+    "Python tests.pytest for test_deficient_encapsulation.test_protected_field_not_flagged.executor": "Run",
+    "Python tests.pytest for test_deficient_encapsulation.test_public_field_not_accessed_by_other_classes.executor": "Run",
+    "Python tests.pytest for test_deficient_encapsulation.test_public_field_used_appropriately.executor": "Run",
+    "Python tests.pytest for test_hub_like_modularization.test_custom_thresholds.executor": "Run",
+    "Python tests.pytest for test_hub_like_modularization.test_detects_hub_like_modularization.executor": "Run",
+    "Python tests.pytest for test_hub_like_modularization.test_error_handling.executor": "Run",
+    "Python tests.pytest for test_hub_like_modularization.test_ignores_non_hub_classes.executor": "Run",
+    "Python tests.pytest for test_hub_like_modularization.test_multiple_classes_in_module.executor": "Run",
+    "Python tests.pytest for test_hub_like_modularization.test_various_fan_in_out_combinations.executor": "Run",
+    "Python tests.pytest for test_insufficient_modularization.test_error_handling_at_module_level.executor": "Run",
+    "Python tests.pytest for test_insufficient_modularization.test_error_handling_in_class_check.executor": "Run",
+    "Python tests.pytest for test_insufficient_modularization.test_metrics_on_threshold.executor": "Run",
+    "Python tests.pytest for test_insufficient_modularization.test_smell_detection_with_custom_config.executor": "Run",
+    "Python tests.pytest for test_lcom.test_calculate_lcom4_invalid_class.executor": "Run",
+    "Python tests.pytest for test_log_config.test_ensure_log_directory_exists_success.executor": "Run",
+    "Python tests.pytest for test_log_config.test_log_level_configuration.executor": "Run",
+    "Python tests.pytest for test_log_config.test_setup_logging_console_handler_development.executor": "Run",
+    "Python tests.pytest for test_long_identifier.test_error_handling.executor": "Run",
+    "Python tests.pytest for test_long_identifier.test_long_class_names.executor": "Run",
+    "Python tests.pytest for test_long_identifier.test_long_identifier.executor": "Run",
+    "Python tests.pytest for test_long_identifier.test_long_identifier_names.executor": "Run",
+    "Python tests.pytest for test_long_identifier.test_no_long_identifiers.executor": "Run",
+    "Python tests.pytest for test_magic_number.test_error_handling.executor": "Run",
+    "Python tests.pytest for test_missing_default.test_detect_missing_default.executor": "Run",
+    "Python tests.pytest for test_missing_default.test_error_handling.executor": "Run",
+    "Python tests.pytest for test_missing_default.test_no_missing_default.executor": "Run",
+    "Python tests.pytest for test_missing_hierarchy.test_detects_missing_hierarchy.executor": "Run",
+    "Python tests.pytest for test_multifaceted_abstraction.test_error_handling_in_class_check.executor": "Run",
+    "Python tests.pytest for test_multifaceted_abstraction.test_error_handling_in_module_check.executor": "Run",
+    "Python tests.pytest for test_multipath_hierarchy.test_error_handling_in_class_level.executor": "Run",
+    "Python tests.pytest for test_multipath_hierarchy.test_error_handling_in_module_level.executor": "Run",
+    "Python tests.pytest for test_multipath_hierarchy.test_multipath_hierarchy_detection.executor": "Run",
+    "Python tests.pytest for test_rebellious_hierarchy.test_error_logging_on_failed_analysis.executor": "Run",
+    "Python tests.pytest for test_rebellious_hierarchy.test_no_rebellious_hierarchy.executor": "Run",
+    "Python tests.pytest for test_rebellious_hierarchy.test_rebellious_hierarchy_with_config.executor": "Run",
+    "Python tests.pytest for test_rebellious_hierarchy.test_rebellious_in_complex_hierarchy.executor": "Run",
+    "Python tests.pytest for test_rebellious_hierarchy.test_rebellious_with_multiple_methods.executor": "Run",
+    "Python tests.pytest for test_smell_detector.test_design_smell_detection_error_handling.executor": "Run",
+    "Python tests.pytest for test_unexploited_encapsulation.test_multiple_entities_with_type_checks.executor": "Run",
+    "Python tests.pytest for test_unexploited_encapsulation.test_no_explicit_type_checks.executor": "Run",
+    "Python tests.pytest for test_unnecessary_abstraction.test_error_handling_in_class_check.executor": "Run",
+    "Python tests.pytest for test_unnecessary_abstraction.test_error_handling_in_classs_check.executor": "Run",
+    "Python tests.pytest for test_unnecessary_abstraction.test_error_handling_in_module_check.executor": "Run",
+    "Python tests.pytest for test_wide_hierarchy.test_invalid_config_input.executor": "Run",
+    "Python tests.pytest for test_wide_hierarchy.test_multiple_wide_hierarchies.executor": "Run",
+    "Python tests.pytest for test_wide_hierarchy.test_no_classes_in_module.executor": "Run",
+    "Python tests.pytest for test_wide_hierarchy.test_nonexistent_superclasses.executor": "Run",
+    "Python tests.pytest for test_wide_hierarchy.test_single_child.executor": "Run",
+    "Python tests.pytest for test_wide_hierarchy.test_wide_hierarchy_detection.executor": "Run",
+    "Python tests.pytest for test_wide_hierarchy.test_wide_hierarchy_with_custom_threshold.executor": "Run",
+    "Python tests.pytest for test_wmc.test_calculate_wmc_for_class.executor": "Run",
+    "Python tests.pytest in long_identifier.py.executor": "Run",
+    "Python tests.pytest in test_broken_hierarchy.py.executor": "Run",
+    "Python tests.pytest in test_broken_modularization.py.executor": "Run",
+    "Python tests.pytest in test_cc.py.executor": "Run",
+    "Python tests.pytest in test_complex_conditional.py.executor": "Run",
+    "Python tests.pytest in test_complex_conditional_detector.py.executor": "Run",
+    "Python tests.pytest in test_complex_method.py.executor": "Run",
+    "Python tests.pytest in test_deep_hierarchy.py.executor": "Run",
+    "Python tests.pytest in test_deficient_encapsulation.py.executor": "Run",
+    "Python tests.pytest in test_empty_catch_block.py.executor": "Run",
+    "Python tests.pytest in test_exporter.py.executor": "Run",
+    "Python tests.pytest in test_fan_metrics.py.executor": "Run",
+    "Python tests.pytest in test_insufficient_modularization.py.executor": "Run",
+    "Python tests.pytest in test_lcom.py.executor": "Run",
+    "Python tests.pytest in test_loc.py.executor": "Run",
+    "Python tests.pytest in test_log_config.py.executor": "Run",
+    "Python tests.pytest in test_long_identifier.py.executor": "Run",
+    "Python tests.pytest in test_long_method.py.executor": "Run",
+    "Python tests.pytest in test_long_parameter_list.py.executor": "Run",
+    "Python tests.pytest in test_long_statement.py.executor": "Run",
+    "Python tests.pytest in test_magic_number.py.executor": "Run",
+    "Python tests.pytest in test_missing_default.py.executor": "Run",
+    "Python tests.pytest in test_missing_hierarchy.py.executor": "Run",
+    "Python tests.pytest in test_multifaceted_abstraction.py.executor": "Run",
+    "Python tests.pytest in test_multipath_hierarchy.py.executor": "Run",
+    "Python tests.pytest in test_nof.py.executor": "Run",
+    "Python tests.pytest in test_nom.py.executor": "Run",
+    "Python tests.pytest in test_pc.py.executor": "Run",
+    "Python tests.pytest in test_rebellious_hierarchy.py.executor": "Run",
+    "Python tests.pytest in test_smell_detector.py.executor": "Run",
+    "Python tests.pytest in test_unnecessary_abstraction.py.executor": "Run",
+    "Python tests.pytest in test_wide_hierarchy.py.executor": "Run",
+    "Python tests.pytest in test_wmc.py.executor": "Run",
+    "Python.cli.executor": "Run",
+    "Python.main-csv-0.executor": "Run",
+    "Python.main-csv-1 (1).executor": "Run",
+    "Python.main-csv-1.executor": "Run",
+    "Python.main-csv-2.executor": "Run",
+    "Python.main-json-1.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.multifaceted_abstraction.executor": "Run",
+    "Python.smell_detector.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "develop__cli",
+    "last_opened_file_path": "E:/DAL/Project/smell-detector-python/test/src/export",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.editor",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\DAL\Project\smell-detector-python\test\src\export" />
       <recent name="E:\DAL\Project\smell-detector-python\test\src\metrics" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\DAL\Project\smell-detector-python" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python tests.pytest in test_exporter.py">
+  <component name="RunManager" selected="Python tests.pytest for test_log_config.test_setup_logging_console_handler_development">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="smell-detector-python" />
       <option name="ENV_FILES" value="" />
@@ -250,6 +271,29 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="cli" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="smell-detector-python" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="E:\DAL\Project\smell-detector-python\cli.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main-csv-0" type="PythonConfigurationType" factoryName="Python">
       <module name="smell-detector-python" />
       <option name="ENV_FILES" value="" />
@@ -267,6 +311,30 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/main.py" />
       <option name="PARAMETERS" value="-i E:\DAL\Project\input -o E:\DAL\Project\output-0-csv -f csv -l E:\DAL\Project\logs" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main-csv-1 (1)" type="PythonConfigurationType" factoryName="Python">
+      <module name="smell-detector-python" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="ENVIRONMENT" value="prod" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cli.py" />
+      <option name="PARAMETERS" value="-i E:\DAL\Project\input_1 -o E:\DAL\Project\output-1-csv -f csv -c E:\DAL\Project\config.json" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -380,13 +448,13 @@
       <option name="USE_PATTERN" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test_lcom.test_calculate_lcom4_invalid_class" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for test_log_config.test_ensure_log_directory_exists_success" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="smell-detector-python" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/src/metrics" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/src" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -394,17 +462,17 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_lcom.test_calculate_lcom4_invalid_class&quot;" />
+      <option name="_new_target" value="&quot;test_log_config.test_ensure_log_directory_exists_success&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest in test_exporter.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for test_log_config.test_log_level_configuration" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="smell-detector-python" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/src/export" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/src" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -412,17 +480,17 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/src/export/test_exporter.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <option name="_new_target" value="&quot;test_log_config.test_log_level_configuration&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest in test_lcom.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for test_log_config.test_setup_logging_console_handler_development" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="smell-detector-python" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/src/metrics" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/src" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -430,17 +498,17 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/src/metrics/test_lcom.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <option name="_new_target" value="&quot;test_log_config.test_setup_logging_console_handler_development&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest in test_wmc.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest in test_log_config.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="smell-detector-python" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/src/metrics" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/src" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -448,27 +516,29 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/src/metrics/test_wmc.py&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/src/test_log_config.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.main-csv-1" />
+      <item itemvalue="Python.main-csv-1 (1)" />
       <item itemvalue="Python.main-csv-2" />
       <item itemvalue="Python.main-json-1" />
-      <item itemvalue="Python.main-csv-1" />
       <item itemvalue="Python.main-csv-0" />
-      <item itemvalue="Python tests.pytest for test_lcom.test_calculate_lcom4_invalid_class" />
-      <item itemvalue="Python tests.pytest in test_exporter.py" />
-      <item itemvalue="Python tests.pytest in test_lcom.py" />
-      <item itemvalue="Python tests.pytest in test_wmc.py" />
+      <item itemvalue="Python.cli" />
+      <item itemvalue="Python tests.pytest for test_log_config.test_ensure_log_directory_exists_success" />
+      <item itemvalue="Python tests.pytest for test_log_config.test_log_level_configuration" />
+      <item itemvalue="Python tests.pytest for test_log_config.test_setup_logging_console_handler_development" />
+      <item itemvalue="Python tests.pytest in test_log_config.py" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.pytest in test_wmc.py" />
-        <item itemvalue="Python tests.pytest in test_lcom.py" />
-        <item itemvalue="Python tests.pytest for test_lcom.test_calculate_lcom4_invalid_class" />
-        <item itemvalue="Python tests.pytest in test_exporter.py" />
-        <item itemvalue="Python.main-json-1" />
+        <item itemvalue="Python tests.pytest for test_log_config.test_setup_logging_console_handler_development" />
+        <item itemvalue="Python tests.pytest for test_log_config.test_log_level_configuration" />
+        <item itemvalue="Python tests.pytest in test_log_config.py" />
+        <item itemvalue="Python tests.pytest for test_log_config.test_ensure_log_directory_exists_success" />
+        <item itemvalue="Python.cli" />
       </list>
     </recent_temporary>
   </component>
@@ -602,11 +672,30 @@
       <option name="project" value="LOCAL" />
       <updated>1703745805274</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Design Smells Implemented; Updated README">
+      <option name="closed" value="true" />
+      <created>1703804898342</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1703804898342</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Test for Smells Added" />
@@ -622,12 +711,14 @@
     <MESSAGE value="Implemented Design Smell: Unexploited Encapsulation with Test Cases" />
     <MESSAGE value="Implemented Design Smell: Broken Modularization with Test Cases" />
     <MESSAGE value="Implemented Design Smell: Insufficient Modularization with Test Cases" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented Design Smell: Insufficient Modularization with Test Cases" />
+    <MESSAGE value="Design Smells Implemented; Updated README" />
+    <option name="LAST_COMMIT_MESSAGE" value="Design Smells Implemented; Updated README" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_wmc_test_calculate_wmc_for_class.coverage" NAME="pytest for test_wmc.test_calculate_wmc_for_class Coverage Results" MODIFIED="1703527773668" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/metrics" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_missing_default_test_error_handling.coverage" NAME="pytest for test_missing_default.test_error_handling Coverage Results" MODIFIED="1703479477645" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_broken_hierarchy_test_method_signature_mismatch.coverage" NAME="pytest for test_broken_hierarchy.test_method_signature_mismatch Coverage Results" MODIFIED="1703651393585" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
+    <SUITE FILE_PATH="coverage/smell_detector_python$cli.coverage" NAME="cli Coverage Results" MODIFIED="1703805589312" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_missing_hierarchy_test_detects_missing_hierarchy.coverage" NAME="pytest for test_missing_hierarchy.test_detects_missing_hierarchy Coverage Results" MODIFIED="1703647895802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_complex_conditional_py.coverage" NAME="pytest in test_complex_conditional.py Coverage Results" MODIFIED="1703521514772" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_broken_hierarchy_test_subclass_without_superclass.coverage" NAME="pytest for test_broken_hierarchy.test_subclass_without_superclass Coverage Results" MODIFIED="1703651412798" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
@@ -635,6 +726,7 @@
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_deficient_encapsulation_test_protected_field_not_flagged.coverage" NAME="pytest for test_deficient_encapsulation.test_protected_field_not_flagged Coverage Results" MODIFIED="1703663843701" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_long_identifier_test_long_identifier.coverage" NAME="pytest for test_long_identifier.test_long_identifier Coverage Results" MODIFIED="1703523123562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_deficient_encapsulation_test_public_field_not_accessed_by_other_classes.coverage" NAME="pytest for test_deficient_encapsulation.test_public_field_not_accessed_by_other_classes Coverage Results" MODIFIED="1703661432591" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
+    <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_log_config_test_ensure_log_directory_exists_success.coverage" NAME="pytest for test_log_config.test_ensure_log_directory_exists_success Coverage Results" MODIFIED="1703818954712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_long_identifier_py.coverage" NAME="pytest in test_long_identifier.py Coverage Results" MODIFIED="1703467456129" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_multipath_hierarchy_test_error_handling_in_class_level.coverage" NAME="pytest for test_multipath_hierarchy.test_error_handling_in_class_level Coverage Results" MODIFIED="1703638180110" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_unexploited_encapsulation_test_no_explicit_type_checks.coverage" NAME="pytest for test_unexploited_encapsulation.test_no_explicit_type_checks Coverage Results" MODIFIED="1703672893026" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
@@ -645,12 +737,15 @@
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_wide_hierarchy_test_multiple_wide_hierarchies.coverage" NAME="pytest for test_wide_hierarchy.test_multiple_wide_hierarchies Coverage Results" MODIFIED="1703658914265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_missing_default_py.coverage" NAME="pytest in test_missing_default.py Coverage Results" MODIFIED="1703402750572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$main_csv_0.coverage" NAME="main-csv-0 Coverage Results" MODIFIED="1703788954034" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/smell_detector_python$main_csv_1__1_.coverage" NAME="main-csv-1 (1) Coverage Results" MODIFIED="1703809482686" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_hub_like_modularization_test_detects_hub_like_modularization.coverage" NAME="pytest for test_hub_like_modularization.test_detects_hub_like_modularization Coverage Results" MODIFIED="1703748173967" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_long_identifier_test_long_identifier_names.coverage" NAME="pytest for test_long_identifier.test_long_identifier_names Coverage Results" MODIFIED="1703522729005" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_long_statement_py.coverage" NAME="pytest in test_long_statement.py Coverage Results" MODIFIED="1703467620490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_rebellious_hierarchy_py.coverage" NAME="pytest in test_rebellious_hierarchy.py Coverage Results" MODIFIED="1703655664927" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
+    <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_log_config_test_log_level_configuration.coverage" NAME="pytest for test_log_config.test_log_level_configuration Coverage Results" MODIFIED="1703819350988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_magic_number_test_error_handling.coverage" NAME="pytest for test_magic_number.test_error_handling Coverage Results" MODIFIED="1703524978466" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_insufficient_modularization_test_error_handling_in_class_check.coverage" NAME="pytest for test_insufficient_modularization.test_error_handling_in_class_check Coverage Results" MODIFIED="1703745324793" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
+    <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_log_config_py.coverage" NAME="pytest in test_log_config.py Coverage Results" MODIFIED="1703819047758" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_insufficient_modularization_test_smell_detection_with_custom_config.coverage" NAME="pytest for test_insufficient_modularization.test_smell_detection_with_custom_config Coverage Results" MODIFIED="1703745450168" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_hub_like_modularization_test_multiple_classes_in_module.coverage" NAME="pytest for test_hub_like_modularization.test_multiple_classes_in_module Coverage Results" MODIFIED="1703748334586" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_missing_default_test_no_missing_default.coverage" NAME="pytest for test_missing_default.test_no_missing_default Coverage Results" MODIFIED="1703401626148" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
@@ -662,7 +757,7 @@
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_wide_hierarchy_test_single_child.coverage" NAME="pytest for test_wide_hierarchy.test_single_child Coverage Results" MODIFIED="1703658937689" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$main_json_1.coverage" NAME="main-json-1 Coverage Results" MODIFIED="1703572380499" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_deficient_encapsulation_py.coverage" NAME="pytest in test_deficient_encapsulation.py Coverage Results" MODIFIED="1703664426914" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
-    <SUITE FILE_PATH="coverage/smell_detector_python$main_csv_1.coverage" NAME="main-csv-1 Coverage Results" MODIFIED="1703788407103" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/smell_detector_python$main_csv_1.coverage" NAME="main-csv-1 Coverage Results" MODIFIED="1703806777497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_deficient_encapsulation_test_multiple_public_fields.coverage" NAME="pytest for test_deficient_encapsulation.test_multiple_public_fields Coverage Results" MODIFIED="1703664419132" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_broken_hierarchy_test_superclass_without_methods.coverage" NAME="pytest for test_broken_hierarchy.test_superclass_without_methods Coverage Results" MODIFIED="1703651377862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_complex_conditional_detector_test_error_handling.coverage" NAME="pytest for test_complex_conditional_detector.test_error_handling Coverage Results" MODIFIED="1703396135695" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
@@ -728,6 +823,7 @@
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_multipath_hierarchy_py.coverage" NAME="pytest in test_multipath_hierarchy.py Coverage Results" MODIFIED="1703631470259" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_unutilized_abstraction_py.coverage" NAME="pytest in test_unutilized_abstraction.py Coverage Results" MODIFIED="1703580794027" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_deficient_encapsulation_test_internal_class_usage.coverage" NAME="pytest for test_deficient_encapsulation.test_internal_class_usage Coverage Results" MODIFIED="1703663913944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
+    <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_log_config_test_setup_logging_console_handler_development.coverage" NAME="pytest for test_log_config.test_setup_logging_console_handler_development Coverage Results" MODIFIED="1703819816213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_broken_modularization_test_external_calls_below_threshold.coverage" NAME="pytest for test_broken_modularization.test_external_calls_below_threshold Coverage Results" MODIFIED="1703732111095" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_rebellious_hierarchy_test_rebellious_in_complex_hierarchy.coverage" NAME="pytest for test_rebellious_hierarchy.test_rebellious_in_complex_hierarchy Coverage Results" MODIFIED="1703640896732" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_imperative_abstraction_test_error_handling_in_module_check.coverage" NAME="pytest for test_imperative_abstraction.test_error_handling_in_module_check Coverage Results" MODIFIED="1703562335625" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
@@ -740,7 +836,7 @@
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_wide_hierarchy_test_invalid_config_input.coverage" NAME="pytest for test_wide_hierarchy.test_invalid_config_input Coverage Results" MODIFIED="1703659235382" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_broken_modularization_test_broken_modularization_detected.coverage" NAME="pytest for test_broken_modularization.test_broken_modularization_detected Coverage Results" MODIFIED="1703730623532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_multipath_hierarchy_test_error_handling_in_module_level.coverage" NAME="pytest for test_multipath_hierarchy.test_error_handling_in_module_level Coverage Results" MODIFIED="1703629513533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
-    <SUITE FILE_PATH="coverage/smell_detector_python$main_csv_2.coverage" NAME="main-csv-2 Coverage Results" MODIFIED="1703781803885" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/smell_detector_python$main_csv_2.coverage" NAME="main-csv-2 Coverage Results" MODIFIED="1703805959181" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_in_test_long_method_py.coverage" NAME="pytest in test_long_method.py Coverage Results" MODIFIED="1703465483372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_rebellious_hierarchy_test_error_logging_on_failed_analysis.coverage" NAME="pytest for test_rebellious_hierarchy.test_error_logging_on_failed_analysis Coverage Results" MODIFIED="1703640755633" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/design_smells" />
     <SUITE FILE_PATH="coverage/smell_detector_python$pytest_for_test_complex_conditional_test_error_handling.coverage" NAME="pytest for test_complex_conditional.test_error_handling Coverage Results" MODIFIED="1703521058183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test/src/smells/implementation_smells" />

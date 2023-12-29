@@ -4,7 +4,7 @@ import datetime
 from logging.handlers import RotatingFileHandler
 
 # Environment setup
-ENVIRONMENT = os.getenv('ENVIRONMENT', 'development').lower()
+ENVIRONMENT = os.getenv('ENVIRONMENT', 'prod').lower()
 LOG_LEVEL = os.getenv('LOG_LEVEL', 'DEBUG' if ENVIRONMENT == 'development' else 'INFO').upper()
 
 # Default log directory setup
@@ -51,6 +51,7 @@ def setup_logging(log_directory=None):
 
     # Console handler for development
     if ENVIRONMENT == 'development':
+        print("Logging will be directed to the console")
         console_handler = logging.StreamHandler()
         console_handler.setFormatter(logging.Formatter(LOG_FORMAT, DATE_FORMAT))
         logger.addHandler(console_handler)

@@ -1,6 +1,5 @@
 import logging
 
-from src.metrics import calculate_lcom4
 from ..smell_detector import DesignSmellDetector
 
 

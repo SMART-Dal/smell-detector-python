@@ -2,13 +2,13 @@ import argparse
 import logging
 import os
 
-from config_loader import load_config
-from export.exporter import export_data, export_implementation_smells, export_design_smells
-from log_config import setup_logging
-from smells import get_detector
-from smells.smell_detector import ImplementationSmellDetector, DesignSmellDetector
-from sourcemodel.ast_parser import ASTParser
-from sourcemodel.sm_project import SMProject
+from src.config_loader import load_config
+from src.export.exporter import export_data, export_implementation_smells, export_design_smells
+from src.log_config import setup_logging
+from src.smells import get_detector
+from src.smells.smell_detector import ImplementationSmellDetector, DesignSmellDetector
+from src.sourcemodel.ast_parser import ASTParser
+from src.sourcemodel.sm_project import SMProject
 
 
 def get_root_path(input_path):
@@ -117,17 +117,19 @@ def perform_analysis(args):
         project_root = get_root_path(args.input)
         project_name = get_project_name(args.input)
         project = SMProject(project_name)
+        config = load_config(user_path=args.config)
 
         modules = process_directory(args.input, project, project_root) if os.path.isdir(args.input) else [
             process_file(args.input, project, project_root)]
         all_metrics = analyze_modules(modules)
-        config = load_config(user_path=args.config)
+        print("AST Parsing and Metrics calculation done!")
 
         all_smells = {'implementation': [], 'design': []}
         for module in modules:
             smells = detect_smells(module, config)
             for smell_type in all_smells:
                 all_smells[smell_type].extend(smells[smell_type])
+        print("Analysis Completed!!")
 
         return all_metrics, all_smells, project_name
     except Exception as e:
@@ -157,21 +159,14 @@ def export_results(all_metrics, all_smells, project_name, args):
         raise  # Re-raising the exception after logging
 
 
-def main():
+def main(args=None):
     """Entry point of the application."""
-    parser = argparse.ArgumentParser(description="PyCodeSmells Analysis Tool")
-    parser.add_argument('-i', '--input', required=True, help="Input Python file or directory for analysis")
-    parser.add_argument('-o', '--output_dir', required=True, help="Output directory for the results")
-    parser.add_argument('-f', '--format', choices=['json', 'csv'], required=True, help="Output format")
-    parser.add_argument('-c', '--config', help="Path to custom configuration file", default=None)
-    parser.add_argument('-l', '--log_dir', default=None,
-                        help="Directory to store log files. Defaults to the output directory if not specified.")
-    args = parser.parse_args()
 
     if configure_environment(args):
         try:
             all_metrics, all_smells, project_name = perform_analysis(args)
             export_results(all_metrics, all_smells, project_name, args)
+
         except Exception as e:
             logging.error(f"Analysis failed: {e}")
             print(f"Analysis failed. Check logs for details.")

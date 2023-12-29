@@ -1,14 +1,18 @@
 import json
 import logging
+import os
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+DEFAULT_CONFIG_PATH = os.path.join(script_dir, 'default_config.json')
 
 
-def load_config(default_path='./default_config.json', user_path=None):
+def load_config(user_path=None):
     config = {}
     try:
-        with open(default_path, 'r') as file:
+        with open(DEFAULT_CONFIG_PATH, 'r') as file:
             config = json.load(file)
     except FileNotFoundError:
-        logging.error(f"Default configuration file not found at {default_path}.")
+        logging.error(f"Default configuration file not found at {DEFAULT_CONFIG_PATH}.")
         raise
     except json.JSONDecodeError as e:
         logging.error(f"Invalid JSON in the default configuration: {e}")

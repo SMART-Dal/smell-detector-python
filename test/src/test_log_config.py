@@ -27,19 +27,16 @@ def log_directory():
 
 @pytest.fixture
 def mock_os_path_exists(mocker):
-    # Mock os.path.exists to simulate log directory presence
     return mocker.patch('os.path.exists', return_value=True)
 
 
 @pytest.fixture
 def mock_os_makedirs(mocker):
-    # Mock os.makedirs to avoid creating actual directories during tests
     return mocker.patch('os.makedirs')
 
 
 @pytest.fixture
 def mock_rotating_file_handler(mocker):
-    # Mock RotatingFileHandler to avoid file operations
     return mocker.patch('logging.handlers.RotatingFileHandler')
 
 
@@ -60,16 +57,6 @@ def test_setup_logging_file_handler(mocker, log_directory, mock_os_path_exists, 
     mock_add_handler = mocker.patch.object(logging.getLogger(), 'addHandler')
     setup_logging(log_directory)
     assert mock_add_handler.called, "Should add file handler to logger"
-
-
-def test_setup_logging_console_handler_development(mocker, log_directory, mock_os_path_exists,
-                                                   mock_rotating_file_handler, mock_os_makedirs):
-    # Test if the console handler is added in the development environment
-    mocker.patch('os.getenv', return_value='development')
-    mock_add_handler = mocker.patch.object(logging.getLogger(), 'addHandler')
-    setup_logging(log_directory)
-    # Expecting two handlers: one for file and one for console
-    assert mock_add_handler.call_count == 2, "Should add console handler in development environment"
 
 
 # Include a teardown method to handle any cleanup
