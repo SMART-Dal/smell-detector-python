@@ -1,6 +1,7 @@
 import argparse
 import logging
 import os
+import re
 
 from src.config_loader import load_config
 from src.export.exporter import export_data, export_implementation_smells, export_design_smells
@@ -22,8 +23,34 @@ def get_project_name(input_path):
         os.path.splitext(os.path.basename(input_path))[0]
 
 
+config = load_config()
+skip_directories = set(config['skip_directories']['names'])
+skip_patterns = [re.compile(pattern) for pattern in config['skip_directories']['patterns']]
+
+
+def should_skip(path):
+    # Normalize and lower the path for comparison
+    path = path.replace('\\', '/').lower()
+
+    # Check if any part of the path is in the skip directories
+    for part in path.split('/'):
+        if part in skip_directories:
+            return True
+
+    # Check if the path matches any of the skip patterns
+    for pattern in skip_patterns:
+        if pattern.search(path):
+            return True
+
+    return False
+
+
 def process_file(file_path, project, project_root, parser=None):
     """Process an individual Python file."""
+    if should_skip(file_path):
+        logging.info(f"Skipping file: {file_path}")
+        return None
+
     parser = parser or ASTParser(project)
     try:
         return parser.parse(file_path, project_root)
@@ -33,16 +60,21 @@ def process_file(file_path, project, project_root, parser=None):
 
 
 def process_directory(directory_path, project, project_root):
-    """Process all Python files within a directory."""
     modules = []
-    for root, _, files in os.walk(directory_path):
+
+    for root, dirs, files in os.walk(directory_path):
+        # Modify dirs in place to skip unwanted directories
+        dirs[:] = [d for d in dirs if not should_skip(os.path.join(root, d))]
+
         for file in files:
-            if file.endswith('.py'):
-                file_path = os.path.join(root, file)
+            file_path = os.path.join(root, file)
+            if file.endswith('.py') and not should_skip(file_path):
                 logging.info(f"Parsing file: {file_path}")
+                print(f"Parsing file: {file_path}")
                 module = process_file(file_path, project, project_root)
                 if module:
                     modules.append(module)
+
     return modules
 
 
@@ -51,6 +83,8 @@ def analyze_modules(modules):
     aggregated_metrics = {'module': [], 'class': [], 'method': [], 'function': []}
     for module in modules:
         logging.info(f"Analyzing module: {module.name}")
+        print(f"Analyzing module: {module.name}")
+
         file_metrics = module.analyze()
         if file_metrics:
             aggregated_metrics['module'].append(file_metrics.get('module_metrics', {}))

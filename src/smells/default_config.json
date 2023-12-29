@@ -95,5 +95,9 @@
       "enable": true,
       "threshold": 5
     }
+  },
+  "skip_directories": {
+    "names": ["test", "tests", "build", "venv", "dist"],
+    "patterns": ["^.*cache$", "^temp.*", "(?i)\\btest_.*", "(?i).*_test\\b"]
   }
 }

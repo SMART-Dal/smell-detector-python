@@ -74,7 +74,7 @@ class ASTParser:
         for module in self.current_project.modules:
             for sm_class in module.classes:
                 if sm_class.name == class_name:
-                    sm_class.mark_used()
+                    sm_class.mark_as_used()
                     break
 
     def _create_sm_class(self, node):
