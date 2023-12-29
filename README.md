@@ -180,8 +180,8 @@ Customize the detection settings for these smells in your configuration JSON fil
 
 ## Contact
 
-- Harsh Vaghani
-- Email: harshvaghani00@gmail.com
+- Harsh Vaghani | [Email](mailto:harshvaghani00@gmail.com) | [LinkedIn](https://www.linkedin.com/in/harsh-vaghani/)
+
 
 ## Acknowledgements
 
