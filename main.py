@@ -207,4 +207,13 @@ def main(args):
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    
+    parser.add_argument('-i', '--input', type=str, help='Input file or directory path')
+    parser.add_argument('-o', '--output-dir', type=str, help='Output directory path')
+    parser.add_argument('-f', '--format', type=str, help='Output format (e.g., csv)')
+    parser.add_argument('--config', type=str, help='Configuration file path')
+    parser.add_argument('--log-dir', type=str, help='Log directory path')
+
+    args = parser.parse_args()
+    main(args)
