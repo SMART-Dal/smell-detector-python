@@ -207,8 +207,9 @@ def main(args):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description="Your program description here.")
     
+    # Add command-line arguments here
     parser.add_argument('-i', '--input', type=str, help='Input file or directory path')
     parser.add_argument('-o', '--output-dir', type=str, help='Output directory path')
     parser.add_argument('-f', '--format', type=str, help='Output format (e.g., csv)')
