@@ -23,6 +23,7 @@ class LongStatementDetector(ImplementationSmellDetector):
             try:
                 for statement in entity.function_body:
                     statement_str = _ast_to_string(statement)
+                    print(statement_str)
                     if len(statement_str) > max_length:
                         detail = f"A statement with {len(statement_str)} chars in {entity.name} exceeds the maximum length of {max_length} characters."
                         smells.append(self._create_smell(module.name, entity, detail, statement.lineno))

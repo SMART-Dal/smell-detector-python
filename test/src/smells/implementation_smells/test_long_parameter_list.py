@@ -2,8 +2,9 @@ import logging
 
 import pytest
 from unittest.mock import MagicMock
+import unittest
 
-from src.smells.implementation_smells import LongParameterListDetector
+from src.smells.implementation_smells.long_parameter_list import LongParameterListDetector
 
 # Sample data for testing
 function_with_many_params = MagicMock()
@@ -42,7 +43,7 @@ def test_no_long_parameter_lists(detector, mock_module):
 
 # Test for functions with too many parameters
 def test_long_parameter_lists(detector, mock_module):
-    smells = detector.detect(mock_module, {"threshold": 5})
+    smells = detector.detect(mock_module, {"threshold": 5   })
     assert any(smell['entity_name'] == function_with_many_params.name for smell in
                smells), "Should detect smells in functions with many parameters"
 
