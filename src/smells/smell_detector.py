@@ -72,3 +72,17 @@ class DesignSmellDetector(SmellDetector):
     def _detect_smells(self, module, config):
         """Actual smell detection logic to be implemented by child classes."""
         pass
+
+class ArchitectureSmellDetector(SmellDetector):#################### architecture
+    """Base class for all architecture smell detectors."""
+    def detect(self, module, config):
+        try:
+            return self._detect_smells(module, config)
+        except Exception as e:
+            logging.error(f"Error detecting architecture smells in module {module.name}: {e}", exc_info=True)
+            return []
+
+    @abstractmethod
+    def _detect_smells(self, module, config):
+        """Actual smell detection logic to be implemented by child classes."""
+        pass
