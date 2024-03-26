@@ -1,6 +1,6 @@
-import logging
+# import logging
 
-from ..smell_detector import ArchitectureSmellDetector
+# from ..smell_detector import ArchitectureSmellDetector
 
-class DenseStructureDetector(ArchitectureSmellDetector):
-    pass
+# class DenseStructureDetector(ArchitectureSmellDetector):
+#     pass

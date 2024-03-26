@@ -1,6 +1,6 @@
-import logging
+# import logging
 
-from ..smell_detector import ArchitectureSmellDetector
+# from ..smell_detector import ArchitectureSmellDetector
 
-class GodComponentDetector(ArchitectureSmellDetector):
-    pass
+# class GodComponentDetector(ArchitectureSmellDetector):
+#     pass

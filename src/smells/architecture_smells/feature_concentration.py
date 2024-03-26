@@ -1,6 +1,6 @@
-import logging
+# import logging
 
-from ..smell_detector import ArchitectureSmellDetector
+# from ..smell_detector import ArchitectureSmellDetector
 
-class FeatureConcentrationDetector(ArchitectureSmellDetector):
-    pass
+# class FeatureConcentrationDetector(ArchitectureSmellDetector):
+#     pass

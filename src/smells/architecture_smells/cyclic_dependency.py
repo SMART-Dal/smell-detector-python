@@ -1,6 +1,6 @@
-import logging
+# import logging
 
-from ..smell_detector import ArchitectureSmellDetector
+# from ..smell_detector import ArchitectureSmellDetector
 
-class CyclicDependencyDetector(ArchitectureSmellDetector):
-    pass
+# class CyclicDependencyDetector(ArchitectureSmellDetector):
+#     pass

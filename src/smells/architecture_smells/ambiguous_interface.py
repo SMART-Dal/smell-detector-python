@@ -19,6 +19,7 @@ class AmbiguousInterfaceDetector(ArchitectureSmellDetector):
     def _check_single_entry_point(self, module):
         entry_points = set()
         for entity in self._iterate_functions_and_methods(module):
-            if entity.is_public:  # Assuming public methods are entry points
+            if entity.access_modifier == "public":  # Assuming public methods are entry points
                 entry_points.add(entity.name)
+        print(len(entry_points))
         return len(entry_points) == 1

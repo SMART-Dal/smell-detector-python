@@ -1,5 +1,7 @@
 import logging
 
+import ast
+
 import astunparse
 
 from ..smell_detector import ImplementationSmellDetector

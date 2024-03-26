@@ -4,10 +4,10 @@ import os
 import re
 
 from src.config_loader import load_config
-from src.export.exporter import export_data, export_implementation_smells, export_design_smells
+from src.export.exporter import export_data, export_implementation_smells, export_design_smells, export_architecture_smells
 from src.log_config import setup_logging
 from src.smells import get_detector
-from src.smells.smell_detector import ImplementationSmellDetector, DesignSmellDetector
+from src.smells.smell_detector import ImplementationSmellDetector, DesignSmellDetector, ArchitectureSmellDetector
 from src.sourcemodel.ast_parser import ASTParser
 from src.sourcemodel.sm_project import SMProject
 
@@ -127,7 +127,8 @@ def detect_smells(module, config):
     # Combine the collected smells into a single dictionary before returning
     detected_smells = {
         'implementation': implementation_smells,
-        'design': design_smells
+        'design': design_smells,
+        'architecture': architecture_smells
     }
 
     return detected_smells
