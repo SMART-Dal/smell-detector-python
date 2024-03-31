@@ -1,4 +1,4 @@
-# from .cyclic_dependency import CyclicDependencyDetector
+from .cyclic_dependency import CyclicDependencyDetector
 # from .unstable_dependency import UnstableDependencyDetector
 from .ambiguous_interface import AmbiguousInterfaceDetector
 # from .god_component import GodComponentDetector
@@ -7,7 +7,7 @@ from .ambiguous_interface import AmbiguousInterfaceDetector
 # from .dense_structure import DenseStructureDetector
 
 DETECTORS = {
-    # 'CyclicDependency': CyclicDependencyDetector(),
+    'CyclicDependency': CyclicDependencyDetector(),
     # 'UnstableDependency': UnstableDependencyDetector(),
     'AmbiguousInterface': AmbiguousInterfaceDetector()
     # 'GodComponent': GodComponentDetector(),
