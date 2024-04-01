@@ -6,10 +6,11 @@ class AmbiguousInterfaceDetector(ArchitectureSmellDetector):
     def _detect_smells(self, module, config):
         logging.info(f"Starting ambiguous interface detection in module: {module.name}")
         smells = []
+        entity = Entity("God Component")
 
         if self._check_single_entry_point(module):
             detail = "Single, general entry point detected in the interface, which may lead to ambiguity."
-            smells.append(self._create_smell(module.name, "Ambiguous Interface", detail))
+            smells.append(self._create_smell(module.name, entity, detail))
 
         logging.info(
             f"Completed ambiguous interface detection in module: {module.name}. Total smells detected: {len(smells)}"
@@ -23,3 +24,7 @@ class AmbiguousInterfaceDetector(ArchitectureSmellDetector):
                 entry_points.add(entity.name)
         print(len(entry_points))
         return len(entry_points) == 1
+    
+class Entity:
+    def __init__(self, name):
+        self.name = name

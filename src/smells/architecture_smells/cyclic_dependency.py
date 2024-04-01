@@ -7,6 +7,7 @@ class CyclicDependencyDetector(ArchitectureSmellDetector):
     def _detect_smells(self, module, config):
         logging.info(f"Starting cyclic dependency detection in module: {module.name}")
         smells = []
+        entity = Entity("Cyclic Dependency")
 
         dependency_graph = DependencyGraph()
 
@@ -19,7 +20,7 @@ class CyclicDependencyDetector(ArchitectureSmellDetector):
 
         for component1, component2 in cyclic_dependencies:
             detail = f"Cyclic dependency detected between {component1} and {component2}."
-            smells.append(self._create_smell(module.name, "Cyclic Dependency", detail))
+            smells.append(self._create_smell(module.name, entity, detail))
         print(smells)
 
         logging.info(
@@ -51,3 +52,7 @@ class CyclicDependencyDetector(ArchitectureSmellDetector):
                 current_path.remove(current_component)
 
         return cyclic_dependencies
+    
+class Entity:
+    def __init__(self, name):
+        self.name = name
