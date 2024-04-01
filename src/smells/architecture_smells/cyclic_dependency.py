@@ -16,11 +16,11 @@ class CyclicDependencyDetector(ArchitectureSmellDetector):
                 dependency_graph.add_dependency(sm_class.name, dependency)
 
         cyclic_dependencies = self._find_cyclic_dependencies(dependency_graph)
-        print(cyclic_dependencies)
 
         for component1, component2 in cyclic_dependencies:
             detail = f"Cyclic dependency detected between {component1} and {component2}."
             smells.append(self._create_smell(module.name, "Cyclic Dependency", detail))
+        print(smells)
 
         logging.info(
             f"Completed cyclic dependency detection in module: {module.name}. Total smells detected: {len(smells)}"
@@ -40,16 +40,13 @@ class CyclicDependencyDetector(ArchitectureSmellDetector):
                     current_component = stack.pop()
                     current_path.add(current_component)
 
-                    # If the current component has already been visited in the current traversal,
-                    # it indicates a cyclic dependency
-                    if current_component in visited:
-                        cyclic_dependencies.append((component, current_component))
-                        break
-
                     visited.add(current_component)
                     for dependency in dependency_graph.get_dependencies(current_component):
                         if dependency not in visited:
                             stack.append(dependency)
+                        else:
+                            cyclic_dependencies.append((component, current_component))
+                            break
 
                 current_path.remove(current_component)
 

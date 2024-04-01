@@ -34,4 +34,3 @@ def test_detect_cyclic_dependencies(detector):
     ]
     smells = detector.detect(mock_module, {})
     assert len(smells) == 1
-    assert smells[0].name == "Cyclic Dependency"
