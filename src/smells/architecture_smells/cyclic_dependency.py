@@ -21,7 +21,6 @@ class CyclicDependencyDetector(ArchitectureSmellDetector):
         for component1, component2 in cyclic_dependencies:
             detail = f"Cyclic dependency detected between {component1} and {component2}."
             smells.append(self._create_smell(module.name, entity, detail))
-        print(smells)
 
         logging.info(
             f"Completed cyclic dependency detection in module: {module.name}. Total smells detected: {len(smells)}"

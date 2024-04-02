@@ -4,14 +4,14 @@ from .ambiguous_interface import AmbiguousInterfaceDetector
 from .god_component import GodComponentDetector
 # from .feature_concentration import FeatureConcentrationDetector
 # from .scattered_functionality import ScatteredFunctionalityDetector
-# from .dense_structure import DenseStructureDetector
+from .dense_structure import DenseStructureDetector
 
 DETECTORS = {
     'CyclicDependency': CyclicDependencyDetector(),
     # 'UnstableDependency': UnstableDependencyDetector(),
     'AmbiguousInterface': AmbiguousInterfaceDetector(),
-    'GodComponent': GodComponentDetector()
-    # 'FeatureCOncentration': FeatureConcentrationDetector(),
+    'GodComponent': GodComponentDetector(),
+    # 'FeatureConcentration': FeatureConcentrationDetector(),
     # 'ScatteredFunctionality': ScatteredFunctionalityDetector(),
-    # 'DenseStructure': DenseStructureDetector()
+    'DenseStructure': DenseStructureDetector()
 }
