@@ -2,7 +2,7 @@ import logging
 from ..smell_detector import ArchitectureSmellDetector
 from src.sourcemodel.dependency_graph import DependencyGraph
 
-class FeatureComponentDetector(ArchitectureSmellDetector):
+class FeatureConcentrationDetector(ArchitectureSmellDetector):
     def _detect_smells(self, package, config):
         logging.info(f"Starting Feature Concentration detection in package: {package.name}")
         smells = []
