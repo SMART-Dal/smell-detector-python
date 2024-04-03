@@ -19,3 +19,6 @@ class DependencyGraph:
             if from_module == component:
                 dependencies.append(to_module)
         return dependencies
+    
+    def weakly_connected_components(self):
+        return nx.weakly_connected_components(self.graph)
