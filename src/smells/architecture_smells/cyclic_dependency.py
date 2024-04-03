@@ -1,29 +1,30 @@
 import logging
-
+from collections import defaultdict
 from ..smell_detector import ArchitectureSmellDetector
 from src.sourcemodel.dependency_graph import DependencyGraph
 
 class CyclicDependencyDetector(ArchitectureSmellDetector):
-    def _detect_smells(self, module, config):
-        logging.info(f"Starting cyclic dependency detection in module: {module.name}")
+    def _detect_smells(self, package, config):
+        logging.info(f"Starting cyclic dependency detection in package: {package.name}")
         smells = []
         entity = Entity("Cyclic Dependency")
 
         dependency_graph = DependencyGraph()
 
-        for sm_class in module.classes:
-            dependency_graph.add_module(sm_class.name)
-            for dependency in sm_class.dependencies:
-                dependency_graph.add_dependency(sm_class.name, dependency)
+        for module in package.modules:
+            for sm_class in module.classes:
+                dependency_graph.add_module(sm_class.name)
+                for external_dependency in sm_class.external_dependencies:
+                    dependency_graph.add_dependency(sm_class.name, external_dependency)
 
         cyclic_dependencies = self._find_cyclic_dependencies(dependency_graph)
 
         for component1, component2 in cyclic_dependencies:
             detail = f"Cyclic dependency detected between {component1} and {component2}."
-            smells.append(self._create_smell(module.name, entity, detail))
+            smells.append(self._create_smell(package.name, entity, detail))
 
         logging.info(
-            f"Completed cyclic dependency detection in module: {module.name}. Total smells detected: {len(smells)}"
+            f"Completed cyclic dependency detection in package: {package.name}. Total smells detected: {len(smells)}"
         )
         return smells
 
@@ -51,7 +52,7 @@ class CyclicDependencyDetector(ArchitectureSmellDetector):
                 current_path.remove(current_component)
 
         return cyclic_dependencies
-    
+
 class Entity:
     def __init__(self, name):
         self.name = name
