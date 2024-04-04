@@ -138,34 +138,34 @@ def detect_smells(package_details, config):
     design_smells = []
     architecture_smells = []
 
-    for package_name, modules in package_details.items():
-        for module in modules:
-            for smell_name, settings in config['Smells'].items():
-                if not settings.get('enable', False):
-                    continue  # Skip if the smell is not enabled
+    for smell_name, settings in config['Smells'].items():
+        if not settings.get('enable', False):
+            continue  # Skip if the smell is not enabled
 
-                detector = get_detector(smell_name)
-                if detector is None:
-                    logging.warning(f"Detector not found for smell: {smell_name}")
-                    continue
+        detector = get_detector(smell_name)
+        if detector is None:
+            logging.warning(f"Detector not found for smell: {smell_name}")
+            continue
 
-                try:
-                    if isinstance(detector, ArchitectureSmellDetector):
-                        arch_smells = detector.detect(package_details, settings)
-                        architecture_smells.extend(arch_smells)
-                    else:
+        try:
+            if isinstance(detector, ArchitectureSmellDetector):
+                arch_smells = detector.detect(package_details, settings)
+                architecture_smells.extend(arch_smells)
+            else:
+                for package_name, modules in package_details.items():
+                    for module in modules:
                         smells = detector.detect(module, settings)
-                    if not isinstance(smells, list):
-                        logging.error(f"Expected list from detector but got {type(smells)} for {smell_name}")
-                        continue
+            if not isinstance(smells, list):
+                logging.error(f"Expected list from detector but got {type(smells)} for {smell_name}")
+                continue
 
-                    if isinstance(detector, ImplementationSmellDetector):
-                        implementation_smells.extend(smells)
-                    elif isinstance(detector, DesignSmellDetector):
-                        design_smells.extend(smells)
+            if isinstance(detector, ImplementationSmellDetector):
+                implementation_smells.extend(smells)
+            elif isinstance(detector, DesignSmellDetector):
+                design_smells.extend(smells)
 
-                except Exception as e:
-                    logging.error(f"Exception during detection of {smell_name}: {e}", exc_info=True)
+        except Exception as e:
+            logging.error(f"Exception during detection of {smell_name}: {e}", exc_info=True)
 
     # Combine the collected smells into a single dictionary before returning
     detected_smells = {

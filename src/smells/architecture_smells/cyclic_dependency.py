@@ -5,7 +5,6 @@ from src.sourcemodel.dependency_graph import DependencyGraph
 
 class CyclicDependencyDetector(ArchitectureSmellDetector):
     def _detect_smells(self, package_details, config):
-        logging.info("I am here")
         all_smells = []
         
         dependency_graph = DependencyGraph()
