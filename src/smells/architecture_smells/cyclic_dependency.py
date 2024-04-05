@@ -7,25 +7,22 @@ class CyclicDependencyDetector(ArchitectureSmellDetector):
     def _detect_smells(self, package_details, config):
         all_smells = []
         
-        dependency_graph = DependencyGraph()
+        # dependency_graph = DependencyGraph()
         module_to_package_mapping = {}
         for package_name, modules in package_details.items():
             for module in modules:
-                module_to_package_mapping[module] = package_name
-
-        for package_name, modules in package_details.items():
-            for module in modules:
-                dependency_graph.add_module(module.name)
-                for sm_class in module.classes:
-                    for external_dependency in sm_class.external_dependencies:
-                        dependency_graph.add_dependency(module.name, external_dependency)
+                module_to_package_mapping[module.name] = package_name
                         
         dependent_lst = {}
         for package_name, modules in package_details.items():
             for module in modules:
-                dependecies = dependency_graph.get_dependencies(module)
+                dependecies = module.dependency_graph.get_dependencies(module.name)
                 for dependency in dependecies:
-                    parent_package_name = module_to_package_mapping[dependency]
+                    parent_package_name = module_to_package_mapping.get(dependency)
+
+                    # skip external dependency                   
+                    if parent_package_name is None or package_name == parent_package_name:
+                        continue
                     if parent_package_name not in dependent_lst:
                         dependent_lst[parent_package_name] = set()
                     dependent_lst[parent_package_name].add(package_name)
