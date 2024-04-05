@@ -1,10 +1,10 @@
 import pytest
 from unittest.mock import MagicMock
-from src.smells.architecture_smells.feature_concentration import FeatureComponentDetector
+from src.smells.architecture_smells.feature_concentration import FeatureConcentrationDetector
 
 @pytest.fixture
 def detector():
-    return FeatureComponentDetector()
+    return FeatureConcentrationDetector()
 
 # Test case for no smell detected
 def test_no_feature_concentration_smell(detector):
