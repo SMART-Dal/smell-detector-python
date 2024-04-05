@@ -48,7 +48,7 @@ class CyclicDependencyDetector(ArchitectureSmellDetector):
         def dfs(node, parent, path):
             visited.add(node)
             path.append(node)
-            for neighbor in graph[node]:
+            for neighbor in graph.get(node, []):
                 if neighbor not in visited:
                     dfs(neighbor, node, path)
                 elif neighbor != parent:
@@ -62,6 +62,7 @@ class CyclicDependencyDetector(ArchitectureSmellDetector):
             if node not in visited:
                 dfs(node, None, [])
         return cycles
+    
 
 class Entity:
     def __init__(self, name):
