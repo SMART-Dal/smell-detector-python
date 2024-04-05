@@ -12,7 +12,6 @@ def test_detect_no_scattered_functionality(detector):
     mock_method.used_modules = ["PackageA.ModuleA.ClassA", "PackageA.ModuleA.ClassB"]
     package_details = {"PackageA": [MagicMock(classes=[MagicMock(methods=[mock_method])])]}
     smells = detector.detect(package_details, {})
-    print(smells)
     assert len(smells) == 0
 
 # Test case for scattered functionality detected in one method
@@ -21,7 +20,6 @@ def test_detect_scattered_functionality_in_one_method(detector):
     mock_method.used_modules = ["PackageA.ModuleA.ClassA", "PackageB.ModuleB.ClassB"]
     package_details = {"PackageA": [MagicMock(classes=[MagicMock(methods=[mock_method])])]}
     smells = detector.detect(package_details, {})
-    print(smells)
     assert len(smells) == 1
     assert smells[0]['entity_name'] == "Scattered Functionality"
 

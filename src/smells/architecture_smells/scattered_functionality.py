@@ -13,7 +13,6 @@ class ScatteredFunctionalityDetector(ArchitectureSmellDetector):
                 for sm_class in module.classes:
                     for method in sm_class.methods:
                         accessed_components = self._get_accessed_components(method, package_name)
-                        print(len(accessed_components))
                         if len(accessed_components) > 1:
                             entity = Entity("Scattered Functionality")
                             detail = f"Method {method.name} in class {sm_class.name} accesses multiple components: {', '.join(accessed_components)}"
