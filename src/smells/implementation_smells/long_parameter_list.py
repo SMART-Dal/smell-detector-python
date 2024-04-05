@@ -1,5 +1,6 @@
 import logging
 
+from ...metrics import calculate_parameter_count
 from ..smell_detector import ImplementationSmellDetector
 
 
@@ -7,7 +8,7 @@ class LongParameterListDetector(ImplementationSmellDetector):
     def _detect_smells(self, module, config):
         logging.info(f"Starting long parameter list detection in module: {module.name}")
         smells = []
-        max_params = config.get("threshold", 5)  # Default to 5 if not specified
+        max_params = config.get("threshold", 5)
 
         for entity in self._iterate_functions_and_methods(module):
             try:

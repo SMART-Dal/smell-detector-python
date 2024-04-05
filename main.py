@@ -4,10 +4,10 @@ import os
 import re
 
 from src.config_loader import load_config
-from src.export.exporter import export_data, export_implementation_smells, export_design_smells
+from src.export.exporter import export_data, export_implementation_smells, export_design_smells, export_architecture_smells
 from src.log_config import setup_logging
 from src.smells import get_detector
-from src.smells.smell_detector import ImplementationSmellDetector, DesignSmellDetector
+from src.smells.smell_detector import ImplementationSmellDetector, DesignSmellDetector, ArchitectureSmellDetector
 from src.sourcemodel.ast_parser import ASTParser
 from src.sourcemodel.sm_project import SMProject
 
@@ -94,10 +94,49 @@ def analyze_modules(modules):
     return aggregated_metrics
 
 
-def detect_smells(module, config):
-    """Detect code smells within a module based on the provided configuration."""
+# def detect_smells(module, config):
+#     """Detect code smells within a module based on the provided configuration."""
+#     implementation_smells = []
+#     design_smells = []
+
+#     for smell_name, settings in config['Smells'].items():
+#         if not settings.get('enable', False):
+#             continue  # Skip if the smell is not enabled
+
+#         detector = get_detector(smell_name)
+#         if detector is None:
+#             logging.warning(f"Detector not found for smell: {smell_name}")
+#             continue
+#         try:
+#             smells = detector.detect(module, settings)
+#             if not isinstance(smells, list):
+#                 logging.error(f"Expected list from detector but got {type(smells)} for {smell_name}")
+#                 continue
+
+#             if isinstance(detector, ImplementationSmellDetector):
+#                 implementation_smells.extend(smells)
+#             elif isinstance(detector, DesignSmellDetector):
+#                 design_smells.extend(smells)
+#             elif isinstance(detector, ArchitectureSmellDetector):###################### architecture
+#                 architecture_smells.extend(smells)
+
+#         except Exception as e:
+#             logging.error(f"Exception during detection of {smell_name}: {e}", exc_info=True)
+
+#     # Combine the collected smells into a single dictionary before returning
+#     detected_smells = {
+#         'implementation': implementation_smells,
+#         'design': design_smells,
+#         'architecture': architecture_smells
+#     }
+
+#     return detected_smells
+
+def detect_smells(package_details, config):
+    """Detect code smells within each package based on the provided configuration."""
     implementation_smells = []
     design_smells = []
+    architecture_smells = []
 
     for smell_name, settings in config['Smells'].items():
         if not settings.get('enable', False):
@@ -107,8 +146,15 @@ def detect_smells(module, config):
         if detector is None:
             logging.warning(f"Detector not found for smell: {smell_name}")
             continue
+
         try:
-            smells = detector.detect(module, settings)
+            if isinstance(detector, ArchitectureSmellDetector):
+                arch_smells = detector.detect(package_details, settings)
+                architecture_smells.extend(arch_smells)
+            else:
+                for package_name, modules in package_details.items():
+                    for module in modules:
+                        smells = detector.detect(module, settings)
             if not isinstance(smells, list):
                 logging.error(f"Expected list from detector but got {type(smells)} for {smell_name}")
                 continue
@@ -124,7 +170,8 @@ def detect_smells(module, config):
     # Combine the collected smells into a single dictionary before returning
     detected_smells = {
         'implementation': implementation_smells,
-        'design': design_smells
+        'design': design_smells,
+        'architecture': architecture_smells
     }
 
     return detected_smells
@@ -144,6 +191,13 @@ def configure_environment(args):
 
     return True  # Indicates successful environment setup
 
+# def detect_arch_smells(package_details, config):
+#     architecture_smells = []
+#     for smell_name, settings in config['Smells'].items():
+#         if not settings.get('enable', False):
+#             continue
+    
+#     detector = get_detector()
 
 def perform_analysis(args):
     """Conduct the main analysis workflow."""
@@ -155,14 +209,25 @@ def perform_analysis(args):
 
         modules = process_directory(args.input, project, project_root) if os.path.isdir(args.input) else [
             process_file(args.input, project, project_root)]
+        
+        package_details = {}
+        
+        for module in modules:
+            if module.package_name in package_details:
+                package_details[module.package_name].append(module)
+            else:
+                package_details[module.package_name] = [module]
         all_metrics = analyze_modules(modules)
         print("AST Parsing and Metrics calculation done!")
-
-        all_smells = {'implementation': [], 'design': []}
-        for module in modules:
-            smells = detect_smells(module, config)
-            for smell_type in all_smells:
-                all_smells[smell_type].extend(smells[smell_type])
+        
+        all_smells = {'implementation': [], 'design': [], 'architecture': []}
+        smells = detect_smells(package_details, config)
+        for smell_type in all_smells:
+            all_smells[smell_type].extend(smells[smell_type])
+        # for module in modules:
+        #     smells = detect_smells(module, config)
+        #     for smell_type in all_smells:
+        #         all_smells[smell_type].extend(smells[smell_type])
         print("Analysis Completed!!")
 
         return all_metrics, all_smells, project_name
@@ -185,6 +250,9 @@ def export_results(all_metrics, all_smells, project_name, args):
 
         if all_smells['design']:
             export_design_smells(all_smells['design'], args.output_dir, project_name, args.format)
+            
+        if all_smells['architecture']: ########################## architecture conditional statement
+            export_architecture_smells(all_smells['architecture'], args.output_dir, project_name, args.format)
 
         else:
             logging.info("No data available for export.")
@@ -207,4 +275,14 @@ def main(args):
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Your program description here.")
+    
+    # Add command-line arguments here
+    parser.add_argument('-i', '--input', type=str, help='Input file or directory path')
+    parser.add_argument('-o', '--output-dir', type=str, help='Output directory path')
+    parser.add_argument('-f', '--format', type=str, help='Output format (e.g., csv)')
+    parser.add_argument('--config', type=str, help='Configuration file path')
+    parser.add_argument('--log-dir', type=str, help='Log directory path')
+
+    args = parser.parse_args()
+    main(args)

@@ -94,6 +94,31 @@
     "WideHierarchy": {
       "enable": true,
       "threshold": 5
+    },
+    "AmbiguousInterface": {
+      "enable": true
+    },
+    "CyclicDependency": {
+      "enable": true
+    },
+    "DenseStructure": {
+      "enable": true,
+      "threshold": 5
+    },
+    "FeatureConcentration":{
+      "enable": true,
+      "lcc_threshold": 0.2
+    },
+    "GodComponent":{
+      "enable": true,
+      "loc_threshold": 27000,
+      "num_of_classes": 30
+    },
+    "ScatteredFunctionality": {
+      "enable": true
+    },
+    "UnstableDependency": {
+      "enable": true
     }
   },
   "skip_directories": {

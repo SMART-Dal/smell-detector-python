@@ -58,3 +58,6 @@ def export_implementation_smells(implementation_smells, output_dir, file_name, e
 
 def export_design_smells(design_smells, output_dir, file_name, exp_format):
     export_data(design_smells, output_dir, f"{file_name}_design_smells", exp_format)
+
+def export_architecture_smells(architecture_smells, output_dir, file_name, exp_format):
+    export_data(architecture_smells, output_dir, f"{file_name}_architecture_smells", exp_format)
