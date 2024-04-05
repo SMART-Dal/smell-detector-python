@@ -13,7 +13,9 @@ from src.sourcemodel.sm_parameter import SMParameter
 def mock_function():
     py_function = create_autospec(SMFunction, instance=True)
     param1 = create_autospec(SMParameter, instance=True)
+    param1.name = "param1"
     param2 = create_autospec(SMParameter, instance=True)
+    param2.name = "param2"
     py_function.parameters = [param1, param2]
     return py_function
 

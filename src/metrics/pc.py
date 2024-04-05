@@ -13,7 +13,6 @@ import logging
 def calculate_parameter_count(py_function):
     try:
         param_count = len(py_function.parameters)
-        # Exclude "self" parameter if it's present
         for parameter in py_function.parameters:
             if parameter.name == "self":
                 param_count -= 1
