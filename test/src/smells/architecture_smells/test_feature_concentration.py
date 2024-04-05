@@ -6,41 +6,25 @@ from src.smells.architecture_smells.feature_concentration import FeatureConcentr
 def detector():
     return FeatureConcentrationDetector()
 
-# Test case for no smell detected
-def test_no_feature_concentration_smell(detector):
-    # Mocking a package with modules having classes with external dependencies
-    mock_package = MagicMock()
-    mock_package.modules = [
-        MagicMock(classes=[
-            MagicMock(external_dependencies=["module1.py", "module2.py"]),
-            MagicMock(external_dependencies=["module1.py", "module3.py"]),
-            MagicMock(external_dependencies=["module2.py", "module3.py"])
-        ])
-    ]
-    smells = detector.detect(mock_package, {})
+def test_detect_feature_concentration_below_threshold(detector):
+    mock_module = MagicMock()
+    mock_module.classes = [MagicMock(external_dependencies=[])]
+    mock_dependency_graph = MagicMock()
+    mock_dependency_graph.weakly_connected_components.return_value = []
+    detector._build_dependency_graph = MagicMock(return_value=mock_dependency_graph)
+
+    smells = detector._detect_smells({"test_package": [mock_module]}, {})
     assert len(smells) == 0
 
-# Test case for smell detected
-def test_feature_concentration_smell(detector):
-    # Mocking a package with modules having classes with external dependencies
-    mock_package = MagicMock()
-    mock_package.modules = [
-        MagicMock(classes=[
-            MagicMock(external_dependencies=["moduleB.py"]),
-        ]),
-        MagicMock(classes=[
-            MagicMock(external_dependencies=["moduleA.py", "moduleB.py"]),
-        ]),
-        MagicMock(classes=[
-            MagicMock(external_dependencies=["moduleA.py", "moduleB.py"]),
-            MagicMock(external_dependencies=["moduleC.py"]),
-        ]),
-        MagicMock(classes=[
-            MagicMock(external_dependencies=["moduleE.py"]),
-        ]),
-        MagicMock(classes=[
-            MagicMock(external_dependencies=["moduleD.py"]),
-        ])
+def test_detect_feature_concentration_above_threshold(detector):
+    mock_module = MagicMock()
+    mock_module.classes = [
+        MagicMock(external_dependencies=["ClassB"]),
+        MagicMock(external_dependencies=["ClassA"]),
+        MagicMock(external_dependencies=["ClassC"]),
     ]
-    smells = detector.detect(mock_package, {})
+    mock_dependency_graph = MagicMock()
+    mock_dependency_graph.weakly_connected_components.return_value = [[], []]
+    detector._build_dependency_graph = MagicMock(return_value=mock_dependency_graph)
+    smells = detector._detect_smells({"test_package": [mock_module]}, {})
     assert len(smells) == 1

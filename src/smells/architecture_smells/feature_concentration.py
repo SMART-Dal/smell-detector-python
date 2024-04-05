@@ -28,6 +28,7 @@ class FeatureConcentrationDetector(ArchitectureSmellDetector):
                 if lcc > lcc_threshold:
                     detail = f"The package {package_name} has Lack of Component Cohesion (LCC) of {lcc}, which exceeds the threshold of {lcc_threshold}."
                     smells.append(self._create_smell(package_name, entity, detail))
+            all_smells.extend(smells)
 
             logging.info(
                 f"Completed Feature Concentration detection in package: {package_name}. Total smells detected: {len(all_smells)}"

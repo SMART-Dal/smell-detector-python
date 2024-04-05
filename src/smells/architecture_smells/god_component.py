@@ -30,7 +30,6 @@ class GodComponentDetector(ArchitectureSmellDetector):
             logging.info(
                 f"Completed God Component detection in package: {package_name}. Total smells detected: {len(smells)}"
             )
-        
         return all_smells
 
 class Entity:
