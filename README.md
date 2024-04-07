@@ -166,8 +166,25 @@ The PyCodeSmells Analysis Tool can detect a wide range of code smells. Below is 
 - **MissingDefault**: Flags switch statements without a default case, potentially leaving out important handling for unexpected cases.
   - `enable`: Turn detection on or off.
 
+#### Architecture Code Smells
+- **AmbiguousInterface**: Detects single entry point in every package and flags it as smell detected.
+  - `enable`: Turn detection on or off.
+- **CyclicDependency**: Detects cycles between packages, which make the code maintainability difficult.
+  - `enable`: Turn detection on or off.
+- **GodComponent**: Identify coponent exceeding lines of code and number of classes threshold, thereafter portraying as a God component.
+  - `enable`: Turn detection on or off.
+  - `threshold`: The maximum amount of lines of code and numberof classes.
+- **DenseStructure**: Detects excessive dependencies in packages which do not have a particular structure.
+  - `enable`: Turn detection on or off.
+  - `threshold`: The maximum amount of average degree a package can have.
+- **FeatureConcentration**: Detects components realizing same architectural level concern.
+  - `enable`: Turn detection on or off.
+  - `threshold`: The maximum lack of cohesion among components that a project/package can have.
+- **ScatteredFunctionality**: Detects a system where multiple components are responsible for realizing the high-level concern.
+  - `enable`: Turn detection on or off.
+- **UnstableDependency**: Detects a component dependent on a less stable component.
+  - `enable`: Turn detection on or off.
 
-#### Notes:
 
 - The `enable` key for each smell is a boolean value (`true` or `false`) indicating whether that particular smell should be checked during analysis.
 - The `threshold` and other numerical parameters are flexible and should be adjusted based on the size and complexity of your codebase, as well as your team's specific coding standards and practices.
@@ -178,9 +195,10 @@ The PyCodeSmells Analysis Tool can detect a wide range of code smells. Below is 
 Customize the detection settings for these smells in your configuration JSON file to ensure the analysis is most effective for your specific codebase and standards.
 
 
-## Contact
+## Contribution
 
 - Harsh Vaghani | [Email](mailto:harshvaghani00@gmail.com) | [LinkedIn](https://www.linkedin.com/in/harsh-vaghani/)
+- Dhruv Upadhyay | [Email](mailto:dhupadhyay2000@gmail.com) | [LinkedIn](https://www.linkedin.com/in/dhruv-upadhyay-41a260188/)
 
 
 ## Acknowledgements
